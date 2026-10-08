@@ -19,40 +19,119 @@ const App = (function() {
       memo: 'C'
     },
     gameConfigs: {
-      cltx: {
-        name: 'CLTX (Chẵn Lẻ Tài Xỉu)',
-        rate: 2.4,
-        memos: ['C', 'L', 'T', 'X']
-      },
       cltx2: {
-        name: 'CLTX2 (Chẵn Lẻ Tài Xỉu 2)',
-        rate: 1.98,
-        memos: ['C2', 'L2', 'T2', 'X2']
-      },
-      doanso: {
-        name: 'ĐOÁN SỐ',
-        rate: 7.0,
-        memos: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        key: 'cltx2',
+        titleIcon: '<i class="fa-solid fa-dice" style="color: #cbd5e1;"></i> <i class="fa-solid fa-dice" style="color: #cbd5e1;"></i>',
+        title: 'CHẴN LẺ - TÀI XỈU - CỘNG 2 SỐ',
+        colHeader: 'Tổng 2 số cuối',
+        rulesType: 'sum2',
+        rows: [
+          { syntax: 'Dungdz TC', memo: 'Dungdz TC', numbers: [0, 2, 4, 6, 8], rate: 1.95, rateLabel: 'x 1.95' },
+          { syntax: 'Dungdz TL', memo: 'Dungdz TL', numbers: [1, 3, 5, 7, 9], rate: 1.95, rateLabel: 'x 1.95' },
+          { syntax: 'Dungdz TT', memo: 'Dungdz TT', numbers: [5, 6, 7, 8, 9], rate: 1.95, rateLabel: 'x 1.95' },
+          { syntax: 'Dungdz TX', memo: 'Dungdz TX', numbers: [0, 1, 2, 3, 4], rate: 1.95, rateLabel: 'x 1.95' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Tổng 2 số cuối</em> của mã ID/Trace.',
+          'Tỉ lệ giảm <em>0.05</em> cho lệnh từ <em>50K</em> trở lên.',
+          'Tỉ lệ giảm <em>0.1</em> cho lệnh từ <em>1tr</em> trở lên.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
       },
       '1p3': {
-        name: '1 PHẦN 3',
-        rate: 3.0,
-        memos: ['N1', 'N2', 'N3']
-      },
-      tong3: {
-        name: 'TỔNG 3 SỐ',
-        rate: 3.5,
-        memos: ['S1', 'S2', 'S3']
+        key: '1p3',
+        titleIcon: '<i class="fa-solid fa-percent" style="color: #cbd5e1;"></i>',
+        title: '1 PHẦN 3',
+        colHeader: 'Số cuối',
+        rulesType: 'last1',
+        rows: [
+          { syntax: 'Dungdz N1', memo: 'Dungdz N1', numbers: [1, 5, 7], rate: 3.0, rateLabel: 'x 3' },
+          { syntax: 'Dungdz N2', memo: 'Dungdz N2', numbers: [2, 4, 8], rate: 3.0, rateLabel: 'x 3' },
+          { syntax: 'Dungdz N3', memo: 'Dungdz N3', numbers: [3, 6, 9], rate: 3.0, rateLabel: 'x 3' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Số cuối</em> của mã ID/Trace.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
       },
       xien: {
-        name: 'XIÊN',
-        rate: 3.2,
-        memos: ['CX', 'CT', 'LX', 'LT']
+        key: 'xien',
+        titleIcon: '<i class="fa-solid fa-bolt" style="color: #cbd5e1;"></i>',
+        title: 'XIÊN SỐ',
+        colHeader: 'Tổng 2 số cuối',
+        rulesType: 'sum2',
+        rows: [
+          { syntax: 'Dungdz CX', memo: 'Dungdz CX', numbers: [0, 2, 4], rate: 3.0, rateLabel: 'x 3' },
+          { syntax: 'Dungdz LT', memo: 'Dungdz LT', numbers: [5, 7, 9], rate: 3.0, rateLabel: 'x 3' },
+          { syntax: 'Dungdz CT', memo: 'Dungdz CT', numbers: [6, 8], rate: 3.5, rateLabel: 'x 3.5' },
+          { syntax: 'Dungdz LX', memo: 'Dungdz LX', numbers: [1, 3], rate: 3.5, rateLabel: 'x 3.5' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Tổng 2 số cuối</em> của mã ID/Trace.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
+      },
+      cltx: {
+        key: 'cltx',
+        titleIcon: '<i class="fa-solid fa-dice" style="color: #cbd5e1;"></i> <i class="fa-solid fa-dice" style="color: #cbd5e1;"></i>',
+        title: 'CHẴN LẺ TÀI XỈU',
+        colHeader: 'Số cuối',
+        rulesType: 'last1',
+        rows: [
+          { syntax: 'Dungdz C', memo: 'Dungdz C', numbers: [2, 4, 6, 8], rate: 2.4, rateLabel: 'x 2.4' },
+          { syntax: 'Dungdz L', memo: 'Dungdz L', numbers: [1, 3, 5, 7], rate: 2.4, rateLabel: 'x 2.4' },
+          { syntax: 'Dungdz T', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.4, rateLabel: 'x 2.4' },
+          { syntax: 'Dungdz X', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.4, rateLabel: 'x 2.4' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Số cuối</em> của mã ID/Trace.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
+      },
+      doanso: {
+        key: 'doanso',
+        titleIcon: '<i class="fa-solid fa-bullseye" style="color: #cbd5e1;"></i>',
+        title: 'ĐOÁN SỐ',
+        colHeader: 'Số cuối',
+        rulesType: 'last1',
+        rows: [
+          { syntax: 'Dungdz 0..9', memo: 'Dungdz 8', numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], rate: 7.0, rateLabel: 'x 7.0' }
+        ],
+        notes: [
+          'Cú pháp: Dungdz + số dự đoán (Ví dụ: Dungdz 8).',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
+      },
+      tong3: {
+        key: 'tong3',
+        titleIcon: '<i class="fa-solid fa-arrow-up-9-1" style="color: #cbd5e1;"></i>',
+        title: 'TỔNG 3 SỐ CUỐI',
+        colHeader: 'Tổng 3 số cuối',
+        rulesType: 'sum3',
+        rows: [
+          { syntax: 'Dungdz S1', memo: 'Dungdz S1', numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9], rate: 3.5, rateLabel: 'x 3.5' },
+          { syntax: 'Dungdz S2', memo: 'Dungdz S2', numbers: [10, 11, 12, 13, 14, 15, 16, 17, 18], rate: 3.5, rateLabel: 'x 3.5' },
+          { syntax: 'Dungdz S3', memo: 'Dungdz S3', numbers: [19, 20, 21, 22, 23, 24, 25, 26, 27], rate: 3.5, rateLabel: 'x 3.5' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Tổng 3 số cuối</em> của mã ID/Trace.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
       },
       tx: {
-        name: 'TÀI XỈU',
-        rate: 2.4,
-        memos: ['T', 'X']
+        key: 'tx',
+        titleIcon: '<i class="fa-solid fa-dice-five" style="color: #cbd5e1;"></i>',
+        title: 'TÀI XỈU',
+        colHeader: 'Số cuối',
+        rulesType: 'last1',
+        rows: [
+          { syntax: 'Dungdz T', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.4, rateLabel: 'x 2.4' },
+          { syntax: 'Dungdz X', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.4, rateLabel: 'x 2.4' }
+        ],
+        notes: [
+          'Kết quả dự theo <em>Số cuối</em> của mã ID/Trace.',
+          'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
+        ]
       }
     }
   };
@@ -254,10 +333,58 @@ const App = (function() {
     if (modal) modal.classList.remove('is-open');
   }
 
+  // Render Dynamic Game Rules Showcase Card (Exact 1-to-1 with screenshots)
+  function renderGameRules(modeKey) {
+    const container = document.getElementById('game-rules-card');
+    if (!container) return;
+    const config = state.gameConfigs[modeKey] || state.gameConfigs.cltx2;
+
+    let rowsHtml = '';
+    config.rows.forEach(r => {
+      const numbersHtml = r.numbers.map(n => `<span class="game-number-chip">${n}</span>`).join(' ');
+      rowsHtml += `
+        <div class="game-rule-row">
+          <div class="game-syntax-cell">
+            <span>${r.syntax}</span>
+            <span class="copy-syntax-icon" onclick="App.copyText('${r.syntax}', 'Cú pháp ${r.syntax}')" title="Sao chép cú pháp ${r.syntax}" role="button" tabindex="0">
+              <i class="fa-regular fa-copy"></i>
+            </span>
+          </div>
+          <div class="game-numbers-cell">
+            ${numbersHtml}
+          </div>
+          <div class="game-rate-cell">${r.rateLabel}</div>
+        </div>
+      `;
+    });
+
+    let notesHtml = '';
+    config.notes.forEach(note => {
+      notesHtml += `<div class="game-rule-note"><span class="pin-icon">📌</span> ${note}</div>`;
+    });
+
+    container.innerHTML = `
+      <div class="game-rules-header">
+        <span class="game-rules-title">${config.titleIcon} ${config.title}</span>
+      </div>
+      <div class="game-rules-table">
+        <div class="game-rule-row header">
+          <div class="header-col">Cú pháp</div>
+          <div class="header-col text-center">${config.colHeader}</div>
+          <div class="header-col text-right">Tỉ lệ</div>
+        </div>
+        ${rowsHtml}
+      </div>
+      <div class="game-rules-notes">
+        ${notesHtml}
+      </div>
+    `;
+  }
+
   // Switch Game Mode
   function setGameMode(modeKey) {
     state.currentGame = modeKey;
-    const config = state.gameConfigs[modeKey] || state.gameConfigs.cltx;
+    const config = state.gameConfigs[modeKey] || state.gameConfigs.cltx2;
 
     // Update active tab buttons
     document.querySelectorAll('.game-tab-button').forEach(btn => {
@@ -266,8 +393,16 @@ const App = (function() {
       btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
     });
 
-    state.activeBank.memo = config.memos[0];
-    showToast(`Chuyển chế độ: ${config.name}`, 'info');
+    // Render rules showcase card
+    renderGameRules(modeKey);
+
+    // Sync with phone simulator if exists
+    if (typeof setPhoneGameMode === 'function') {
+      setPhoneGameMode(modeKey);
+    }
+
+    state.activeBank.memo = config.rows[0] ? config.rows[0].syntax : 'Dungdz TC';
+    showToast(`Chuyển trò chơi: ${config.title}`, 'info');
     playTone(520, 'sine', 0.08);
   }
 
@@ -709,30 +844,97 @@ const App = (function() {
           const randFT = Math.floor(100000000 + Math.random() * 900000000);
           const fullTxCode = `FT26${randFT}`;
           const lastDigit = randFT % 10;
+          const secondLastDigit = Math.floor(randFT / 10) % 10;
+          const sumLast2 = (lastDigit + secondLastDigit) % 10;
 
           // Determine WIN / LOSE based on player's chosen memo
           let isWin = false;
-          let rate = 2.4;
-          const memoUpper = phoneState.memo.toUpperCase();
+          let rate = 1.95;
+          let calcExplain = '';
+          const memoClean = phoneState.memo.toUpperCase().replace(/^DUNGDZ\s+/, '').trim();
 
-          if (memoUpper === 'C') {
+          // 1. CLTX+2 (Cộng 2 số cuối)
+          if (memoClean === 'TC') {
+            isWin = [0, 2, 4, 6, 8].includes(sumLast2);
+            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Chẵn]`;
+          } else if (memoClean === 'TL') {
+            isWin = [1, 3, 5, 7, 9].includes(sumLast2);
+            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Lẻ]`;
+          } else if (memoClean === 'TT') {
+            isWin = [5, 6, 7, 8, 9].includes(sumLast2);
+            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Tài]`;
+          } else if (memoClean === 'TX') {
+            isWin = [0, 1, 2, 3, 4].includes(sumLast2);
+            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Xỉu]`;
+          }
+          // 2. 1 PHẦN 3
+          else if (memoClean === 'N1') {
+            isWin = [1, 5, 7].includes(lastDigit);
+            rate = 3.0;
+            calcExplain = `Số cuối: [${lastDigit}] khớp N1 (1, 5, 7)`;
+          } else if (memoClean === 'N2') {
+            isWin = [2, 4, 8].includes(lastDigit);
+            rate = 3.0;
+            calcExplain = `Số cuối: [${lastDigit}] khớp N2 (2, 4, 8)`;
+          } else if (memoClean === 'N3') {
+            isWin = [3, 6, 9].includes(lastDigit);
+            rate = 3.0;
+            calcExplain = `Số cuối: [${lastDigit}] khớp N3 (3, 6, 9)`;
+          }
+          // 3. XIÊN SỐ (Tổng 2 số cuối)
+          else if (memoClean === 'CX') {
+            isWin = [0, 2, 4].includes(sumLast2);
+            rate = 3.0;
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CX (0, 2, 4)`;
+          } else if (memoClean === 'LT') {
+            isWin = [5, 7, 9].includes(sumLast2);
+            rate = 3.0;
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LT (5, 7, 9)`;
+          } else if (memoClean === 'CT') {
+            isWin = [6, 8].includes(sumLast2);
+            rate = 3.5;
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CT (6, 8)`;
+          } else if (memoClean === 'LX') {
+            isWin = [1, 3].includes(sumLast2);
+            rate = 3.5;
+            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LX (1, 3)`;
+          }
+          // 4. Default CLTX
+          else if (memoClean === 'C') {
             isWin = [2, 4, 6, 8].includes(lastDigit);
             rate = 2.4;
-          } else if (memoUpper === 'L') {
+            calcExplain = `Số cuối: [${lastDigit}] [Chẵn]`;
+          } else if (memoClean === 'L') {
             isWin = [1, 3, 5, 7].includes(lastDigit);
             rate = 2.4;
-          } else if (memoUpper === 'T') {
+            calcExplain = `Số cuối: [${lastDigit}] [Lẻ]`;
+          } else if (memoClean === 'T') {
             isWin = [5, 6, 7, 8].includes(lastDigit);
             rate = 2.4;
-          } else if (memoUpper === 'X') {
+            calcExplain = `Số cuối: [${lastDigit}] [Tài]`;
+          } else if (memoClean === 'X') {
             isWin = [1, 2, 3, 4].includes(lastDigit);
             rate = 2.4;
-          } else if (memoUpper === 'C2') {
+            calcExplain = `Số cuối: [${lastDigit}] [Xỉu]`;
+          } else if (memoClean === 'C2') {
             isWin = [0, 2, 4, 6, 8].includes(lastDigit);
             rate = 1.98;
-          } else if (memoUpper === 'L2') {
+            calcExplain = `Số cuối: [${lastDigit}] [Chẵn 2]`;
+          } else if (memoClean === 'L2') {
             isWin = [1, 3, 5, 7, 9].includes(lastDigit);
             rate = 1.98;
+            calcExplain = `Số cuối: [${lastDigit}] [Lẻ 2]`;
+          }
+
+          // 10% Chance of Double Payment (Thanh toán 2 lần!)
+          let isDoublePayout = false;
+          if (isWin && Math.random() < 0.10) {
+            isDoublePayout = true;
+            rate *= 2;
           }
 
           const payoutAmount = isWin ? Math.round(phoneState.amount * rate) : 0;
@@ -748,22 +950,24 @@ const App = (function() {
           const receiptRecipientStk = document.getElementById('receipt-recipient-stk');
           const receiptRecipientName = document.getElementById('receipt-recipient-name');
 
+          const isSumGame = ['TC', 'TL', 'TT', 'TX', 'CX', 'LT', 'CT', 'LX'].includes(memoClean);
+
           if (receiptAmountEl) receiptAmountEl.textContent = `-${phoneState.amount.toLocaleString('vi-VN')} VND`;
           if (receiptTimeEl) receiptTimeEl.textContent = formatTimeNow();
           if (receiptMemoEl) receiptMemoEl.textContent = phoneState.memo;
           if (receiptTxEl) receiptTxEl.textContent = fullTxCode;
-          if (receiptDigitEl) receiptDigitEl.textContent = lastDigit;
-          if (receiptTailEl) receiptTailEl.textContent = lastDigit;
+          if (receiptDigitEl) receiptDigitEl.textContent = isSumGame ? sumLast2 : lastDigit;
+          if (receiptTailEl) receiptTailEl.textContent = isSumGame ? `${secondLastDigit}+${lastDigit}=${sumLast2}` : lastDigit;
           if (receiptRecipientStk) receiptRecipientStk.textContent = phoneState.recipientStk;
           if (receiptRecipientName) receiptRecipientName.textContent = phoneState.recipientName;
 
           if (receiptMatchEl) {
             if (isWin) {
               receiptMatchEl.style.color = '#16a34a';
-              receiptMatchEl.textContent = `KHỚP CỬA ${phoneState.memo} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)`;
+              receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2 LẦN!]' : ''}`;
             } else {
               receiptMatchEl.style.color = '#dc2626';
-              receiptMatchEl.textContent = `SỐ CUỐI ${lastDigit} KHÔNG KHỚP CỬA ${phoneState.memo} ➔ THUA (0đ)`;
+              receiptMatchEl.textContent = `${calcExplain} ➔ THUA (0đ)`;
             }
           }
 
@@ -877,12 +1081,92 @@ const App = (function() {
     });
   }
 
+  // Helper to switch game category inside Phone Simulator
+  function setPhoneGameMode(modeKey) {
+    const pills = document.querySelectorAll('.phone-mode-pill');
+    pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-cat') === modeKey));
+
+    const chipsContainer = document.getElementById('phone-memo-chips');
+    if (!chipsContainer) return;
+
+    let chipItems = [];
+    if (modeKey === 'cltx2') {
+      chipItems = [
+        { memo: 'Dungdz TC', label: 'Dungdz TC (x1.95)' },
+        { memo: 'Dungdz TL', label: 'Dungdz TL (x1.95)' },
+        { memo: 'Dungdz TT', label: 'Dungdz TT (x1.95)' },
+        { memo: 'Dungdz TX', label: 'Dungdz TX (x1.95)' }
+      ];
+    } else if (modeKey === '1p3') {
+      chipItems = [
+        { memo: 'Dungdz N1', label: 'Dungdz N1 (x3)' },
+        { memo: 'Dungdz N2', label: 'Dungdz N2 (x3)' },
+        { memo: 'Dungdz N3', label: 'Dungdz N3 (x3)' }
+      ];
+    } else if (modeKey === 'xien') {
+      chipItems = [
+        { memo: 'Dungdz CX', label: 'Dungdz CX (x3)' },
+        { memo: 'Dungdz LT', label: 'Dungdz LT (x3)' },
+        { memo: 'Dungdz CT', label: 'Dungdz CT (x3.5)' },
+        { memo: 'Dungdz LX', label: 'Dungdz LX (x3.5)' }
+      ];
+    } else {
+      chipItems = [
+        { memo: 'Dungdz C', label: 'C (x2.4)' },
+        { memo: 'Dungdz L', label: 'L (x2.4)' },
+        { memo: 'Dungdz T', label: 'T (x2.4)' },
+        { memo: 'Dungdz X', label: 'X (x2.4)' }
+      ];
+    }
+
+    chipsContainer.innerHTML = chipItems.map((c, i) => `
+      <div class="fake-memo-chip ${i === 0 ? 'active' : ''}" role="button" tabindex="0" data-memo="${c.memo}">${c.label}</div>
+    `).join('');
+
+    phoneState.memo = chipItems[0].memo;
+    const disp = document.getElementById('phone-memo-display');
+    if (disp) disp.textContent = phoneState.memo;
+
+    // Attach click listeners to newly created chips
+    chipsContainer.querySelectorAll('.fake-memo-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chipsContainer.querySelectorAll('.fake-memo-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const memo = chip.getAttribute('data-memo');
+        phoneState.memo = memo;
+        if (disp) disp.textContent = memo;
+        playTone(580, 'sine', 0.05);
+      });
+    });
+  }
+
   // Initialization
   function init() {
     initListeners();
+    // Default boot on CLTX2 (matching Screenshot 1)
+    setGameMode('cltx2');
+    setPhoneGameMode('cltx2');
+
+    // Bind Game Tab buttons
+    document.querySelectorAll('.game-tab-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const gameKey = btn.getAttribute('data-game');
+        setGameMode(gameKey);
+      });
+    });
+
+    // Bind Phone mode category pills
+    document.querySelectorAll('.phone-mode-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const catKey = pill.getAttribute('data-cat');
+        setPhoneGameMode(catKey);
+        playTone(500, 'sine', 0.06);
+      });
+    });
+
     // Periodically stream new winning transactions
     setInterval(streamNewBigWinner, 4200);
-    console.log('%cTRUM.TOP Engine Active with Fake Phone Simulator', 'color: #ffb703; font-weight: bold; font-size: 14px;');
+    console.log('%cTRUM.TOP Engine Active with CLTX+2, 1P3, XIEN SO', 'color: #ffb703; font-weight: bold; font-size: 14px;');
   }
 
   return {

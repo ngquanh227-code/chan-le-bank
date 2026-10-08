@@ -139,6 +139,92 @@
   <!-- Main Content Container -->
   <main class="main-content" id="main-container">
 
+    <!-- ACTIVE GAME RULES SHOWCASE CARD (CLTX+2, 1 PHẦN 3, XIÊN SỐ, CLTX) -->
+    <section class="game-rules-showcase-card" id="game-rules-card" aria-label="Bảng quy định và tỷ lệ trả thưởng trò chơi">
+      <div class="game-rules-header">
+        <span class="game-rules-title">
+          <i class="fa-solid fa-dice" style="color: #cbd5e1;"></i> <i class="fa-solid fa-dice" style="color: #cbd5e1;"></i> CHẴN LẺ - TÀI XỈU - CỘNG 2 SỐ
+        </span>
+      </div>
+      <div class="game-rules-table">
+        <div class="game-rule-row header">
+          <div class="header-col">Cú pháp</div>
+          <div class="header-col text-center">Tổng 2 số cuối</div>
+          <div class="header-col text-right">Tỉ lệ</div>
+        </div>
+        <div class="game-rule-row">
+          <div class="game-syntax-cell">
+            <span>Dungdz TC</span>
+            <span class="copy-syntax-icon" onclick="App.copyText('Dungdz TC', 'Cú pháp Dungdz TC')" title="Sao chép cú pháp Dungdz TC" role="button" tabindex="0">
+              <i class="fa-regular fa-copy"></i>
+            </span>
+          </div>
+          <div class="game-numbers-cell">
+            <span class="game-number-chip">0</span>
+            <span class="game-number-chip">2</span>
+            <span class="game-number-chip">4</span>
+            <span class="game-number-chip">6</span>
+            <span class="game-number-chip">8</span>
+          </div>
+          <div class="game-rate-cell">x 1.95</div>
+        </div>
+        <div class="game-rule-row">
+          <div class="game-syntax-cell">
+            <span>Dungdz TL</span>
+            <span class="copy-syntax-icon" onclick="App.copyText('Dungdz TL', 'Cú pháp Dungdz TL')" title="Sao chép cú pháp Dungdz TL" role="button" tabindex="0">
+              <i class="fa-regular fa-copy"></i>
+            </span>
+          </div>
+          <div class="game-numbers-cell">
+            <span class="game-number-chip">1</span>
+            <span class="game-number-chip">3</span>
+            <span class="game-number-chip">5</span>
+            <span class="game-number-chip">7</span>
+            <span class="game-number-chip">9</span>
+          </div>
+          <div class="game-rate-cell">x 1.95</div>
+        </div>
+        <div class="game-rule-row">
+          <div class="game-syntax-cell">
+            <span>Dungdz TT</span>
+            <span class="copy-syntax-icon" onclick="App.copyText('Dungdz TT', 'Cú pháp Dungdz TT')" title="Sao chép cú pháp Dungdz TT" role="button" tabindex="0">
+              <i class="fa-regular fa-copy"></i>
+            </span>
+          </div>
+          <div class="game-numbers-cell">
+            <span class="game-number-chip">5</span>
+            <span class="game-number-chip">6</span>
+            <span class="game-number-chip">7</span>
+            <span class="game-number-chip">8</span>
+            <span class="game-number-chip">9</span>
+          </div>
+          <div class="game-rate-cell">x 1.95</div>
+        </div>
+        <div class="game-rule-row">
+          <div class="game-syntax-cell">
+            <span>Dungdz TX</span>
+            <span class="copy-syntax-icon" onclick="App.copyText('Dungdz TX', 'Cú pháp Dungdz TX')" title="Sao chép cú pháp Dungdz TX" role="button" tabindex="0">
+              <i class="fa-regular fa-copy"></i>
+            </span>
+          </div>
+          <div class="game-numbers-cell">
+            <span class="game-number-chip">0</span>
+            <span class="game-number-chip">1</span>
+            <span class="game-number-chip">2</span>
+            <span class="game-number-chip">3</span>
+            <span class="game-number-chip">4</span>
+          </div>
+          <div class="game-rate-cell">x 1.95</div>
+        </div>
+      </div>
+      <div class="game-rules-notes">
+        <div class="game-rule-note"><span class="pin-icon">📌</span> Kết quả dự theo <em>Tổng 2 số cuối</em> của mã ID/Trace.</div>
+        <div class="game-rule-note"><span class="pin-icon">📌</span> Tỉ lệ giảm <em>0.05</em> cho lệnh từ <em>50K</em> trở lên.</div>
+        <div class="game-rule-note"><span class="pin-icon">📌</span> Tỉ lệ giảm <em>0.1</em> cho lệnh từ <em>1tr</em> trở lên.</div>
+        <div class="game-rule-note"><span class="pin-icon">📌</span> Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em></div>
+      </div>
+    </section>
+
     <!-- UPPER 2-COLUMN GRID: THÔNG TIN TÀI KHOẢN & THÔNG TIN NHẬN -->
     <div class="grid-two-cards">
 
@@ -1099,15 +1185,20 @@
           <div class="fake-bank-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span class="fake-card-label">Nội dung chuyển khoản (Chọn cửa)</span>
-              <span style="background: #eab308; color: #000; padding: 1px 8px; font-weight: 800; border-radius: 4px; font-size: 12px;" id="phone-memo-display">C</span>
+              <span style="background: #eab308; color: #000; padding: 1px 8px; font-weight: 800; border-radius: 4px; font-size: 12px;" id="phone-memo-display">Dungdz TC</span>
             </div>
-            <div class="fake-memo-chips">
-              <div class="fake-memo-chip active" role="button" tabindex="0" data-memo="C">C (Chẵn x2.4)</div>
-              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="L">L (Lẻ x2.4)</div>
-              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="T">T (Tài x2.4)</div>
-              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="X">X (Xỉu x2.4)</div>
-              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="C2">C2 (x1.98)</div>
-              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="L2">L2 (x1.98)</div>
+            <!-- Quick Game Category Filter inside Phone -->
+            <div class="phone-game-pills" id="phone-game-pills">
+              <span class="phone-mode-pill active" data-cat="cltx2">CLTX+2</span>
+              <span class="phone-mode-pill" data-cat="1p3">1 PHẦN 3</span>
+              <span class="phone-mode-pill" data-cat="xien">XIÊN</span>
+              <span class="phone-mode-pill" data-cat="cltx">CLTX</span>
+            </div>
+            <div class="fake-memo-chips" id="phone-memo-chips">
+              <div class="fake-memo-chip active" role="button" tabindex="0" data-memo="Dungdz TC">Dungdz TC (x1.95)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TL">Dungdz TL (x1.95)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TT">Dungdz TT (x1.95)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TX">Dungdz TX (x1.95)</div>
             </div>
           </div>
 

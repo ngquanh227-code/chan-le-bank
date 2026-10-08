@@ -323,6 +323,209 @@ a:hover {
   gap: 14px;
 }
 
+/* ==========================================================================
+   GAME RULES SHOWCASE CARD (EXACT TRUM.TOP 1-TO-1 VISUAL SPECIFICATION)
+   ========================================================================== */
+.game-rules-showcase-card {
+  background: #14171d;
+  border: 1px solid #232730;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  animation: modal-enter 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.game-rules-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.game-rules-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-rules-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-rule-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 110px;
+  align-items: center;
+  padding: 11px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 14.5px;
+}
+
+.game-rule-row.header {
+  font-size: 13.5px;
+  color: #94a3b8;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 8px;
+}
+
+.header-col.text-center {
+  text-align: left;
+  padding-left: 4px;
+}
+
+.header-col.text-right {
+  text-align: right;
+  padding-right: 4px;
+}
+
+.game-syntax-cell {
+  color: #ffffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.copy-syntax-icon {
+  color: #f59e0b;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.15s ease, color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.copy-syntax-icon:hover {
+  transform: scale(1.15);
+  color: #fbbf24;
+}
+
+.game-numbers-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.game-number-chip {
+  background-color: #2b303a;
+  color: #f1f5f9;
+  font-weight: 800;
+  font-size: 13.5px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  min-width: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.game-rate-cell {
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 15px;
+  text-align: right;
+  letter-spacing: 0.3px;
+  padding-right: 4px;
+}
+
+.game-rules-notes {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.game-rule-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.game-rule-note em {
+  color: #fde047;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.pin-icon {
+  font-size: 14px;
+}
+
+/* Phone Simulator Mode Pills */
+.phone-game-pills {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 0;
+}
+
+.phone-game-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-mode-pill {
+  background: #1b263b;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid #2d3c54;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.phone-mode-pill:hover {
+  background: #25334c;
+  color: #ffffff;
+}
+
+.phone-mode-pill.active {
+  background: #0052cc;
+  color: #ffffff;
+  border-color: #38bdf8;
+}
+
+@media (max-width: 640px) {
+  .game-rule-row {
+    grid-template-columns: 130px 1fr 80px;
+    font-size: 12px;
+    padding: 8px 4px;
+  }
+
+  .game-number-chip {
+    padding: 2px 7px;
+    font-size: 12px;
+    min-width: 24px;
+  }
+
+  .game-syntax-cell {
+    font-size: 12.5px;
+    gap: 6px;
+  }
+
+  .game-rate-cell {
+    font-size: 13px;
+  }
+}
+
 /* Standard Dark Card */
 .dashboard-card {
   background-color: var(--color-surface-card);
