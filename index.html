@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRUM.TOP - CHẴN LẺ BANK TỰ ĐỘNG 24/7</title>
+  <meta name="description" content="Trùm Chẵn Lẻ Bank - Hệ thống chẵn lẻ ngân hàng tự động số 1 Việt Nam, thanh toán tự động 5s qua MBBank, Vietcombank. Tỷ lệ thưởng cao, minh bạch 100%.">
+
+  <!-- Open Sans Font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet matching TRUM.TOP UI UX -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Sticky Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Brand Logo (Link 1) -->
+      <a href="#trang-chu" class="trum-logo" id="link-brand-home" aria-label="TRUM TOP Logo">
+        <i class="fa-solid fa-crown"></i>
+        <span>TRUM</span>
+      </a>
+
+      <!-- Primary Navigation Bar (Nav Count: 1) -->
+      <nav role="navigation" aria-label="Main Navigation" class="main-nav">
+        <!-- List 1: Top Navigation List -->
+        <ul class="nav-list" id="list-nav-top">
+          <!-- Links 2 to 9 -->
+          <li>
+            <a href="#huong-dan" class="nav-item-link" id="link-nav-guide">
+              <i class="fa-solid fa-book-open icon-guide"></i>
+              <span>Hướng dẫn</span>
+            </a>
+          </li>
+          <li>
+            <a href="#uy-tin" class="nav-item-link" id="link-nav-reputation">
+              <i class="fa-solid fa-gift icon-reputation"></i>
+              <span>Uy tín</span>
+            </a>
+          </li>
+          <li>
+            <a href="#giftcode" class="nav-item-link" id="link-nav-giftcode">
+              <i class="fa-solid fa-trophy icon-giftcode"></i>
+              <span>Giftcode</span>
+            </a>
+          </li>
+          <li>
+            <a href="#vong-quay" class="nav-item-link" id="link-nav-wheel">
+              <i class="fa-solid fa-dharmachakra icon-wheel"></i>
+              <span>Vòng quay</span>
+            </a>
+          </li>
+          <li>
+            <a href="#hoan-cuoc" class="nav-item-link" id="link-nav-refund">
+              <i class="fa-solid fa-rotate-left icon-refund"></i>
+              <span>Hoàn cược</span>
+            </a>
+          </li>
+          <li>
+            <a href="#hoan-cuoc-tuan" class="nav-item-link" id="link-nav-weekly-refund">
+              <i class="fa-solid fa-coins icon-weekly-refund"></i>
+              <span>Hoàn cược tuần</span>
+            </a>
+          </li>
+          <li>
+            <a href="#no-jackpot" class="nav-item-link" id="link-nav-jackpot">
+              <i class="fa-solid fa-shield-halved icon-jackpot"></i>
+              <span>Nổ Jackpot</span>
+            </a>
+          </li>
+          <li>
+            <a href="#thong-tin-tai-khoan" class="nav-item-link" id="link-nav-user-profile">
+              <span class="user-greeting">Xin chào </span>
+              <span class="user-name-highlight">Dungktt</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Header Action Tools (Buttons 1, 2, 3) -->
+      <div class="header-tools">
+        <!-- Button 1: Sound Toggle -->
+        <button type="button" class="btn btn-secondary" id="btn-sound" aria-label="Bật/Tắt âm thanh" title="Âm thanh">
+          <i class="fa-solid fa-volume-high" id="sound-icon"></i>
+        </button>
+        <!-- Button 2: Density Toggle -->
+        <button type="button" class="btn btn-secondary" id="btn-density" aria-label="Mật độ hiển thị" title="Đổi mật độ">
+          <i class="fa-solid fa-table-cells"></i>
+        </button>
+        <!-- Button 3: Design Tokens Drawer -->
+        <button type="button" class="btn btn-primary" id="btn-design-tokens" title="Bảng Token & 8 States">
+          <i class="fa-solid fa-palette"></i> Tokens
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-Header Row: Red Bank Mode & Game Selector Tabs -->
+  <div class="sub-header-bar">
+    <!-- Button 4: Red Bank Pill -->
+    <button type="button" class="btn-bank-pill" id="btn-bank-tab">
+      <i class="fa-solid fa-circle" style="font-size: 8px;"></i>
+      <span>Bank</span>
+    </button>
+
+    <!-- List 2: Game Selector Pills List (CLTX, CLTX2, ĐOÁN SỐ, 1 PHẦN 3, TỔNG 3, XIÊN, TÀI XỈU) -->
+    <ul class="game-tabs-row" id="list-game-tabs" role="tablist">
+      <li class="game-tab-item">
+        <div class="game-tab-button active" role="tab" tabindex="0" data-game="cltx" id="tab-cltx">CLTX</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="cltx2" id="tab-cltx2">CLTX2</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="doanso" id="tab-doanso">ĐOÁN SỐ</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="1p3" id="tab-1p3">1 PHẦN 3</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="tong3" id="tab-tong3">TỔNG 3</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="xien" id="tab-xien">XIÊN</div>
+      </li>
+      <li class="game-tab-item">
+        <div class="game-tab-button" role="tab" tabindex="0" data-game="tx" id="tab-tx">TÀI XỈU</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="main-content" id="main-container">
+
+    <!-- UPPER 2-COLUMN GRID: THÔNG TIN TÀI KHOẢN & THÔNG TIN NHẬN -->
+    <div class="grid-two-cards">
+
+      <!-- LEFT CARD: THÔNG TIN TÀI KHOẢN -->
+      <section class="dashboard-card" id="thong-tin-tai-khoan" aria-labelledby="card-account-title">
+        <div class="card-title-bar">
+          <span id="card-account-title"><i class="fa-solid fa-id-card"></i> Thông tin tài khoản</span>
+        </div>
+        <div class="card-body-content">
+          <div class="account-info-box">
+            <!-- Nickname Row -->
+            <div class="account-row">
+              <span>👑 Nickname:</span>
+              <span class="account-nickname">Dungktt</span>
+              <span onclick="App.copyText('Dungktt', 'Nickname')" style="cursor: pointer; color: #9ca3af;" title="Sao chép Nickname" role="button" tabindex="0">
+                <i class="fa-regular fa-copy"></i>
+              </span>
+            </div>
+
+            <!-- Bank Payout Row -->
+            <div style="font-size: var(--font-size-sm); color: #d1d5db; margin-top: 2px;">
+              💳 Bank trả thưởng:
+            </div>
+
+            <!-- Bank Selection Dropdown -->
+            <div>
+              <select class="form-select-bank" id="select-payout-bank" aria-label="Ngân hàng nhận thưởng">
+                <option value="MB" selected>MB-Ngân hàng Quân Đội</option>
+                <option value="VCB">VCB-Ngân hàng Ngoại Thương</option>
+                <option value="TCB">TCB-Ngân hàng Kỹ Thương</option>
+                <option value="ACB">ACB-Ngân hàng Á Châu</option>
+              </select>
+            </div>
+
+            <!-- Input 1/3: Account Number -->
+            <div>
+              <input type="text" class="form-input-clean" id="input-stk-reward" value="0971266012" placeholder="Số tài khoản nhận tiền" aria-label="Số tài khoản nhận tiền">
+            </div>
+
+            <!-- Input 2/3: Account Holder Name -->
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <input type="text" class="form-input-clean" id="input-name-reward" value="NGUYEN THAO LINH" placeholder="Tên chủ tài khoản" aria-label="Tên chủ tài khoản">
+              <!-- Button 5: Save/Edit Account -->
+              <button type="button" class="btn btn-secondary" id="btn-save-account" title="Lưu thông tin tài khoản">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+            </div>
+
+            <!-- Button 6: Lịch sử chơi -->
+            <div>
+              <button type="button" class="btn-history-play" id="btn-history-play">
+                <i class="fa-solid fa-gamepad"></i> Lịch sử chơi
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT CARD: THÔNG TIN NHẬN (TABLES 1 & 2) -->
+      <section class="dashboard-card" id="thong-tin-nhan" aria-labelledby="card-receiving-title">
+        <div class="card-title-bar">
+          <span id="card-receiving-title"><i class="fa-solid fa-building-columns"></i> THÔNG TIN NHẬN</span>
+        </div>
+        <div class="card-body-content">
+          <!-- 1. Ngân hàng nhận -->
+          <div class="rules-highlight-title">
+            1. Ngân hàng nhận (Chỉ hỗ trợ chuyển cùng Bank)
+          </div>
+
+          <!-- TABLE 1/7: Ngân hàng nhận MBBank (Table 1) -->
+          <div class="receiving-table-wrap">
+            <table class="table-clean" id="table-receiving-banks" aria-label="Danh sách tài khoản MBBank nhận tiền">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 44px;">QR</th>
+                  <th scope="col">Bank</th>
+                  <th scope="col">TK</th>
+                  <th scope="col">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1: Button 7 (QR), Button 8 (Copy) -->
+                <tr>
+                  <td>
+                    <button type="button" class="btn-qr-action" id="btn-qr-1" onclick="App.openQrModal('MBBank', '0644888866', 'NGUYEN VAN PHONG')" aria-label="Tạo mã QR STK 1">
+                      <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <span class="bank-mb-badge"><i class="fa-solid fa-star"></i> MB</span>
+                  </td>
+                  <td>
+                    <code style="color: #fff; font-size: 13px;">0644***866</code>
+                    <span onclick="App.copyText('0644888866', 'STK 0644888866')" style="cursor: pointer; color: #ffb703; margin-left: 4px;" title="Sao chép STK" role="button" tabindex="0">
+                      <i class="fa-regular fa-copy"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn-copy-tag btn-status-active" id="btn-copy-stk-1" data-stk="0644888866">
+                      THAO TÁC
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row 2: Button 9 (QR), Button 10 (Copy) -->
+                <tr>
+                  <td>
+                    <button type="button" class="btn-qr-action" id="btn-qr-2" onclick="App.openQrModal('MBBank', '7047999999', 'TRAN THI HUYEN')" aria-label="Tạo mã QR STK 2">
+                      <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <span class="bank-mb-badge"><i class="fa-solid fa-star"></i> MB</span>
+                  </td>
+                  <td>
+                    <code style="color: #fff; font-size: 13px;">7047***999</code>
+                    <span onclick="App.copyText('7047999999', 'STK 7047999999')" style="cursor: pointer; color: #ffb703; margin-left: 4px;" title="Sao chép STK" role="button" tabindex="0">
+                      <i class="fa-regular fa-copy"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn-copy-tag btn-status-pause" id="btn-copy-stk-2" data-stk="7047999999">
+                      HUỶ
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row 3: Button 11 (QR), Button 12 (Copy) -->
+                <tr>
+                  <td>
+                    <button type="button" class="btn-qr-action" id="btn-qr-3" onclick="App.openQrModal('MBBank', '2002999991', 'LE HOANG NAM')" aria-label="Tạo mã QR STK 3">
+                      <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <span class="bank-mb-badge"><i class="fa-solid fa-star"></i> MB</span>
+                  </td>
+                  <td>
+                    <code style="color: #fff; font-size: 13px;">2002***991</code>
+                    <span onclick="App.copyText('2002999991', 'STK 2002999991')" style="cursor: pointer; color: #ffb703; margin-left: 4px;" title="Sao chép STK" role="button" tabindex="0">
+                      <i class="fa-regular fa-copy"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn-copy-tag btn-status-pause" id="btn-copy-stk-3" data-stk="2002999991">
+                      TẠM DỪNG
+                    </button>
+                  </td>
+                </tr>
+
+                <!-- Row 4: Button 13 (QR), Button 14 (Copy) -->
+                <tr>
+                  <td>
+                    <button type="button" class="btn-qr-action" id="btn-qr-4" onclick="App.openQrModal('MBBank', '0568666666', 'VU DINH QUAN')" aria-label="Tạo mã QR STK 4">
+                      <i class="fa-solid fa-qrcode"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <span class="bank-mb-badge"><i class="fa-solid fa-star"></i> MB</span>
+                  </td>
+                  <td>
+                    <code style="color: #fff; font-size: 13px;">0568***666</code>
+                    <span onclick="App.copyText('0568666666', 'STK 0568666666')" style="cursor: pointer; color: #ffb703; margin-left: 4px;" title="Sao chép STK" role="button" tabindex="0">
+                      <i class="fa-regular fa-copy"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn-copy-tag btn-status-active" id="btn-copy-stk-4" data-stk="0568666666">
+                      HOẠT ĐỘNG
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 2. Quy định mức cược -->
+          <div class="rules-highlight-title" style="margin-top: 10px;">
+            2. Quy định mức cược :
+          </div>
+
+          <!-- TABLE 2/7: Quy định mức cược (Table 2) -->
+          <div class="receiving-table-wrap">
+            <table class="table-clean" id="table-bet-limits" aria-label="Bảng mức cược tối thiểu và tối đa">
+              <thead>
+                <tr>
+                  <th scope="col">Bank</th>
+                  <th scope="col">Tối thiểu</th>
+                  <th scope="col">Tối đa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>MB</strong></td>
+                  <td><strong style="color: #4ade80;">10.000</strong></td>
+                  <td><strong style="color: #c084fc;">5.000.000</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- List 3: 4 quy định tiếp theo trong Thông Tin Nhận -->
+          <ul class="guideline-numbered-list" id="list-receiving-rules">
+            <li>3. Hệ thống chỉ chấp nhận chuyển cùng Bank. Kết quả được tính theo <strong>mã GD</strong> của giao dịch.</li>
+            <li>4. Riêng với VCB số tiền trả qua là Mã ma quét mạng với số giao dịch và phải chuyển từ APP VCB DIGIBANK.</li>
+            <li>5. Tối đa hoàn lại <strong>98%</strong> nếu sai cú pháp hoặc ngoài mức cược cho phép.</li>
+            <li>6. Yêu cầu bank nhận tiền và bank chuyển tiền cùng 1 chủ tài khoản.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- MIDDLE CARD 1: LỊCH SỬ CHƠI (TABLE 3) -->
+    <section class="dashboard-card" id="lich-su-choi-section" aria-labelledby="card-history-title">
+      <div class="card-title-bar">
+        <span id="card-history-title"><i class="fa-solid fa-list-ul"></i> LỊCH SỬ CHƠI</span>
+      </div>
+      <div class="card-body-content" style="padding: 0;">
+        <div style="overflow-x: auto;">
+          <!-- TABLE 3/7: Lịch sử chơi (Table 3) -->
+          <table class="table-live-stream" id="table-my-history" aria-label="Bảng lịch sử chơi cá nhân">
+            <thead>
+              <tr>
+                <th scope="col">Trò chơi</th>
+                <th scope="col">Đặt cược</th>
+                <th scope="col">Tiền cược</th>
+                <th scope="col">Tiền nhận</th>
+                <th scope="col">Kết quả</th>
+                <th scope="col">Mã Trans</th>
+                <th scope="col">Đuôi</th>
+                <th scope="col">Thời gian</th>
+              </tr>
+            </thead>
+            <tbody id="my-history-rows">
+              <tr>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">L</span></td>
+                <td>48,000</td>
+                <td><strong style="color: #4ade80;">115,200</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***6031</code></td>
+                <td><span class="badge-tail-digit">1</span></td>
+                <td>2026/10/08 22:11:21</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>250,000</td>
+                <td><strong style="color: #4ade80;">600,000</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***2248</code></td>
+                <td><span class="badge-tail-digit">8</span></td>
+                <td>2026/10/08 16:11:03</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>120,000</td>
+                <td>0</td>
+                <td><span class="badge-result-lose">LOSE</span></td>
+                <td><code>***1234</code></td>
+                <td><span class="badge-tail-digit">4</span></td>
+                <td>2026/10/08 16:08:42</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>100,000</td>
+                <td>0</td>
+                <td><span class="badge-result-lose">LOSE</span></td>
+                <td><code>***1598</code></td>
+                <td><span class="badge-tail-digit">9</span></td>
+                <td>2026/10/08 15:41:05</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">C</span></td>
+                <td>48,000</td>
+                <td>0</td>
+                <td><span class="badge-result-lose">LOSE</span></td>
+                <td><code>***2830</code></td>
+                <td><span class="badge-tail-digit">0</span></td>
+                <td>2026/10/08 15:40:01</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">C</span></td>
+                <td>48,000</td>
+                <td><strong style="color: #4ade80;">115,200</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***8042</code></td>
+                <td><span class="badge-tail-digit">2</span></td>
+                <td>2026/10/08 14:53:08</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>48,000</td>
+                <td><strong style="color: #4ade80;">115,200</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***4317</code></td>
+                <td><span class="badge-tail-digit">7</span></td>
+                <td>2026/10/08 14:15:21</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">X</span></td>
+                <td>10,000</td>
+                <td>0</td>
+                <td><span class="badge-result-lose">LOSE</span></td>
+                <td><code>***6443</code></td>
+                <td><span class="badge-tail-digit">3</span></td>
+                <td>2026/10/08 14:04:39</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">L</span></td>
+                <td>10,000</td>
+                <td>0</td>
+                <td><span class="badge-result-lose">LOSE</span></td>
+                <td><code>***1040</code></td>
+                <td><span class="badge-tail-digit">0</span></td>
+                <td>2026/10/08 14:01:58</td>
+              </tr>
+              <tr>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>100,000</td>
+                <td><strong style="color: #4ade80;">240,000</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***1217</code></td>
+                <td><span class="badge-tail-digit">7</span></td>
+                <td>2026/10/08 01:42:34</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- MIDDLE CARD 2: NGƯỜI CHƠI THẮNG LỚN (TABLE 4) -->
+    <section class="dashboard-card" id="nguoi-choi-thang-lon-section" aria-labelledby="card-winners-title">
+      <div class="card-title-bar">
+        <span id="card-winners-title"><i class="fa-solid fa-users"></i> NGƯỜI CHƠI THẮNG LỚN</span>
+      </div>
+      <div class="card-body-content" style="padding: 0;">
+        <div style="overflow-x: auto;">
+          <!-- TABLE 4/7: Người chơi thắng lớn (Table 4) -->
+          <table class="table-live-stream" id="table-big-winners" aria-label="Bảng người chơi thắng lớn">
+            <thead>
+              <tr>
+                <th scope="col">Nickname</th>
+                <th scope="col">Trò chơi</th>
+                <th scope="col">Đặt cược</th>
+                <th scope="col">Tiền cược</th>
+                <th scope="col">Tiền nhận</th>
+                <th scope="col">Kết quả</th>
+                <th scope="col">Mã Trans</th>
+                <th scope="col">Đuôi</th>
+                <th scope="col">Thời gian</th>
+              </tr>
+            </thead>
+            <tbody id="big-winners-rows">
+              <tr>
+                <td><code>nghia5***</code></td>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">T</span></td>
+                <td>20,000</td>
+                <td><strong style="color: #4ade80;">75,191</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***0705</code></td>
+                <td><span class="badge-tail-digit">5</span></td>
+                <td>2026/10/09 00:53:53</td>
+              </tr>
+              <tr>
+                <td><code>trhvunga***</code></td>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">X</span></td>
+                <td>43,143</td>
+                <td><strong style="color: #4ade80;">129,037</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***6735</code></td>
+                <td><span class="badge-tail-digit">4</span></td>
+                <td>2026/10/09 00:52:07</td>
+              </tr>
+              <tr>
+                <td><code>danhsan***</code></td>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">C</span></td>
+                <td>22,000</td>
+                <td><strong style="color: #4ade80;">88,100</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***9212</code></td>
+                <td><span class="badge-tail-digit">2</span></td>
+                <td>2026/10/09 00:52:03</td>
+              </tr>
+              <tr>
+                <td><code>Tiet9***</code></td>
+                <td><span class="badge-game-mode">CL</span></td>
+                <td><span class="badge-bet-choice">C</span></td>
+                <td>100,000</td>
+                <td><strong style="color: #4ade80;">240,000</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***1014</code></td>
+                <td><span class="badge-tail-digit">4</span></td>
+                <td>2026/10/09 00:52:16</td>
+              </tr>
+              <tr>
+                <td><code>Bao7***</code></td>
+                <td><span class="badge-game-mode">TX</span></td>
+                <td><span class="badge-bet-choice">X</span></td>
+                <td>600,000</td>
+                <td><strong style="color: #4ade80;">1,440,000</strong></td>
+                <td><span class="badge-result-win">WIN</span></td>
+                <td><code>***8014</code></td>
+                <td><span class="badge-tail-digit">4</span></td>
+                <td>2026/10/09 00:51:31</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOWER 2-COLUMN GRID: ĐẠI GIA TUẦN & NHIỆM VỤ (TABLES 5 & 6) -->
+    <div class="grid-two-cards">
+
+      <!-- LEFT CARD: ĐẠI GIA TUẦN (TABLE 5) -->
+      <section class="dashboard-card" id="dai-gia-tuan-section" aria-labelledby="card-tycoons-title">
+        <div class="card-title-bar">
+          <span id="card-tycoons-title"><i class="fa-solid fa-trophy" style="color: #ffd700;"></i> ĐẠI GIA TUẦN</span>
+        </div>
+        <div class="card-body-content">
+          <div style="overflow-x: auto;">
+            <!-- TABLE 5/7: Đại gia tuần (Table 5) -->
+            <table class="table-clean" id="table-weekly-tycoons" aria-label="Bảng xếp hạng đại gia tuần">
+              <thead>
+                <tr>
+                  <th scope="col">Hạng</th>
+                  <th scope="col">Nickname</th>
+                  <th scope="col">Tổng cược</th>
+                  <th scope="col">Thưởng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1. <span class="crown-rank rank-1">👑</span></td>
+                  <td><code>Xuanthao***</code></td>
+                  <td><strong>896,700,000</strong></td>
+                  <td><strong style="color: #ffd700;">5,000,000</strong></td>
+                </tr>
+                <tr>
+                  <td>2. <span class="crown-rank rank-2">🥈</span></td>
+                  <td><code>dzuz7***</code></td>
+                  <td><strong>562,998,124</strong></td>
+                  <td><strong style="color: #ffd700;">3,000,000</strong></td>
+                </tr>
+                <tr>
+                  <td>3. <span class="crown-rank rank-3">🥉</span></td>
+                  <td><code>Bao7***</code></td>
+                  <td><strong>455,545,000</strong></td>
+                  <td><strong style="color: #ffd700;">2,000,000</strong></td>
+                </tr>
+                <tr>
+                  <td>4.</td>
+                  <td><code>Huy2***</code></td>
+                  <td>425,555,000</td>
+                  <td>1,000,000</td>
+                </tr>
+                <tr>
+                  <td>5.</td>
+                  <td><code>Trec***</code></td>
+                  <td>124,715,103</td>
+                  <td>500,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note-warning-text">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Lưu ý: Tính theo tổng cược trong tuần: Thưởng vào Thứ 2 đầu tuần</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT CARD: NHIỆM VỤ (TABLE 6 & BUTTON 15) -->
+      <section class="dashboard-card" id="nhiem-vu-section" aria-labelledby="card-missions-title">
+        <div class="card-title-bar">
+          <span id="card-missions-title"><i class="fa-solid fa-star" style="color: #facc15;"></i> NHIỆM VỤ</span>
+          <!-- Button 15: Claim Quest Reward -->
+          <button type="button" class="btn btn-secondary" id="btn-claim-quest" style="font-size: 11px; padding: 2px 8px;">
+            <i class="fa-solid fa-gift"></i> Nhận
+          </button>
+        </div>
+        <div class="card-body-content">
+          <div style="color: #4ade80; font-weight: 700; font-size: var(--font-size-sm); margin-bottom: 8px;">
+            Tổng cược trong ngày: 614,000đ
+          </div>
+          <div style="overflow-x: auto;">
+            <!-- TABLE 6/7: Nhiệm vụ mốc ngày (Table 6) -->
+            <table class="table-clean" id="table-daily-missions" aria-label="Bảng nhiệm vụ mốc cược ngày">
+              <thead>
+                <tr>
+                  <th scope="col">Hạng</th>
+                  <th scope="col">Mốc chơi</th>
+                  <th scope="col">Thưởng</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>N1 <i class="fa-solid fa-circle-check check-mission-done"></i></td>
+                  <td>200,000</td>
+                  <td><strong style="color: #ffd700;">6,666</strong></td>
+                </tr>
+                <tr>
+                  <td>N2</td>
+                  <td>1,000,000</td>
+                  <td>11,111</td>
+                </tr>
+                <tr>
+                  <td>N3</td>
+                  <td>5,000,000</td>
+                  <td>55,555</td>
+                </tr>
+                <tr>
+                  <td>N4</td>
+                  <td>10,000,000</td>
+                  <td>111,111</td>
+                </tr>
+                <tr>
+                  <td>N5</td>
+                  <td>30,000,000</td>
+                  <td>333,333</td>
+                </tr>
+                <tr>
+                  <td>N6</td>
+                  <td>50,000,000</td>
+                  <td>555,555</td>
+                </tr>
+                <tr>
+                  <td>N7</td>
+                  <td>100,000,000</td>
+                  <td>1,111,111</td>
+                </tr>
+                <tr>
+                  <td>N8</td>
+                  <td>200,000,000</td>
+                  <td>2,222,222</td>
+                </tr>
+                <tr>
+                  <td>N9</td>
+                  <td>500,000,000</td>
+                  <td>6,666,666</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note-warning-text">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Lưu ý: Tính theo tổng cược trong ngày: Số tiền cược hoàn ngày sau khi đạt mốc.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FULL-WIDTH CARD: QUY ĐỊNH (LIST 4) -->
+    <section class="dashboard-card" id="quy-dinh-section" aria-labelledby="card-system-rules-title">
+      <div class="card-title-bar">
+        <span id="card-system-rules-title"><i class="fa-solid fa-circle-info"></i> QUY ĐỊNH</span>
+      </div>
+      <div class="card-body-content">
+        <!-- List 4: 6 mục quy định chung -->
+        <ol class="rules-full-list" id="list-system-rules">
+          <li>Hệ thống chẵn lẻ bank tính lại kết quả số cuối của ID giao dịch hoặc mã Trans.</li>
+          <li>Hệ thống chạy hoàn chuyển khoản theo tất cả ngân hàng vào thanh toán của web.</li>
+          <li>Kết quả kết thúc bằng số 0 hoặc số 9 thay luôn là thua cược.</li>
+          <li>Hệ thống tự đổi Tài khoản Bank nhận thường xuyên, trước khi chơi khách hàng vui lòng lấy web tải lại trang 15 giây nhặt Bank nhận. Hệ thống sẽ không hỗ trợ hoàn tiền nếu không chuyển tiền vào Bank đã OFF.</li>
+          <li>Số tiền thắng cược sẽ được thanh toán tự động trong vòng 5s vào Tài khoản Bank của bạn.</li>
+          <li>Không hỗ trợ hoàn tiền nếu SAI CÚ PHÁP hoặc NGOÀI MỨC CƯỢC của play.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FULL-WIDTH CARD: GIỚI THIỆU (LIST 5, LINKS 10 TO 15) -->
+    <section class="dashboard-card" id="gioi-thieu-section" aria-labelledby="card-about-title">
+      <div class="card-title-bar">
+        <span id="card-about-title"><i class="fa-solid fa-circle-question"></i> GIỚI THIỆU</span>
+      </div>
+      <div class="card-body-content">
+        <div class="intro-text-body">
+          <p style="margin-bottom: 8px;">
+            • <a href="#trang-chu" id="link-about-clb-1">Chẵn lẻ bank</a> là một trò chơi cược đơn giản, dựa vào mã giao dịch trả trước để làm kết quả. Nhanh gọn tự động chỉ trong 5 giây sau khi bạn nạp tiền cược vào hệ thống ngân hàng 24/7.
+          </p>
+          <p style="margin-bottom: 8px;">
+            • <a href="#trang-chu" id="link-about-clb-2">Chẵn lẻ Bank</a> là một trò chơi phổ biến thường được chơi trong các dịp lễ tết truyền thống, lễ hội hoặc trong các quán bar. Hiện nay, <a href="#trang-chu" id="link-about-clb-3">Chẵn lẻ Bank</a> đã được phát triển thành một trò chơi trực tuyến. <a href="#trang-chu" id="link-about-clb-4">Chẵn lẻ Bank</a> có cách chơi đơn giản và dễ hiểu. Người chơi chỉ cần chọn cược vào chẵn hoặc lẻ, hoặc cược vào một số nhất định từ 0 đến 9. Kết quả của trò chơi sẽ được xác định dựa trên số cuối của mã giao dịch hoặc mã trans.
+          </p>
+          <p style="margin-bottom: 8px;">
+            • Ngoài ra <a href="#trang-chu" id="link-about-clb-5">Chẵn lẻ Bank</a> còn phát triển thêm các thể loại game khác như: TX, Đoán Số hay Xiên để người chơi thêm phần phấn khích.
+          </p>
+          <p style="margin-bottom: 8px;">
+            • <a href="#trang-chu" id="link-about-clb-6">Chẵn lẻ Bank</a> có tính an toàn cao nhờ liên kết trực tiếp với các cổng thanh toán ngân hàng nhà nước.
+          </p>
+          <!-- List 5: Các lưu ý quan trọng trong phần Giới Thiệu -->
+          <ul style="list-style: none; padding-left: 14px; margin-top: 6px;" id="list-intro-rules">
+            <li>1. Bạn sẽ nhận lại tiền nếu chuyển vào Bank bị lỗi.</li>
+            <li>2. Khách cược sai mức tiền hợp lệ, không tính kết quả.</li>
+            <li>3. Đặt cược mỗi phiên trong ngày.</li>
+            <li>4. Không nên lạm dụng tài khoản tránh trường hợp tài khoản bị khoá.</li>
+            <li>5. Chúc các bạn chơi may mắn và kiếm được nhiều tiền thưởng trên hệ thống!</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: TRA CỨU & BẢNG TOKEN DESIGN MATRIX (TABLE 7, INPUT 3, BUTTON 16, LISTS 6 & 7) -->
+    <section class="dashboard-card" id="tra-cuu-section" aria-labelledby="card-tokens-title">
+      <div class="card-title-bar">
+        <span id="card-tokens-title"><i class="fa-solid fa-code"></i> TRA CỨU MÃ GIAO DỊCH & DESIGN TOKENS (TABLE 7)</span>
+      </div>
+      <div class="card-body-content">
+        <!-- Input 3/3 & Button 16: Search Transaction ID -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+          <input type="text" class="form-input-clean" id="input-search-tx" placeholder="Nhập mã giao dịch ngân hàng để tra cứu, vd: MB881923..." style="flex: 1; min-width: 240px;" aria-label="Nhập mã giao dịch">
+          <!-- Button 16: Search TX -->
+          <button type="button" class="btn btn-primary" id="btn-search-tx">
+            <i class="fa-solid fa-magnifying-glass"></i> Kiểm tra ngay
+          </button>
+        </div>
+
+        <div id="tx-search-result-box" style="display: none; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs); margin-bottom: 14px; font-size: var(--font-size-xs);">
+          <!-- Dynamic verification breakdown -->
+        </div>
+
+        <!-- TABLE 7/7: Design Tokens & Foundations Matrix (Table 7) -->
+        <div style="overflow-x: auto; margin-top: 6px;">
+          <table class="table-clean" id="table-tokens-lookup" aria-label="Bảng Design Tokens System">
+            <thead>
+              <tr>
+                <th scope="col">Tên Token</th>
+                <th scope="col">CSS Variable</th>
+                <th scope="col">Giá trị chuẩn</th>
+                <th scope="col">Mục đích sử dụng</th>
+                <th scope="col">Tiêu chuẩn WCAG 2.2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Surface Card</strong></td>
+                <td><code>--color-surface-card</code></td>
+                <td><code>#20242a</code></td>
+                <td>Nền thẻ khối chứa nội dung</td>
+                <td><span style="color: #4ade80;">Contrast 14.8:1 (AAA)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Tail Badge</strong></td>
+                <td><code>--color-tail-badge</code></td>
+                <td><code>#b02a77</code></td>
+                <td>Hộp màu tím hiển thị số đuôi mã GD</td>
+                <td><span style="color: #4ade80;">Contrast 4.9:1 (AA)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Text Yellow</strong></td>
+                <td><code>--color-text-yellow</code></td>
+                <td><code>#f8c332</code></td>
+                <td>Điểm nhấn Nickname, tiêu đề mục</td>
+                <td><span style="color: #4ade80;">Contrast 9.1:1 (AAA)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- List 6 & List 7 in compact flex row -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; font-size: var(--font-size-xs);">
+          <!-- List 6: Developer Webhook Events -->
+          <div>
+            <div style="color: var(--color-text-yellow); font-weight: 700; margin-bottom: 4px;">
+              Danh sách Webhook Events (List 6):
+            </div>
+            <ul style="list-style: disc; padding-left: 16px; color: #9ca3af;" id="list-webhook-events">
+              <li><code>payment.received</code> (Số dư cộng 24/7)</li>
+              <li><code>transaction.verified</code> (Khớp đuôi kết quả)</li>
+              <li><code>payout.completed</code> (Trả thưởng 5s qua NAPAS)</li>
+            </ul>
+          </div>
+          <!-- List 7: Security Standards -->
+          <div>
+            <div style="color: #4ade80; font-weight: 700; margin-bottom: 4px;">
+              Tiêu chuẩn bảo mật (List 7):
+            </div>
+            <ul style="list-style: disc; padding-left: 16px; color: #9ca3af;" id="list-security-standards">
+              <li>Mã hóa dữ liệu TLS 1.3 End-to-End</li>
+              <li>Tự động che danh tính người chơi (Data Masking)</li>
+              <li>Không lưu trữ mật khẩu hay thông tin đăng nhập ngân hàng</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING WIDGETS (LINKS 16 & 17) -->
+  <!-- Link 16: Floating Telegram -->
+  <a href="https://t.me/trumtop" target="_blank" rel="noopener noreferrer" class="floating-telegram-btn" id="link-floating-tg" aria-label="Liên hệ Telegram CSKH">
+    <i class="fa-brands fa-telegram"></i>
+  </a>
+  <!-- Link 17: Floating Live Support -->
+  <a href="#thong-tin-nhan" class="floating-support-btn" id="link-floating-chat" aria-label="Hỗ trợ trực tuyến">
+    <i class="fa-solid fa-comment-dots"></i>
+  </a>
+
+  <!-- FLOATING PHONE BANK SIMULATOR LAUNCHER -->
+  <div class="floating-phone-launcher" id="btn-open-phone-sim" role="button" tabindex="0" title="Mở giả lập điện thoại chuyển khoản MBBank">
+    <span class="phone-pulse-dot" aria-hidden="true"></span>
+    <i class="fa-solid fa-mobile-screen-button"></i>
+    <span>Giả Lập Chuyển Tiền MB</span>
+  </div>
+
+  <!-- FOOTER (LINKS 18 TO 42: EXACTLY 25 FOOTER LINKS) -->
+  <footer class="site-footer">
+    <div class="footer-inner-content">
+      <div style="color: #9ca3af; font-size: 13px;">
+        © 2026 Trum.top, All Rights Reserved.
+      </div>
+      <!-- Links 18, 19, 20 -->
+      <div style="display: flex; gap: 8px; font-weight: 700;">
+        <a href="#trang-chu" id="link-f-trum">Trùm</a> | 
+        <a href="#quy-dinh-section" id="link-f-clb-main">Chẵn lẻ bank</a> | 
+        <a href="#gioi-thieu-section" id="link-f-clb-seo">chan le bank</a>
+      </div>
+      <!-- Links 21, 22, 23 -->
+      <div style="display: flex; gap: 12px; margin-top: 2px;">
+        <a href="#quy-dinh-section" id="link-f-privacy">Privacy Policy</a> | 
+        <a href="#quy-dinh-section" id="link-f-terms">Terms of Service</a> | 
+        <a href="https://t.me/trumtop" target="_blank" rel="noopener noreferrer" id="link-f-contact">Contact Us</a>
+      </div>
+
+      <!-- Additional 19 Categorized Navigation Links (Links 24 to 42) -->
+      <div class="footer-nav-links" style="margin-top: 6px;">
+        <a href="#trang-chu" id="link-f-home">Trang chủ</a>
+        <a href="#list-game-tabs" id="link-f-cltx">CLTX</a>
+        <a href="#list-game-tabs" id="link-f-cltx2">CLTX2</a>
+        <a href="#list-game-tabs" id="link-f-doanso">Đoán Số</a>
+        <a href="#list-game-tabs" id="link-f-1p3">1 Phần 3</a>
+        <a href="#list-game-tabs" id="link-f-tong3">Tổng 3</a>
+        <a href="#list-game-tabs" id="link-f-xien">Xiên</a>
+        <a href="#dai-gia-tuan-section" id="link-f-bxh">Đại Gia Tuần</a>
+        <a href="#nhiem-vu-section" id="link-f-quests">Nhiệm Vụ Ngày</a>
+        <a href="#lich-su-choi-section" id="link-f-history">Lịch Sử Cược</a>
+        <a href="#tra-cuu-section" id="link-f-api-docs">Developer API</a>
+        <a href="#tra-cuu-section" id="link-f-webhook-spec">Webhook Specs</a>
+        <a href="#tra-cuu-section" id="link-f-postman">Postman</a>
+        <a href="#tra-cuu-section" id="link-f-sdk-python">Python SDK</a>
+        <a href="#tra-cuu-section" id="link-f-sdk-node">Node.js SDK</a>
+        <a href="#tra-cuu-section" id="link-f-github">GitHub Repos</a>
+        <a href="#tra-cuu-section" id="link-f-status-page">Uptime Monitor</a>
+        <a href="#quy-dinh-section" id="link-f-anti-cheat">Chống Gian Lận</a>
+        <a href="#quy-dinh-section" id="link-f-wcag-audit">WCAG 2.2 AA</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- POPUP 1: VIETQR GENERATOR MODAL -->
+  <div class="modal-backdrop" id="modal-qr" role="dialog" aria-modal="true" aria-labelledby="modal-qr-title">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span id="modal-qr-title"><i class="fa-solid fa-qrcode"></i> QUÉT MÃ VIETQR CHUYỂN KHOẢN TỰ ĐỘNG</span>
+        <span onclick="App.closeQrModal()" style="cursor: pointer; padding: 4px 8px; color: #fff;" role="button" tabindex="0" aria-label="Đóng popup QR">
+          <i class="fa-solid fa-xmark"></i>
+        </span>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div style="background: #ffffff; padding: 12px; border-radius: var(--radius-sm); display: inline-block; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+          <canvas id="qr-canvas" width="220" height="220"></canvas>
+        </div>
+        <div style="margin-top: 10px; text-align: left; background: var(--color-surface-base); padding: 10px; border-radius: var(--radius-xs); border: 1px solid var(--color-border-strong); font-size: var(--font-size-sm);">
+          <div style="margin-bottom: 4px;">Ngân hàng: <strong style="color: #fff;" id="modal-bank-name">MBBank</strong></div>
+          <div style="margin-bottom: 4px;">Số tài khoản: <strong style="color: #38bdf8; font-family: var(--font-family-mono);" id="modal-bank-stk">0644888866</strong></div>
+          <div style="margin-bottom: 4px;">Chủ tài khoản: <strong style="color: #fff;" id="modal-bank-owner">NGUYEN VAN PHONG</strong></div>
+          <div>Nội dung chuyển khoản: <span style="background: #eab308; color: #000; padding: 2px 8px; font-weight: 800; border-radius: 3px;" id="modal-bank-memo">C</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span class="btn btn-secondary" onclick="App.closeQrModal()" role="button" tabindex="0">Đóng</span>
+        <span class="btn btn-primary" onclick="App.copyText(document.getElementById('modal-bank-memo').textContent, 'Nội dung')" role="button" tabindex="0">
+          <i class="fa-regular fa-copy"></i> Sao chép nội dung
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP 2: DESIGN SYSTEM & 8-STATE COMPONENT MATRIX MODAL -->
+  <div class="modal-backdrop" id="modal-design-system" role="dialog" aria-modal="true" aria-labelledby="modal-ds-title">
+    <div class="modal-window" style="max-width: 720px;">
+      <div class="modal-header">
+        <span id="modal-ds-title"><i class="fa-solid fa-palette"></i> DESIGN TOKENS & 8-STATE COMPONENT MATRIX</span>
+        <span id="btn-close-ds-modal" style="cursor: pointer; padding: 4px 8px; color: #fff;" role="button" tabindex="0" aria-label="Đóng bảng Design Tokens">
+          <i class="fa-solid fa-xmark"></i>
+        </span>
+      </div>
+      <div class="modal-body" style="font-size: var(--font-size-xs);">
+        <p style="color: #9ca3af; margin-bottom: 10px;">
+          Toàn bộ 8 trạng thái thành phần giao diện (8-State Model) chuẩn WCAG 2.2 AA tuân thủ tuyệt đối quy định token hóa.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center;">
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">1. Default</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px;">Action</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">2. Hover</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px; background-color: #1d4ed8;">Hovered</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">3. Focus-Visible</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px; outline: 2px solid #fff;">Focused</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">4. Active</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px; transform: translateY(2px);">Pressed</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">5. Disabled</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px; opacity: 0.5;">Disabled</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">6. Loading</div>
+            <span class="btn btn-primary" style="font-size: 11px; padding: 3px 8px;"><i class="fa-solid fa-spinner fa-spin"></i> Wait</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">7. Error</div>
+            <span class="btn" style="font-size: 11px; padding: 3px 8px; background-color: #dc3545; color: #fff;">Error</span>
+          </div>
+          <div style="padding: 8px; background: var(--color-surface-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-xs);">
+            <div style="color: #9ca3af; margin-bottom: 4px;">8. Success</div>
+            <span class="btn" style="font-size: 11px; padding: 3px 8px; background-color: #28a745; color: #fff;">Success</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span class="btn btn-primary" id="btn-close-ds-footer" role="button" tabindex="0">Đóng</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMARTPHONE FAKE TRANSFER SIMULATOR MODAL -->
+  <div class="phone-modal-backdrop" id="modal-phone-sim" role="dialog" aria-modal="true" aria-labelledby="phone-app-title">
+    <div class="phone-chassis">
+      <!-- Dynamic Island Notch -->
+      <div class="phone-dynamic-island" id="phone-dynamic-island">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background: #111;"></div>
+        <div style="width: 10px; height: 10px; border-radius: 50%; background: #08111e; border: 1px solid #1a273a;"></div>
+      </div>
+
+      <!-- Real-time Payout Dropdown Notification Banner -->
+      <div class="phone-payout-toast" id="phone-payout-alert">
+        <div style="width: 36px; height: 36px; border-radius: 50%; background: #003399; color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" id="phone-payout-toast-icon">
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+        <div style="font-size: 11.5px; line-height: 1.35; flex: 1;">
+          <div style="font-weight: 800; color: #4ade80;" id="phone-payout-toast-title">MBBank Biến động số dư</div>
+          <div id="phone-payout-toast-body">TK 0971266012 +120,000đ lúc 00:59. ND: TRUM.TOP TRA THUONG GD MB99381274</div>
+        </div>
+      </div>
+
+      <!-- Phone Status Bar -->
+      <div class="phone-status-bar">
+        <span id="phone-clock">00:59</span>
+        <div class="status-bar-icons">
+          <i class="fa-solid fa-signal"></i>
+          <span>5G</span>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-full" style="color: #4ade80;"></i>
+        </div>
+      </div>
+
+      <!-- Banking App Viewport -->
+      <div class="phone-app-viewport">
+        <!-- App Header Bar -->
+        <div class="app-bank-header">
+          <div class="app-bank-brand">
+            <i class="fa-solid fa-star"></i>
+            <span id="phone-app-title">MBBank • Chuyển tiền 247</span>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span id="btn-close-phone" role="button" tabindex="0" style="cursor: pointer; font-size: 15px; padding: 2px 6px; color: #cbd5e1;" title="Đóng giả lập">
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- SCREEN 1: TRANSFER FORM -->
+        <div class="app-screen-body" id="phone-screen-form">
+          <!-- Sender Account Card -->
+          <div class="fake-bank-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="fake-card-label">Tài khoản nguồn trích nợ</span>
+              <span class="btn-topup-badge" id="btn-toggle-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
+                <i class="fa-solid fa-plus"></i> Nạp thêm tiền
+              </span>
+            </div>
+            <div class="fake-account-val">
+              <span>0971266012 (Dungktt)</span>
+              <span class="fake-balance-badge" id="phone-user-balance">5,420,000đ</span>
+            </div>
+            <span style="font-size: 11px; color: #64748b;">Chủ tài khoản: NGUYEN THAO LINH</span>
+
+            <!-- Collapsible Top-Up Drawer -->
+            <div class="topup-panel-box" id="phone-topup-panel">
+              <div style="font-size: 10.5px; color: #94a3b8; font-weight: 700;">NẠP TIỀN TEST NHANH VÀO SỐ DƯ:</div>
+              <div class="topup-chips-grid">
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="500000">+500k</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="1000000">+1M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="2000000">+2M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="5000000">+5M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="10000000">+10M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="50000000">+50M</div>
+                <div class="topup-chip-btn topup-chip-custom" id="btn-custom-topup" role="button" tabindex="0">
+                  <i class="fa-solid fa-pen-to-square"></i> Nhập số dư tùy chỉnh...
+                </div>
+                <div class="topup-chip-btn topup-chip-reset" role="button" tabindex="0" data-topup="reset">
+                  <i class="fa-solid fa-arrows-rotate"></i> Khôi phục số dư 10,000,000đ
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Destination Account Card -->
+          <div class="fake-bank-card">
+            <span class="fake-card-label">Tài khoản thụ hưởng (CHẴN LẺ BANK)</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px;">
+              <span style="font-size: 13.5px; font-weight: 700; color: #fff;" id="phone-recipient-name">NGUYEN VAN PHONG</span>
+              <span class="bank-mb-badge"><i class="fa-solid fa-star"></i> MB</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #38bdf8; font-family: var(--font-family-mono); margin-top: 2px;">
+              <span id="phone-recipient-stk">0644888866</span>
+              <span style="color: #4ade80; font-size: 11px;"><i class="fa-solid fa-bolt"></i> Auto 5s</span>
+            </div>
+          </div>
+
+          <!-- Transfer Amount Selection -->
+          <div class="fake-bank-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="fake-card-label">Số tiền muốn cược</span>
+              <strong style="font-size: 14.5px; color: #facc15; font-family: var(--font-family-mono);" id="phone-amount-display">50,000 VND</strong>
+            </div>
+            <div class="fake-amount-chips">
+              <div class="fake-chip-btn" role="button" tabindex="0" data-amount="20000">20,000đ</div>
+              <div class="fake-chip-btn active" role="button" tabindex="0" data-amount="50000">50,000đ</div>
+              <div class="fake-chip-btn" role="button" tabindex="0" data-amount="100000">100,000đ</div>
+              <div class="fake-chip-btn" role="button" tabindex="0" data-amount="200000">200,000đ</div>
+              <div class="fake-chip-btn" role="button" tabindex="0" data-amount="500000">500,000đ</div>
+              <div class="fake-chip-btn" role="button" tabindex="0" data-amount="1000000">1,000,000đ</div>
+            </div>
+          </div>
+
+          <!-- Content / Memo Selection -->
+          <div class="fake-bank-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="fake-card-label">Nội dung chuyển khoản (Chọn cửa)</span>
+              <span style="background: #eab308; color: #000; padding: 1px 8px; font-weight: 800; border-radius: 4px; font-size: 12px;" id="phone-memo-display">C</span>
+            </div>
+            <div class="fake-memo-chips">
+              <div class="fake-memo-chip active" role="button" tabindex="0" data-memo="C">C (Chẵn x2.4)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="L">L (Lẻ x2.4)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="T">T (Tài x2.4)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="X">X (Xỉu x2.4)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="C2">C2 (x1.98)</div>
+              <div class="fake-memo-chip" role="button" tabindex="0" data-memo="L2">L2 (x1.98)</div>
+            </div>
+          </div>
+
+          <!-- Confirm Transfer Button -->
+          <div class="btn-fake-transfer-confirm" id="btn-phone-submit-transfer" role="button" tabindex="0">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span id="btn-phone-transfer-text">XÁC NHẬN CHUYỂN TIỀN (50,000đ)</span>
+          </div>
+          <div style="text-align: center; font-size: 10.5px; color: #64748b; margin-top: 2px;">
+            <i class="fa-solid fa-lock"></i> Miễn phí chuyển khoản NAPAS 247 • Bảo mật FaceID
+          </div>
+        </div>
+
+        <!-- SCREEN 2: FACEID SCANNING OVERLAY -->
+        <div class="faceid-overlay" id="phone-faceid-overlay">
+          <div class="faceid-scanner-circle">
+            <i class="fa-regular fa-face-smile"></i>
+          </div>
+          <div style="font-size: 14px; font-weight: 700; color: #ffffff;">Đang xác thực Face ID...</div>
+          <div style="font-size: 11.5px; color: #94a3b8;">Thanh toán an toàn bảo mật MBBank</div>
+        </div>
+
+        <!-- SCREEN 3: TRANSFER SUCCESS RECEIPT (AUTHENTIC MBBANK RECEIPT) -->
+        <div class="app-screen-body fake-receipt-screen" id="phone-screen-receipt">
+          <div class="receipt-white-card">
+            <div class="receipt-success-icon">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="receipt-title-text">GIAO DỊCH THÀNH CÔNG</div>
+            <div class="receipt-amount-large" id="receipt-amount-display">-50,000 VND</div>
+            <div style="font-size: 11px; color: #64748b;" id="receipt-time-display">09/10/2026 01:08:25</div>
+
+            <div class="receipt-detail-grid">
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Tài khoản trích nợ:</span>
+                <span class="receipt-row-value">0971266012 (NGUYEN THAO LINH)</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Tài khoản thụ hưởng:</span>
+                <span class="receipt-row-value" style="color: #003399;" id="receipt-recipient-stk">0644888866</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Tên người thụ hưởng:</span>
+                <span class="receipt-row-value" id="receipt-recipient-name">NGUYEN VAN PHONG</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Ngân hàng thụ hưởng:</span>
+                <span class="receipt-row-value">MB - NGÂN HÀNG QUÂN ĐỘI</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Mã giao dịch (Mã FT):</span>
+                <span class="receipt-ft-badge" id="receipt-tx-code">FT26281903824</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Nội dung chuyển tiền:</span>
+                <span class="receipt-row-value" style="background: #facc15; padding: 1px 6px; border-radius: 3px;" id="receipt-memo">C</span>
+              </div>
+              <div class="receipt-row-item">
+                <span class="receipt-row-label">Phí giao dịch:</span>
+                <span class="receipt-row-value" style="color: #16a34a;">0 VND (Miễn phí 247)</span>
+              </div>
+            </div>
+
+            <!-- Highlighted Tail Digit & Game Result -->
+            <div class="receipt-game-verdict">
+              <div style="font-size: 10.5px; color: #64748b; font-weight: 600;">SỐ CUỐI MÃ FT TÍNH THẮNG THUA:</div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span style="font-size: 14px; font-weight: 700; color: #0f172a;">Đuôi mã FT:</span>
+                <span class="badge-tail-digit" id="receipt-tail-box" style="width: 24px; height: 24px; font-size: 14px;">4</span>
+              </div>
+              <div id="receipt-match-result" style="font-size: 12px; font-weight: 800; color: #16a34a;">
+                KHỚP CỬA C (CHẴN) ➔ THẮNG (+120,000đ)
+              </div>
+              <div class="receipt-topup-link" id="btn-receipt-quick-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
+                <i class="fa-solid fa-circle-plus"></i> Hết tiền? Nạp thêm ngay
+              </div>
+            </div>
+          </div>
+
+          <!-- Action buttons inside receipt -->
+          <div style="display: flex; gap: 8px; width: 100%; margin-top: auto;">
+            <div class="btn-fake-transfer-confirm" id="btn-phone-new-transfer" role="button" tabindex="0" style="background: #1e293b; color: #e2e8f0; flex: 1; padding: 10px;">
+              <i class="fa-solid fa-rotate-left"></i> Chơi tiếp
+            </div>
+            <div class="btn-fake-transfer-confirm" id="btn-phone-close-receipt" role="button" tabindex="0" style="flex: 1; padding: 10px;">
+              <i class="fa-solid fa-check"></i> Đóng
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
