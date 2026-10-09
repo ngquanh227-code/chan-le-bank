@@ -1,0 +1,473 @@
+/* ==========================================================================
+   SMARTPHONE FAKE BANKING SIMULATOR (PHONE MOCKUP)
+   ========================================================================== */
+
+/* Floating Phone Launcher */
+.floating-phone-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 80px;
+  background: linear-gradient(135deg, #002b80 0%, #0052cc 60%, #1e40af 100%);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 51, 153, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.25);
+  z-index: 998;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.floating-phone-launcher:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 102, 255, 0.75), 0 0 0 2px rgba(56, 189, 248, 0.6);
+  background: linear-gradient(135deg, #003db8 0%, #0066ff 100%);
+}
+
+.floating-phone-launcher:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.phone-pulse-dot {
+  width: 9px;
+  height: 9px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4ade80, 0 0 20px #22c55e;
+  animation: pulse-dot 1.4s infinite;
+}
+
+/* Phone Modal Container */
+.phone-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(3, 7, 18, 0.86);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  padding: 12px;
+}
+
+.phone-modal-backdrop.is-open {
+  display: flex;
+}
+
+/* Realistic Smartphone Frame (iPhone 16 Pro Style Titanium Finish) */
+.phone-chassis {
+  height: min(840px, 92vh);
+  aspect-ratio: 473 / 1024;
+  width: auto;
+  max-width: 95vw;
+  background-color: #000000;
+  border-radius: 44px;
+  border: 7px solid #1e293b;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.98),
+    0 0 0 1px rgba(255, 255, 255, 0.25),
+    0 0 35px rgba(0, 102, 255, 0.25),
+    inset 0 0 8px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  animation: modal-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-chassis::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 95;
+  border-radius: 38px 38px 0 0;
+}
+
+/* Phone Drag Bar Handle */
+.phone-drag-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 130;
+  cursor: grab;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 100%);
+  transition: background 0.2s ease;
+}
+
+.phone-drag-bar:hover {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.2) 0%, transparent 100%);
+}
+
+.phone-drag-bar:active,
+.phone-chassis.is-dragging .phone-drag-bar {
+  cursor: grabbing;
+}
+
+.drag-handle-pill {
+  width: 44px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.phone-drag-bar:hover .drag-handle-pill {
+  background: #38bdf8;
+  width: 54px;
+}
+
+.phone-chassis.is-dragging {
+  cursor: grabbing !important;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.99), 0 0 0 2px #38bdf8, 0 0 45px rgba(56, 189, 248, 0.45) !important;
+  transition: box-shadow 0.15s ease;
+}
+
+/* Phone Floating Pin (PiP / Non-blocking Mode) Button */
+.phone-floating-pin {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 125;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.phone-floating-pin:hover,
+.phone-floating-pin.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  transform: scale(1.08);
+}
+
+/* Pinned State: Allows full interaction with website while phone is open */
+.phone-modal-backdrop.is-pinned {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  pointer-events: none !important;
+}
+
+.phone-modal-backdrop.is-pinned .phone-chassis {
+  pointer-events: auto !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(255, 255, 255, 0.25), 0 0 30px rgba(0, 102, 255, 0.3) !important;
+}
+
+/* Phone Floating Close Button */
+.phone-floating-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.5px;
+  cursor: pointer;
+  z-index: 125;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.phone-floating-close:hover {
+  background: rgba(220, 38, 38, 0.9);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+/* Dynamic Island */
+.phone-dynamic-island {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 25px;
+  background-color: #000000;
+  border-radius: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.phone-dynamic-island.expanded {
+  width: 90%;
+  height: 60px;
+  top: 12px;
+  border-radius: 24px;
+  background-color: #121722;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 8px 12px;
+}
+
+/* Status Bar */
+.phone-status-bar {
+  height: 38px;
+  padding: 8px 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-ios);
+  z-index: 90;
+}
+
+.status-bar-icons {
+  display: flex;
+  gap: 5px;
+  font-size: 11px;
+}
+
+/* MBBank App Viewport */
+.phone-app-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #091322;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Screen 1: MBBank Photographic Home / Balance Screen */
+.photo-home-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: none;
+  z-index: 10;
+  background: #081121;
+}
+
+.photo-home-screen.is-active {
+  display: block;
+}
+
+.photo-home-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-home-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.photo-home-clock {
+  position: absolute;
+  top: 2.2%;
+  left: 8.8%;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+  font-family: var(--font-family-ios);
+  letter-spacing: -0.3px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.photo-home-balance {
+  position: absolute;
+  top: 21.2%;
+  left: 39.5%;
+  font-size: 19px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-mb) !important;
+  letter-spacing: -0.2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  z-index: 15;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  user-select: none;
+}
+
+.photo-home-vnd {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 0.95;
+  font-family: var(--font-family-mb) !important;
+}
+
+.photo-home-eye-btn {
+  position: absolute;
+  top: 17.2%;
+  left: 82.5%;
+  width: 36px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 25;
+  transition: background 0.15s ease;
+}
+
+.photo-home-eye-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.photo-home-topup-btn {
+  position: absolute;
+  top: 24.8%;
+  left: 39.5%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-mb) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.photo-home-topup-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.04);
+}
+
+.photo-home-withdraw-btn {
+  position: absolute;
+  top: 24.8%;
+  left: 63.5%;
+  background: rgba(56, 189, 248, 0.28);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(186, 230, 253, 0.5);
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-mb) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.photo-home-withdraw-btn:hover {
+  background: rgba(56, 189, 248, 0.45);
+  transform: scale(1.04);
+}
+
+.photo-home-qr-btn {
+  position: absolute;
+  top: 24.8%;
+  left: 15.5%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-mb) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.photo-home-qr-btn:hover {
+  background: rgba(255, 255, 255, 0.38);
+  transform: scale(1.04);
+}
+
+.photo-home-transfer-btn {
+  position: absolute;
+  top: 31%;
+  left: 7.5%;
+  width: 19%;
+  height: 9.5%;
+  border-radius: 18px;
+  cursor: pointer;
+  z-index: 25;
+  transition: transform 0.18s ease;
+}
+
+.photo-home-transfer-btn:hover {
+  transform: scale(1.05);
+}
+
+.photo-home-transfer-btn:active {
+  transform: scale(0.96);
+}
+
+.photo-home-transfer-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 2px solid rgba(56, 189, 248, 0.6);
+  animation: home-btn-pulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes home-btn-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
