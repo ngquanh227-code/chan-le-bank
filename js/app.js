@@ -149,6 +149,15 @@ const App = (function() {
     }
   };
 
+  // Shared Phone Banking Simulator State (Module Scope)
+  const phoneState = {
+    balance: 5420000,
+    amount: 50000,
+    memo: 'Dungdz TC',
+    recipientName: 'NGUYEN VAN PHONG',
+    recipientStk: '0644888866'
+  };
+
   // Web Audio Synth Synthesizer for subtle UX feedback
   function initAudio() {
     if (!state.audioCtx) {
@@ -664,14 +673,6 @@ const App = (function() {
     // =========================================================================
     // PHONE FAKE BANKING SIMULATOR LOGIC
     // =========================================================================
-    const phoneState = {
-      balance: 5420000,
-      amount: 50000,
-      memo: 'C',
-      recipientName: 'NGUYEN VAN PHONG',
-      recipientStk: '0644888866'
-    };
-
     const modalPhone = document.getElementById('modal-phone-sim');
     const btnOpenPhone = document.getElementById('btn-open-phone-sim');
     const btnClosePhone = document.getElementById('btn-close-phone');
@@ -745,19 +746,36 @@ const App = (function() {
       });
     });
 
-    // Memo Chips Selection
-    document.querySelectorAll('.fake-memo-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        document.querySelectorAll('.fake-memo-chip').forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const memo = chip.getAttribute('data-memo');
-        phoneState.memo = memo;
-
-        const disp = document.getElementById('phone-memo-display');
-        if (disp) disp.textContent = memo;
-        playTone(580, 'sine', 0.05);
+    // Delegated Phone Game Mode Pills Selection
+    const pillsContainer = document.getElementById('phone-game-pills');
+    if (pillsContainer) {
+      pillsContainer.addEventListener('click', (e) => {
+        const pill = e.target.closest('.phone-mode-pill');
+        if (pill) {
+          const catKey = pill.getAttribute('data-cat');
+          setPhoneGameMode(catKey);
+          playTone(500, 'sine', 0.06);
+        }
       });
-    });
+    }
+
+    // Delegated Memo Chips Selection
+    const chipsContainer = document.getElementById('phone-memo-chips');
+    if (chipsContainer) {
+      chipsContainer.addEventListener('click', (e) => {
+        const chip = e.target.closest('.fake-memo-chip');
+        if (chip) {
+          chipsContainer.querySelectorAll('.fake-memo-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const memo = chip.getAttribute('data-memo');
+          phoneState.memo = memo;
+
+          const disp = document.getElementById('phone-memo-display');
+          if (disp) disp.textContent = memo;
+          playTone(580, 'sine', 0.05);
+        }
+      });
+    }
 
     // Top-Up & Balance Adjustment Listeners
     const btnToggleTopup = document.getElementById('btn-toggle-topup');
