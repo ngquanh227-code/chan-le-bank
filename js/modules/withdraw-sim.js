@@ -106,7 +106,7 @@
           time: 'Vừa xong',
           body: `TK ${maskedStk}|GD: +${amount.toLocaleString("en-US")}VND ${notiDate} |SD: +${amount.toLocaleString("en-US")}VND|ND: NGUYEN TUAN DUNG rut tien TRUM.TOP`,
           type: 'credit',
-          duration: 5500
+          duration: 1800
         });
       }
     }, 1200);

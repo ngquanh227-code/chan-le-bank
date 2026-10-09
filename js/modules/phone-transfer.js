@@ -336,7 +336,7 @@
             title: 'Thông báo biến động số dư',
             time: 'Vừa xong',
             body: `TK 08xxx888|GD: +10,000,000VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: MBBank khoi phuc so du goc`,
-            duration: 4500
+            duration: 1800
           });
         } else {
           const addAmount = parseInt(topupVal, 10);
@@ -348,7 +348,7 @@
               title: 'Thông báo biến động số dư',
               time: 'Vừa xong',
               body: `TK 08xxx888|GD: +${formatMoney(addAmount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Nguon tien MBBank nap vao`,
-              duration: 4500
+              duration: 1800
             });
           }
         }
@@ -381,7 +381,7 @@
               title: 'Thông báo biến động số dư',
               time: 'Vừa xong',
               body: `TK 08xxx888|GD: Cap nhat ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Thiet lap so du tuy chinh`,
-              duration: 4500
+              duration: 1800
             });
             if (window.CLB.audio) {
               window.CLB.audio.playTone(587, 'sine', 0.1);
@@ -664,7 +664,7 @@
             title: 'Thông báo biến động số dư',
             time: 'Vừa xong',
             body: `TK 08xxx888|GD: -${formatMoney(phoneState.amount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien ${phoneState.memo}`,
-            duration: 4500
+            duration: 1800
           });
 
           // Inject into Website's "LỊCH SỬ CHƠI" Table
@@ -702,7 +702,7 @@
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
                 body: `TK 08xxx888|GD: +${formatMoney(payoutAmount)}VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien tra thuong ${memoClean}`,
-                duration: 6000
+                duration: 1800
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(true);
@@ -714,7 +714,7 @@
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
                 body: `TK 08xxx888|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Sai cu phap (${phoneState.memo}) khong tra thuong`,
-                duration: 4500
+                duration: 1800
               });
               if (window.CLB.audio) window.CLB.audio.playChime(false);
               if (window.CLB.toast) window.CLB.toast.showToast(`Nội dung "${phoneState.memo}" sai cú pháp! Hệ thống không chuyển tiền lại.`, 'warning');
@@ -725,7 +725,7 @@
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
                 body: `TK 08xxx888|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Khong trung thuong (${lastDigit} khac ${memoClean})`,
-                duration: 4500
+                duration: 1800
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(false);

@@ -54,17 +54,125 @@
     return `${day}/${month}/${year} ${hours}:${minutes}`;
   }
 
-  function triggerPhoneNotification({ title, body, iconHtml, type, duration = 4800, time = 'Vừa xong' }) {
+  function dismissPhoneNotification() {
+    const payoutAlert = document.getElementById('phone-payout-alert');
+    if (!payoutAlert) return;
+    if (phoneToastTimer) {
+      clearTimeout(phoneToastTimer);
+      phoneToastTimer = null;
+    }
+    payoutAlert.classList.add('is-dismissing');
+    setTimeout(() => {
+      payoutAlert.classList.remove('show', 'is-dismissing', 'is-swiping');
+      payoutAlert.style.transform = '';
+      payoutAlert.style.opacity = '';
+    }, 220);
+  }
+
+  function initNotificationSwipe() {
+    const payoutAlert = document.getElementById('phone-payout-alert');
+    if (!payoutAlert || payoutAlert._hasSwipeListener) return;
+    payoutAlert._hasSwipeListener = true;
+
+    let startY = 0;
+    let currentDeltaY = 0;
+    let isTracking = false;
+
+    // Click/tap to dismiss immediately
+    payoutAlert.addEventListener('click', () => {
+      if (Math.abs(currentDeltaY) < 6) {
+        dismissPhoneNotification();
+      }
+    });
+
+    // Touch events for mobile/tablet swipe-up
+    payoutAlert.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) return;
+      startY = e.touches[0].clientY;
+      currentDeltaY = 0;
+      isTracking = true;
+      payoutAlert.classList.add('is-swiping');
+    }, { passive: true });
+
+    payoutAlert.addEventListener('touchmove', (e) => {
+      if (!isTracking || e.touches.length !== 1) return;
+      const deltaY = e.touches[0].clientY - startY;
+      if (deltaY < 0) {
+        currentDeltaY = deltaY;
+        payoutAlert.style.transform = `translateY(${deltaY}px) scale(${Math.max(0.85, 1 + deltaY / 300)})`;
+        payoutAlert.style.opacity = Math.max(0, 1 + deltaY / 80).toString();
+      }
+    }, { passive: true });
+
+    const handleTouchEnd = () => {
+      if (!isTracking) return;
+      isTracking = false;
+      payoutAlert.classList.remove('is-swiping');
+      if (currentDeltaY < -15) {
+        dismissPhoneNotification();
+      } else {
+        payoutAlert.style.transform = '';
+        payoutAlert.style.opacity = '';
+      }
+      setTimeout(() => { currentDeltaY = 0; }, 80);
+    };
+
+    payoutAlert.addEventListener('touchend', handleTouchEnd, { passive: true });
+    payoutAlert.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+
+    // Pointer events for desktop drag-up
+    payoutAlert.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch') return;
+      startY = e.clientY;
+      currentDeltaY = 0;
+      isTracking = true;
+      payoutAlert.classList.add('is-swiping');
+      try { payoutAlert.setPointerCapture(e.pointerId); } catch(err) {}
+    });
+
+    payoutAlert.addEventListener('pointermove', (e) => {
+      if (!isTracking || e.pointerType === 'touch') return;
+      const deltaY = e.clientY - startY;
+      if (deltaY < 0) {
+        currentDeltaY = deltaY;
+        payoutAlert.style.transform = `translateY(${deltaY}px) scale(${Math.max(0.85, 1 + deltaY / 300)})`;
+        payoutAlert.style.opacity = Math.max(0, 1 + deltaY / 80).toString();
+      }
+    });
+
+    const handlePointerUp = (e) => {
+      if (!isTracking || e.pointerType === 'touch') return;
+      isTracking = false;
+      payoutAlert.classList.remove('is-swiping');
+      try { payoutAlert.releasePointerCapture(e.pointerId); } catch(err) {}
+      if (currentDeltaY < -15) {
+        dismissPhoneNotification();
+      } else {
+        payoutAlert.style.transform = '';
+        payoutAlert.style.opacity = '';
+      }
+      setTimeout(() => { currentDeltaY = 0; }, 80);
+    };
+
+    payoutAlert.addEventListener('pointerup', handlePointerUp);
+    payoutAlert.addEventListener('pointercancel', handlePointerUp);
+  }
+
+  function triggerPhoneNotification({ title, body, iconHtml, type, duration = 1800, time = 'Vừa xong' }) {
     const payoutAlert = document.getElementById('phone-payout-alert');
     if (!payoutAlert) return;
     if (phoneToastTimer) clearTimeout(phoneToastTimer);
+
+    initNotificationSwipe();
 
     // Play MBBank Notification MP3 audio
     if (window.CLB.audio && window.CLB.audio.playMbBankAudio) {
       window.CLB.audio.playMbBankAudio();
     }
 
-    payoutAlert.classList.remove('show', 'is-debit', 'is-credit', 'is-lose', 'is-topup');
+    payoutAlert.classList.remove('show', 'is-debit', 'is-credit', 'is-lose', 'is-topup', 'is-dismissing', 'is-swiping');
+    payoutAlert.style.transform = '';
+    payoutAlert.style.opacity = '';
 
     const iconEl = document.getElementById('phone-payout-toast-icon');
     const titleEl = document.getElementById('phone-payout-toast-title');
@@ -88,9 +196,11 @@
     void payoutAlert.offsetWidth;
     payoutAlert.classList.add('show');
 
+    // 1-2s duration: defaults to 1.8s (1800ms), maximum 2.0s (2000ms)
+    const notiDuration = Math.min(Math.max(duration || 1800, 1000), 2000);
     phoneToastTimer = setTimeout(() => {
-      payoutAlert.classList.remove('show');
-    }, duration);
+      dismissPhoneNotification();
+    }, notiDuration);
   }
 
   function showPhoneScreen(screenName) {
@@ -265,6 +375,7 @@
     syncBalanceUI,
     toggleEyeBalance,
     triggerPhoneNotification,
+    dismissPhoneNotification,
     showPhoneScreen,
     togglePhone,
     updatePhoneClock,
