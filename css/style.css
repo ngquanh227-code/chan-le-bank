@@ -1568,9 +1568,10 @@ a:hover {
 
 .photo-home-balance {
   position: absolute;
-  top: 22.9%;
+  top: 21.2%;
   left: 39.5%;
   font-size: 19px;
+  line-height: 1.1;
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-family-mb) !important;
@@ -1610,14 +1611,14 @@ a:hover {
 
 .photo-home-topup-btn {
   position: absolute;
-  top: 26.6%;
+  top: 24.8%;
   left: 39.5%;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
-  padding: 2.5px 8px;
-  font-size: 10px;
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 9.5px;
   font-weight: 700;
   color: #ffffff;
   font-family: var(--font-family-mb) !important;
@@ -2176,74 +2177,57 @@ a:hover {
 
 .photo-ov-verdict {
   position: absolute;
-  top: 56.5%;
-  left: 7.5%;
-  width: 85%;
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 10px 14px;
+  top: 55.6%;
+  left: 6%;
+  width: 88%;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   color: #0f172a;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  box-shadow: 0 4px 18px rgba(0, 35, 102, 0.08);
+  justify-content: center;
+  gap: 2px;
   z-index: 15;
   font-family: var(--font-family-mb);
+  pointer-events: none;
 }
 
 .photo-ov-ft-line {
-  font-size: 12.5px;
-  color: #475569;
+  font-size: 12px;
+  color: #64748b;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  background: transparent !important;
 }
 
 .photo-ov-ft-line strong {
-  color: #0f172a;
-  font-family: var(--font-family-mono);
+  color: #002b80;
+  font-family: var(--font-family-mb);
   font-weight: 700;
+  letter-spacing: 0.2px;
 }
 
 .photo-ov-tail-badge {
-  background: #fef08a;
-  color: #854d0e;
-  border: 1px solid #fde047;
-  font-weight: 800;
-  font-size: 12px;
-  padding: 1px 7px;
-  border-radius: 8px;
+  background: #eef2ff;
+  color: #002b80;
+  border: 1px solid #c7d2fe;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 5px;
 }
 
 .photo-ov-match-line {
-  font-size: 13px;
-  font-weight: 800;
-  text-align: center;
-  color: #16a34a;
-}
-
-.photo-ov-match-line.is-lose {
-  color: #dc2626;
+  display: none !important;
 }
 
 .photo-ov-topup-link {
-  font-size: 11.5px;
-  color: #0284c7;
-  cursor: pointer;
-  margin-top: 2px;
-  text-decoration: none;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.photo-ov-topup-link:hover {
-  color: #0369a1;
-  text-decoration: underline;
+  display: none !important;
 }
 
 .photo-ov-btn-again {
