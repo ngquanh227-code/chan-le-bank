@@ -1038,8 +1038,15 @@ const App = (function() {
 
           const isSumGame = ['TC', 'TL', 'TT', 'TX', 'CX', 'LT', 'CT', 'LX'].includes(memoClean);
 
-          if (receiptAmountEl) receiptAmountEl.textContent = `-${phoneState.amount.toLocaleString('vi-VN')} VND`;
-          if (receiptTimeEl) receiptTimeEl.textContent = formatTimeNow();
+          const nowTx = new Date();
+          const timeShortTx = `${String(nowTx.getHours()).padStart(2, '0')}:${String(nowTx.getMinutes()).padStart(2, '0')}`;
+          const dateFormatted = `${String(nowTx.getDate()).padStart(2, '0')}/${String(nowTx.getMonth() + 1).padStart(2, '0')}/${nowTx.getFullYear()}`;
+
+          if (receiptAmountEl) receiptAmountEl.textContent = `${phoneState.amount.toLocaleString('vi-VN')} VND`;
+          if (receiptTimeEl) receiptTimeEl.textContent = `${timeShortTx} - ${dateFormatted}`;
+          const photoClock = document.getElementById('photo-receipt-clock');
+          if (photoClock) photoClock.textContent = timeShortTx;
+
           if (receiptMemoEl) receiptMemoEl.textContent = phoneState.memo;
           if (receiptTxEl) receiptTxEl.textContent = fullTxCode;
           if (receiptDigitEl) receiptDigitEl.textContent = isSumGame ? sumLast2 : lastDigit;
@@ -1049,11 +1056,11 @@ const App = (function() {
 
           if (receiptMatchEl) {
             if (isWin) {
-              receiptMatchEl.style.color = '#16a34a';
-              receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2 LẦN!]' : ''}`;
+              receiptMatchEl.style.color = '#4ade80';
+              receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2!]' : ''}`;
             } else {
-              receiptMatchEl.style.color = '#dc2626';
-              receiptMatchEl.textContent = `${calcExplain} ➔ THUA (0đ)`;
+              receiptMatchEl.style.color = '#f87171';
+              receiptMatchEl.textContent = `${calcExplain} ➔ THUA (-${phoneState.amount.toLocaleString('vi-VN')}đ)`;
             }
           }
 
@@ -1064,8 +1071,6 @@ const App = (function() {
           playTone(400, 'sine', 0.1);
 
           // Trigger Immediate Debit Notification (Biến động số dư trừ tiền cược & hiện số dư còn lại)
-          const nowTx = new Date();
-          const timeShortTx = `${String(nowTx.getHours()).padStart(2, '0')}:${String(nowTx.getMinutes()).padStart(2, '0')}`;
           triggerPhoneNotification({
             type: 'debit',
             iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #f87171;"></i>',

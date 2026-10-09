@@ -1224,70 +1224,48 @@
           <div style="font-size: 11.5px; color: #94a3b8;">Thanh toán an toàn bảo mật MBBank</div>
         </div>
 
-        <!-- SCREEN 3: TRANSFER SUCCESS RECEIPT (AUTHENTIC MBBANK RECEIPT) -->
-        <div class="app-screen-body fake-receipt-screen" id="phone-screen-receipt">
-          <div class="receipt-white-card">
-            <div class="receipt-success-icon">
-              <i class="fa-solid fa-check"></i>
-            </div>
-            <div class="receipt-title-text">GIAO DỊCH THÀNH CÔNG</div>
-            <div class="receipt-amount-large" id="receipt-amount-display">-50,000 VND</div>
-            <div style="font-size: 11px; color: #64748b;" id="receipt-time-display">09/10/2026 01:08:25</div>
+        <!-- SCREEN 3: AUTHENTIC PHOTOGRAPHIC MBBANK RECEIPT WITH DYNAMIC TEXT OVERLAY -->
+        <div class="app-screen-body photo-receipt-screen" id="phone-screen-receipt">
+          <div class="photo-receipt-frame">
+            <img src="img/mbbank_receipt_clean.jpg" alt="MBBank Biên lai chuyển tiền thành công" class="photo-receipt-bg-img" />
 
-            <div class="receipt-detail-grid">
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Tài khoản trích nợ:</span>
-                <span class="receipt-row-value">0971266012 (NGUYEN THAO LINH)</span>
+            <!-- Live Status Bar Clock Overlay -->
+            <div class="photo-ov-clock" id="photo-receipt-clock">22:23</div>
+
+            <!-- Top Right Home / Close Button Hotspot -->
+            <div class="photo-ov-home-btn" id="btn-phone-close-receipt" role="button" tabindex="0" title="Đóng biên lai"></div>
+
+            <!-- Dynamic Amount Overlay -->
+            <div class="photo-ov-amount" id="receipt-amount-display">50,000 VND</div>
+
+            <!-- Dynamic Time Overlay -->
+            <div class="photo-ov-time" id="receipt-time-display">22:23 - 09/10/2026</div>
+
+            <!-- Dynamic Recipient Box Overlay -->
+            <div class="photo-ov-card">
+              <div class="photo-ov-card-name" id="receipt-recipient-name">NGUYEN VAN PHONG</div>
+              <div class="photo-ov-card-bank"><span class="mbbank-star">★</span> MB Bank (MBB)</div>
+              <div class="photo-ov-card-stk" id="receipt-recipient-stk">0644888866</div>
+              <div class="photo-ov-card-memo"><span class="memo-prefix">Nội dung:</span> <strong id="receipt-memo">Dungdz TC</strong></div>
+            </div>
+
+            <!-- Floating Result Verdict Banner -->
+            <div class="photo-ov-verdict" id="receipt-game-verdict-box">
+              <div class="photo-ov-ft-line">
+                <span>Mã FT:</span> <strong id="receipt-tx-code">FT268194824</strong>
+                <span class="photo-ov-tail-badge" id="receipt-tail-box">4</span>
               </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Tài khoản thụ hưởng:</span>
-                <span class="receipt-row-value" style="color: #003399;" id="receipt-recipient-stk">0644888866</span>
+              <div class="photo-ov-match-line" id="receipt-match-result">
+                KHỚP CỬA CHẴN (TC) ➔ THẮNG (+97,500đ)
               </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Tên người thụ hưởng:</span>
-                <span class="receipt-row-value" id="receipt-recipient-name">NGUYEN VAN PHONG</span>
-              </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Ngân hàng thụ hưởng:</span>
-                <span class="receipt-row-value">MB - NGÂN HÀNG QUÂN ĐỘI</span>
-              </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Mã giao dịch (Mã FT):</span>
-                <span class="receipt-ft-badge" id="receipt-tx-code">FT26281903824</span>
-              </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Nội dung chuyển tiền:</span>
-                <span class="receipt-row-value" style="background: #facc15; padding: 1px 6px; border-radius: 3px;" id="receipt-memo">C</span>
-              </div>
-              <div class="receipt-row-item">
-                <span class="receipt-row-label">Phí giao dịch:</span>
-                <span class="receipt-row-value" style="color: #16a34a;">0 VND (Miễn phí 247)</span>
+              <div class="photo-ov-topup-link" id="btn-receipt-quick-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
+                <i class="fa-solid fa-circle-plus"></i> Nạp thêm tiền
               </div>
             </div>
 
-            <!-- Highlighted Tail Digit & Game Result -->
-            <div class="receipt-game-verdict">
-              <div style="font-size: 10.5px; color: #64748b; font-weight: 600;">SỐ CUỐI MÃ FT TÍNH THẮNG THUA:</div>
-              <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <span style="font-size: 14px; font-weight: 700; color: #0f172a;">Đuôi mã FT:</span>
-                <span class="badge-tail-digit" id="receipt-tail-box" style="width: 24px; height: 24px; font-size: 14px;">4</span>
-              </div>
-              <div id="receipt-match-result" style="font-size: 12px; font-weight: 800; color: #16a34a;">
-                KHỚP CỬA C (CHẴN) ➔ THẮNG (+120,000đ)
-              </div>
-              <div class="receipt-topup-link" id="btn-receipt-quick-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
-                <i class="fa-solid fa-circle-plus"></i> Hết tiền? Nạp thêm ngay
-              </div>
-            </div>
-          </div>
-
-          <!-- Action buttons inside receipt -->
-          <div style="display: flex; gap: 8px; width: 100%; margin-top: auto;">
-            <div class="btn-fake-transfer-confirm" id="btn-phone-new-transfer" role="button" tabindex="0" style="background: #1e293b; color: #e2e8f0; flex: 1; padding: 10px;">
-              <i class="fa-solid fa-rotate-left"></i> Chơi tiếp
-            </div>
-            <div class="btn-fake-transfer-confirm" id="btn-phone-close-receipt" role="button" tabindex="0" style="flex: 1; padding: 10px;">
-              <i class="fa-solid fa-check"></i> Đóng
+            <!-- Action Hotspot: "Thực hiện giao dịch khác" Button -->
+            <div class="photo-ov-btn-again" id="btn-phone-new-transfer" role="button" tabindex="0" title="Thực hiện giao dịch khác">
+              <span>Thực hiện giao dịch khác</span>
             </div>
           </div>
         </div>
