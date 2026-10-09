@@ -362,11 +362,30 @@ a:hover {
 
 .game-rule-row {
   display: grid;
-  grid-template-columns: 180px 1fr 110px;
+  grid-template-columns: 210px 1fr 140px;
   align-items: center;
-  padding: 11px 8px;
+  padding: 10px 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 14.5px;
+  transition: all 0.15s ease;
+}
+
+.game-rule-row:not(.header) {
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 2px 0;
+}
+
+.game-rule-row:not(.header):hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.game-rule-row:not(.header):active,
+.game-rule-row:not(.header).is-selected {
+  background-color: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 0 1px #38bdf8;
 }
 
 .game-rule-row.header {
@@ -374,7 +393,8 @@ a:hover {
   color: #94a3b8;
   font-weight: 600;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 8px 8px;
+  padding: 8px 10px;
+  cursor: default;
 }
 
 .header-col.text-center {
@@ -392,7 +412,19 @@ a:hover {
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.syntax-door-tag {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fde047;
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .copy-syntax-icon {
@@ -402,11 +434,14 @@ a:hover {
   transition: transform 0.15s ease, color 0.15s ease;
   display: inline-flex;
   align-items: center;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .copy-syntax-icon:hover {
   transform: scale(1.15);
   color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
 }
 
 .game-numbers-cell {
@@ -428,15 +463,43 @@ a:hover {
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.game-rule-row:not(.header):hover .game-number-chip {
+  border-color: rgba(56, 189, 248, 0.3);
 }
 
 .game-rate-cell {
   font-weight: 800;
   color: #ffffff;
   font-size: 15px;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
   letter-spacing: 0.3px;
   padding-right: 4px;
+}
+
+.btn-row-quick-play {
+  background: #0052cc;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.btn-row-quick-play:hover {
+  background: #0284c7;
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
 }
 
 .game-rules-notes {
@@ -505,24 +568,35 @@ a:hover {
 
 @media (max-width: 640px) {
   .game-rule-row {
-    grid-template-columns: 130px 1fr 80px;
+    grid-template-columns: 145px 1fr 90px;
     font-size: 12px;
     padding: 8px 4px;
   }
 
   .game-number-chip {
-    padding: 2px 7px;
-    font-size: 12px;
-    min-width: 24px;
+    padding: 2px 6px;
+    font-size: 11.5px;
+    min-width: 22px;
   }
 
   .game-syntax-cell {
-    font-size: 12.5px;
-    gap: 6px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .syntax-door-tag {
+    font-size: 10px;
+    padding: 0 4px;
   }
 
   .game-rate-cell {
-    font-size: 13px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .btn-row-quick-play {
+    font-size: 10px;
+    padding: 2px 5px;
   }
 }
 
