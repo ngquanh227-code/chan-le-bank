@@ -34,7 +34,7 @@
 
     if (recNameEl) recNameEl.textContent = config.owner || 'NGUYEN QUANG ANH';
     if (recStkEl) recStkEl.textContent = config.accountNumber || '0962714685';
-    if (recBankLabel) recBankLabel.textContent = `${config.name || 'MB'} - Quân đội`;
+    if (recBankLabel) recBankLabel.textContent = 'Quân đội (MB)';
     if (memoInput) memoInput.innerText = initialMemo;
     if (memoDisplay) memoDisplay.textContent = initialMemo;
 

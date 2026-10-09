@@ -64,12 +64,12 @@
 /* Live Source Account Balance */
 .photo-transfer-balance {
   position: absolute;
-  top: 24.2%;
+  top: 24.0%;
   left: 9.3%;
   font-size: 20px;
-  font-weight: 700;
-  color: #0f172a;
-  letter-spacing: -0.3px;
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: -0.2px;
   font-family: var(--font-family-mb) !important;
   z-index: 20;
 }
@@ -112,22 +112,23 @@
 /* Recipient Info Overlays */
 .photo-transfer-rec-bank {
   position: absolute;
-  top: 40.6%;
-  left: 22.2%;
-  font-size: 14px;
-  font-weight: 700;
-  color: #0f172a;
+  top: 39.8%;
+  left: 22.4%;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1e293b;
   font-family: var(--font-family-mb) !important;
   pointer-events: none;
   z-index: 20;
+  letter-spacing: -0.1px;
 }
 
 .photo-transfer-rec-stk {
   position: absolute;
-  top: 48.8%;
+  top: 47.6%;
   left: 9.3%;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 600;
   color: #0f172a;
   letter-spacing: 0.3px;
   font-family: var(--font-family-mb) !important;
@@ -137,12 +138,16 @@
 
 .photo-transfer-rec-owner {
   position: absolute;
-  top: 55.8%;
+  top: 55.0%;
   left: 9.3%;
+  max-width: 58%;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #0f172a;
   letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: var(--font-family-mb) !important;
   pointer-events: none;
   z-index: 20;
@@ -166,67 +171,73 @@
 /* Amount Box Display & Input */
 .photo-transfer-amount-box {
   position: absolute;
-  top: 64.0%;
-  left: 9.3%;
-  width: 81.4%;
-  height: 48px;
+  top: 61.5%;
+  left: 6.6%;
+  width: 86.8%;
+  height: 8.0%;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 6px;
   z-index: 25;
 }
 
 .photo-transfer-amount-val {
-  font-size: 26px;
-  font-weight: 800;
-  color: #4338ca;
+  font-size: 24px;
+  font-weight: 600;
+  color: #4f46e5;
   font-family: var(--font-family-mb) !important;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
   outline: none;
   cursor: text;
-  border-bottom: 1.5px dashed rgba(67, 56, 202, 0.3);
-  padding: 0 4px;
+  border: none;
+  border-bottom: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.15s ease;
 }
 
 .photo-transfer-amount-val:focus {
-  border-bottom: 2px solid #4338ca;
-  background: rgba(67, 56, 202, 0.05);
+  background: rgba(79, 70, 229, 0.08);
 }
 
 .photo-transfer-amount-curr {
-  font-size: 14px;
-  font-weight: 700;
-  color: #64748b;
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
   font-family: var(--font-family-mb) !important;
+  line-height: 1;
 }
 
 /* Memo Input: DIRECT MANUAL USER INPUT! */
 .photo-transfer-memo-input {
   position: absolute;
-  top: 76.5%;
+  top: 75.5%;
   left: 9.3%;
-  width: 73%;
-  height: 44px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #0f172a;
+  width: 72%;
+  min-height: 44px;
+  max-height: 60px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #1e293b;
   line-height: 1.35;
   font-family: var(--font-family-mb) !important;
   outline: none;
   cursor: text;
   background: transparent;
-  word-break: break-all;
-  display: flex;
-  align-items: center;
-  padding: 2px 4px;
+  word-break: break-word;
+  display: block;
+  text-align: left;
+  padding: 0;
   border-radius: 4px;
+  overflow-y: auto;
   transition: background 0.15s ease;
   z-index: 25;
 }
 
 .photo-transfer-memo-input:focus {
-  background: rgba(0, 43, 128, 0.05);
+  background: rgba(0, 43, 128, 0.04);
 }
 
 .photo-transfer-memo-input:empty:before {
@@ -238,17 +249,17 @@
 
 .photo-transfer-clear-memo {
   position: absolute;
-  top: 76.2%;
+  top: 75.0%;
   right: 9.3%;
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 30;
 }
 
 .photo-transfer-clear-memo:hover {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* Bottom Action Hotspots */
