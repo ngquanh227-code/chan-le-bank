@@ -3,11 +3,39 @@
    Conforms to: Exact Visual Layout, WCAG 2.2 AA, Token-driven Architecture
    ========================================================================== */
 
+@font-face {
+  font-family: 'AvertaCY';
+  src: url('../fonts/intelligent_design_-_avertastdcy-regular_3-webfont.woff2') format('woff2'),
+       url('../fonts/intelligent_design_-_avertastdcy-regular_3-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AvertaCY';
+  src: url('../fonts/intelligent_design_-_avertastdcy-bold_1-webfont.woff2') format('woff2'),
+       url('../fonts/intelligent_design_-_avertastdcy-bold_1-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AvertaCY';
+  src: url('../fonts/intelligent_design_-_avertastdcy-black_1-webfont.woff2') format('woff2'),
+       url('../fonts/intelligent_design_-_avertastdcy-black_1-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Typography Tokens */
   --font-family-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   --font-family-ios: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Be Vietnam Pro', -apple-system-subheadline, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-mb: 'AvertaCY', 'SF Pro Display', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   --font-size-base: 15px;
   --font-weight-base: 400;
   --font-line-height-base: 22px;
@@ -1540,67 +1568,69 @@ a:hover {
 
 .photo-home-balance {
   position: absolute;
-  top: 22.8%;
-  left: 39.5%;
-  font-size: 19px;
+  top: 23.6%;
+  left: 24.5%;
+  font-size: 21px;
   font-weight: 700;
   color: #ffffff;
-  font-family: var(--font-family-ios);
-  letter-spacing: -0.3px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  font-family: var(--font-family-mb) !important;
+  letter-spacing: -0.2px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   white-space: nowrap;
   z-index: 15;
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 5px;
   user-select: none;
 }
 
 .photo-home-vnd {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #ffffff;
   opacity: 0.95;
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-home-eye-btn {
   position: absolute;
-  top: 16.6%;
-  left: 81%;
-  width: 10.5%;
-  height: 3.6%;
+  top: 23.2%;
+  left: 73.5%;
+  width: 9%;
+  height: 3.8%;
   border-radius: 8px;
   cursor: pointer;
   z-index: 25;
+  transition: background 0.15s ease;
 }
 
 .photo-home-eye-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .photo-home-topup-btn {
   position: absolute;
   top: 27.2%;
-  left: 39.5%;
+  left: 24.5%;
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
-  padding: 2px 9px;
+  padding: 3px 10px;
   font-size: 10.5px;
   font-weight: 700;
   color: #ffffff;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb) !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   z-index: 25;
   transition: all 0.2s ease;
 }
 
 .photo-home-topup-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   transform: scale(1.04);
 }
 
@@ -1639,183 +1669,153 @@ a:hover {
   100% { transform: scale(1); opacity: 0.8; }
 }
 
-/* Screen 2: Transfer / Betting Form Screen */
+/* Screen 2: Authentic MBBank Transfer Form Screen */
 .phone-form-screen {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 0 12px 14px;
+  padding: 0 0 16px;
   margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #091322;
+  background: #f1f4f9;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
   z-index: 10;
+  font-family: var(--font-family-mb) !important;
+}
+
+.phone-form-screen .phone-status-bar {
+  background: #002b80;
+  color: #ffffff;
+}
+
+.app-bank-header {
+  background: linear-gradient(135deg, #0a40a8 0%, #002366 100%);
+  padding: 10px 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .app-bank-back {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 16px;
-  color: #38bdf8;
+  color: #ffffff;
   border-radius: 50%;
   transition: background 0.15s ease;
 }
 
 .app-bank-back:hover {
-  background: rgba(56, 189, 248, 0.15);
-}
-
-/* App Header */
-.app-bank-header {
-  background: linear-gradient(180deg, #002266 0%, #003399 100%);
-  padding: 10px 14px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .app-bank-brand {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13.5px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  font-family: var(--font-family-mb);
 }
 
 .app-bank-brand i {
-  color: #d32f2f;
+  color: #ef4444;
 }
 
-/* App Scrollable Body */
-.app-screen-body {
-  padding: 12px;
+/* Cards inside Fake App */
+.phone-form-screen .app-screen-body {
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex: 1;
 }
 
-/* Cards inside Fake App */
-.fake-bank-card {
-  background-color: #111b2b;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 10px 12px;
+.phone-form-screen .fake-bank-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 11px 13px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  box-shadow: 0 2px 10px rgba(0, 35, 102, 0.05);
 }
 
-.fake-card-label {
+.phone-form-screen .fake-card-label {
   font-size: 11px;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
-.fake-account-val {
-  font-size: 13.5px;
+.phone-form-screen .fake-account-val {
+  font-size: 14px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: var(--font-family-mb);
 }
 
-.fake-balance-badge {
-  font-size: 12px;
-  color: #38bdf8;
-  font-family: var(--font-family-mono);
+.phone-form-screen .fake-balance-badge {
+  font-size: 13.5px;
+  color: #0047cc;
+  font-weight: 700;
+  font-family: var(--font-family-mb);
 }
 
-/* Top-up Button & Drawer */
-.btn-topup-badge {
-  background: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+.phone-form-screen .btn-topup-badge {
+  background: linear-gradient(135deg, #0e8449 0%, #16a34a 100%);
   color: #ffffff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10.5px;
+  font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
   transition: all 0.15s ease;
   user-select: none;
 }
 
-.btn-topup-badge:hover {
-  background: linear-gradient(135deg, #16a34a 0%, #4ade80 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.6);
+.phone-form-screen .topup-panel-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
 }
 
-.btn-topup-badge:active {
-  transform: translateY(1px);
+.phone-form-screen .topup-chip-btn {
+  background: #ffffff;
+  color: #059669;
+  border: 1px solid #cbd5e1;
 }
 
-/* Collapsible / Expandable Top-up Panel */
-.topup-panel-box {
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px dashed rgba(56, 189, 248, 0.4);
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-top: 6px;
-  animation: modal-enter 0.2s ease;
+.phone-form-screen .topup-chip-btn:hover {
+  background: #ecfdf5;
+  border-color: #059669;
 }
 
-.topup-panel-box.is-open {
-  display: flex;
-}
-
-.topup-chips-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-}
-
-.topup-chip-btn {
-  background: #1e293b;
-  color: #4ade80;
-  border: 1px solid #334155;
-  border-radius: 6px;
-  padding: 5px 2px;
-  font-size: 11px;
-  font-weight: 800;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.topup-chip-btn:hover {
-  background: #28374d;
-  border-color: #4ade80;
-  transform: translateY(-1px);
-}
-
-.topup-chip-btn:active {
-  transform: translateY(1px);
-}
-
-.topup-chip-custom {
+.phone-form-screen .topup-chip-custom {
   grid-column: span 3;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(5, 150, 105, 0.28) 100%);
-  border: 1px dashed #10b981;
-  color: #6ee7b7;
+  background: #ecfdf5;
+  border: 1px dashed #059669;
+  color: #047857;
   padding: 6px 8px;
   font-size: 11px;
   font-weight: 800;
@@ -1828,134 +1828,131 @@ a:hover {
   transition: all 0.15s ease;
 }
 
-.topup-chip-custom:hover {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(5, 150, 105, 0.45) 100%);
-  border-color: #34d399;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.topup-chip-reset {
+.phone-form-screen .topup-chip-reset {
   grid-column: span 3;
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #003399 0%, #0047cc 100%);
   color: #ffffff;
   border: none;
   padding: 6px 4px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.topup-chip-reset:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+.phone-form-screen .fake-amount-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 4px;
 }
 
-.receipt-topup-link {
-  margin-top: 6px;
+.phone-form-screen .fake-chip-btn {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 7px 4px;
   font-size: 11.5px;
   font-weight: 700;
-  color: #0284c7;
+  text-align: center;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+  transition: all 0.15s ease;
+  font-family: var(--font-family-mb);
+}
+
+.phone-form-screen .fake-chip-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.phone-form-screen .fake-chip-btn.active {
+  background: #003fb3;
+  border-color: #003fb3;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 63, 179, 0.3);
+}
+
+.phone-form-screen .phone-game-pills {
+  display: flex;
+  flex-wrap: wrap;
   gap: 5px;
-  padding: 4px 10px;
+  margin-top: 6px;
+}
+
+.phone-form-screen .phone-mode-pill {
+  background: #e2e8f0;
+  color: #334155;
   border-radius: 6px;
-  background: #e0f2fe;
-  border: 1px solid #bae6fd;
-  transition: all 0.15s ease;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family-mb);
 }
 
-.receipt-topup-link:hover {
-  background: #bae6fd;
-  color: #0369a1;
-  transform: translateY(-1px);
+.phone-form-screen .phone-mode-pill.active {
+  background: #002b80;
+  color: #ffffff;
 }
 
-.fake-amount-chips {
+.phone-form-screen .fake-memo-chips {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 6px;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
-.fake-chip-btn {
-  background-color: #1b263b;
-  color: #e2e8f0;
-  border: 1px solid #2d3c54;
-  border-radius: 6px;
-  padding: 6px 4px;
+.phone-form-screen .fake-memo-chip {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 7px 5px;
   font-size: 11.5px;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
   transition: all 0.15s ease;
+  font-family: var(--font-family-mb);
 }
 
-.fake-chip-btn:hover {
-  background-color: #273752;
+.phone-form-screen .fake-memo-chip:hover {
+  background-color: #e2e8f0;
 }
 
-.fake-chip-btn.active {
-  background-color: #0052cc;
-  border-color: #38bdf8;
-  color: #ffffff;
-}
-
-/* Memo Chips */
-.fake-memo-chips {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.fake-memo-chip {
-  background-color: #1b263b;
-  color: #facc15;
-  border: 1px solid #2d3c54;
-  border-radius: 6px;
-  padding: 6px 4px;
-  font-size: 11.5px;
-  font-weight: 800;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.fake-memo-chip:hover {
-  background-color: #273752;
-}
-
-.fake-memo-chip.active {
-  background-color: #d97706;
-  border-color: #fbbf24;
+.phone-form-screen .fake-memo-chip.active {
+  background-color: #f59e0b;
+  border-color: #d97706;
   color: #000000;
+  font-weight: 800;
 }
 
-/* Confirm Action Button */
-.btn-fake-transfer-confirm {
+.phone-form-screen .btn-fake-transfer-confirm {
   width: 100%;
-  background: linear-gradient(135deg, #0052cc 0%, #0066ff 100%);
+  background: linear-gradient(135deg, #0b45b0 0%, #002b80 100%);
   color: #ffffff;
   border: none;
-  border-radius: 12px;
-  padding: 12px;
-  font-size: 13.5px;
+  border-radius: 14px;
+  padding: 13px;
+  font-size: 14px;
   font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 43, 128, 0.35);
   transition: all 0.15s ease;
   margin-top: auto;
+  font-family: var(--font-family-mb);
 }
 
-.btn-fake-transfer-confirm:hover {
-  background: linear-gradient(135deg, #0040b3 0%, #0052cc 100%);
+.phone-form-screen .btn-fake-transfer-confirm:hover {
+  background: linear-gradient(135deg, #083896 0%, #001f5c 100%);
   transform: translateY(-1px);
 }
 
-.btn-fake-transfer-confirm:active {
+.phone-form-screen .btn-fake-transfer-confirm:active {
   transform: translateY(1px);
 }
 
@@ -2007,6 +2004,7 @@ a:hover {
   background: #f1f5f9;
   display: none;
   z-index: 10;
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-receipt-screen.is-active {
@@ -2036,7 +2034,7 @@ a:hover {
   font-size: 13px;
   font-weight: 700;
   color: #000000;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb);
   letter-spacing: -0.2px;
 }
 
@@ -2053,15 +2051,15 @@ a:hover {
 
 .photo-ov-amount {
   position: absolute;
-  top: 26.2%;
+  top: 27.2%;
   left: 50%;
   transform: translateX(-50%);
   width: 88%;
   text-align: center;
-  font-size: 23px;
-  font-weight: 800;
-  color: #001f5c;
-  font-family: var(--font-family-ios);
+  font-size: 26px;
+  font-weight: 700;
+  color: #00127a;
+  font-family: var(--font-family-mb) !important;
   letter-spacing: -0.5px;
   background: #f5f9ff;
   padding: 2px 0;
@@ -2069,25 +2067,25 @@ a:hover {
 
 .photo-ov-time {
   position: absolute;
-  top: 30.6%;
+  top: 31.0%;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
   text-align: center;
   font-size: 11.5px;
-  font-weight: 600;
+  font-weight: 400;
   color: #64748b;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb) !important;
   background: #f0f5fc;
   padding: 1px 0;
 }
 
 .photo-ov-card {
   position: absolute;
-  top: 37.3%;
+  top: 36.6%;
   left: 5.9%;
   width: 88.2%;
-  height: 16.1%;
+  height: 16.8%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2097,48 +2095,45 @@ a:hover {
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   padding: 4px 10px;
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-ov-card-name {
-  font-size: 14px;
-  font-weight: 800;
-  color: #1e293b;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0f172a;
   text-transform: uppercase;
-  letter-spacing: 0.2px;
-  font-family: var(--font-family-ios);
+  letter-spacing: 0.3px;
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-ov-card-bank {
   font-size: 12px;
   font-weight: 700;
-  color: #0f172a;
+  color: #002b80;
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-family: var(--font-family-ios);
-}
-
-.mbbank-star {
-  color: #ef4444;
-  font-size: 13px;
+  gap: 5px;
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-ov-card-stk {
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 400;
   color: #334155;
   letter-spacing: 0.5px;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-ov-card-memo {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   color: #0f172a;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb) !important;
 }
 
 .photo-ov-card-memo strong {
+  font-weight: 700;
   color: #0284c7;
   background: rgba(56, 189, 248, 0.15);
   padding: 1px 6px;
@@ -2166,7 +2161,7 @@ a:hover {
   gap: 4px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   z-index: 5;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb);
 }
 
 .photo-ov-ft-line {
@@ -2221,7 +2216,12 @@ a:hover {
   cursor: pointer;
   transition: all 0.15s ease;
   z-index: 10;
-  font-family: var(--font-family-ios);
+  font-family: var(--font-family-mb) !important;
+}
+
+.photo-ov-btn-again:hover {
+  background: #f0f7ff;
+  transform: scale(1.01);
 }
 
 .photo-ov-btn-again:hover {
