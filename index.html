@@ -1163,7 +1163,7 @@
           <!-- Sender Account Card -->
           <div class="fake-bank-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="fake-card-label">Tài khoản nguồn trích nợ</span>
+              <span class="fake-card-label">Từ tài khoản nguồn</span>
               <span class="btn-topup-badge" id="btn-toggle-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
                 <i class="fa-solid fa-plus"></i> Nạp thêm tiền
               </span>
@@ -1176,7 +1176,7 @@
 
             <!-- Collapsible Top-Up Drawer -->
             <div class="topup-panel-box" id="phone-topup-panel">
-              <div style="font-size: 10.5px; color: #94a3b8; font-weight: 700;">NẠP TIỀN TEST NHANH VÀO SỐ DƯ:</div>
+              <div style="font-size: 10.5px; color: #0284c7; font-weight: 700;">NẠP TIỀN NHANH VÀO SỐ DƯ:</div>
               <div class="topup-chips-grid">
                 <div class="topup-chip-btn" role="button" tabindex="0" data-topup="500000">+500k</div>
                 <div class="topup-chip-btn" role="button" tabindex="0" data-topup="1000000">+1M</div>
@@ -1196,7 +1196,7 @@
 
           <!-- Destination Account Card -->
           <div class="fake-bank-card">
-            <span class="fake-card-label">Tài khoản thụ hưởng (CHẴN LẺ BANK)</span>
+            <span class="fake-card-label">Thông tin người thụ hưởng</span>
             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px;">
               <span style="font-size: 13.5px; font-weight: 700; color: #0f172a;" id="phone-recipient-name">NGUYEN VAN PHONG</span>
               <span class="bank-mb-badge" style="display: inline-flex; align-items: center; gap: 4px; background: #002b80; color: #fff; padding: 2px 7px; border-radius: 6px; font-weight: 700; font-size: 11px;"><img src="img/banks/mb.png" alt="MB" style="height: 12px; width: auto;" /> MBBank</span>
@@ -1253,7 +1253,7 @@
             <span id="btn-phone-transfer-text">Tiếp tục (50,000đ)</span>
           </div>
           <div style="text-align: center; font-size: 10.5px; color: #64748b; margin-top: 2px;">
-            <i class="fa-solid fa-lock"></i> Miễn phí chuyển khoản NAPAS 247 • Bảo mật FaceID
+            <i class="fa-solid fa-shield-halved"></i> Miễn phí chuyển tiền • Bảo mật xác thực MB Smart OTP
           </div>
         </div>
 
@@ -1283,25 +1283,17 @@
             <!-- Dynamic Time Overlay -->
             <div class="photo-ov-time" id="receipt-time-display">22:23 - 09/10/2026</div>
 
-            <!-- Dynamic Recipient Box Overlay -->
+            <!-- Dynamic Recipient Box Overlay (With perfectly integrated FT Code line) -->
             <div class="photo-ov-card">
               <div class="photo-ov-card-name" id="receipt-recipient-name">NGUYEN VAN PHONG</div>
               <div class="photo-ov-card-bank"><img src="img/banks/mb.png" alt="MB" style="height: 14px; width: auto; vertical-align: middle; margin-right: 4px;" /> MB Bank (MBB)</div>
               <div class="photo-ov-card-stk" id="receipt-recipient-stk">0644888866</div>
               <div class="photo-ov-card-memo"><span class="memo-prefix">Nội dung:</span> <strong id="receipt-memo">Dungdz TC</strong></div>
-            </div>
-
-            <!-- Floating Result Verdict Banner -->
-            <div class="photo-ov-verdict" id="receipt-game-verdict-box">
-              <div class="photo-ov-ft-line">
-                <span>Mã FT:</span> <strong id="receipt-tx-code">FT268194824</strong>
-                <span class="photo-ov-tail-badge" id="receipt-tail-box">4</span>
-              </div>
-              <div class="photo-ov-match-line" id="receipt-match-result">
-                KHỚP CỬA CHẴN (TC) ➔ THẮNG (+97,500đ)
-              </div>
-              <div class="photo-ov-topup-link" id="btn-receipt-quick-topup" role="button" tabindex="0" title="Bấm để nạp thêm tiền số dư">
-                <i class="fa-solid fa-circle-plus"></i> Nạp thêm tiền
+              <div class="photo-ov-card-ft" id="receipt-game-verdict-box">
+                <span class="memo-prefix">Mã giao dịch:</span> <strong id="receipt-tx-code">FT268194824</strong>
+                <span class="photo-ov-tail-badge" id="receipt-tail-box" style="display: none;">4</span>
+                <span class="photo-ov-match-line" id="receipt-match-result" style="display: none;"></span>
+                <span class="photo-ov-topup-link" id="btn-receipt-quick-topup" role="button" tabindex="0" style="display: none;"></span>
               </div>
             </div>
 

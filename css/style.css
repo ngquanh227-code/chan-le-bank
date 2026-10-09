@@ -1689,19 +1689,19 @@ a:hover {
 }
 
 .phone-form-screen .phone-status-bar {
-  background: #002b80;
-  color: #ffffff;
+  background: #ffffff;
+  color: #0f172a;
   margin: 0 -10px;
 }
 
 .app-bank-header {
-  background: linear-gradient(135deg, #002b80 0%, #001f5c 100%);
-  padding: 10px 14px 14px;
+  background: #ffffff;
+  padding: 8px 14px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #ffffff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #002b80;
+  border-bottom: 1px solid #edf2f7;
   margin: 0 -10px;
 }
 
@@ -1713,28 +1713,28 @@ a:hover {
   justify-content: center;
   cursor: pointer;
   font-size: 16px;
-  color: #ffffff;
+  color: #002b80;
   border-radius: 50%;
   transition: background 0.15s ease;
 }
 
 .app-bank-back:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #f1f5f9;
 }
 
 .app-bank-brand {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: 0.2px;
-  color: #ffffff;
+  letter-spacing: 0.1px;
+  color: #002b80;
   font-family: var(--font-family-mb);
 }
 
 .app-bank-brand img {
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
 }
 
 /* Cards inside Transfer Screen */
@@ -2115,22 +2115,22 @@ a:hover {
   top: 36.6%;
   left: 8%;
   width: 84%;
-  height: 16%;
+  height: 17.5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3px;
+  gap: 3.5px;
   background: transparent;
   border: none;
   padding: 0;
   font-family: var(--font-family-mb) !important;
   pointer-events: none;
-  z-index: 5;
+  z-index: 15;
 }
 
 .photo-ov-card-name {
-  font-size: 14.5px;
+  font-size: 14px;
   font-weight: 700;
   color: #0f172a;
   text-transform: uppercase;
@@ -2149,7 +2149,7 @@ a:hover {
 }
 
 .photo-ov-card-stk {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 400;
   color: #334155;
   letter-spacing: 0.5px;
@@ -2173,61 +2173,30 @@ a:hover {
 
 .memo-prefix {
   color: #64748b;
+  font-weight: 500;
 }
 
-.photo-ov-verdict {
-  position: absolute;
-  top: 55.6%;
-  left: 6%;
-  width: 88%;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  color: #0f172a;
+.photo-ov-card-ft {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #64748b;
+  font-family: var(--font-family-mb) !important;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  z-index: 15;
-  font-family: var(--font-family-mb);
-  pointer-events: none;
+  gap: 4px;
+  margin-top: 1px;
 }
 
-.photo-ov-ft-line {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: transparent !important;
-}
-
-.photo-ov-ft-line strong {
+.photo-ov-card-ft strong {
   color: #002b80;
-  font-family: var(--font-family-mb);
   font-weight: 700;
+  font-family: var(--font-family-mb) !important;
   letter-spacing: 0.2px;
 }
 
-.photo-ov-tail-badge {
-  background: #eef2ff;
-  color: #002b80;
-  border: 1px solid #c7d2fe;
-  font-weight: 700;
-  font-size: 11px;
-  padding: 1px 6px;
-  border-radius: 5px;
-}
-
-.photo-ov-match-line {
-  display: none !important;
-}
-
-.photo-ov-topup-link {
-  display: none !important;
+.photo-ov-verdict {
+  display: contents;
 }
 
 .photo-ov-btn-again {
