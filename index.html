@@ -1184,9 +1184,9 @@
               <i class="fa-solid fa-money-bill-transfer"></i> Rút về TK
             </div>
 
-            <!-- "Quét mã QR" Hotspot / Button on Home Screen -->
+            <!-- "Quét mã QR" Hotspot on Home Screen (Centered Bottom Nav Icon) -->
             <div class="photo-home-qr-btn" id="btn-home-open-qr" role="button" tabindex="0" title="Bấm để Quét mã QR chuyển tiền">
-              <i class="fa-solid fa-qrcode"></i> Quét QR
+              <span class="photo-home-qr-pulse"></span>
             </div>
 
             <!-- "Chuyển tiền" Hotspot (Opens Transfer / Betting Sheet) -->
@@ -1289,159 +1289,78 @@
         </div>
 
         <!-- SCREEN 2: TRANSFER & BETTING FORM (Image 2 replica: "Chuyển tiền tới số tài khoản") -->
-        <div class="app-screen-body phone-form-screen" id="phone-screen-form" style="display: none;">
-          <!-- Phone Status Bar for Form Screen -->
-          <div class="phone-status-bar light-status-bar">
-            <span id="phone-clock">19:27</span>
-            <div class="status-bar-icons">
-              <i class="fa-solid fa-signal"></i>
-              <span>5G</span>
-              <i class="fa-solid fa-wifi"></i>
-              <i class="fa-solid fa-battery-full" style="color: #0f172a;"></i>
-            </div>
-          </div>
+        <!-- SCREEN 2: AUTHENTIC PHOTOGRAPHIC MBBANK TRANSFER SCREEN (Image 2 replica) -->
+        <div class="app-screen-body photo-transfer-screen" id="phone-screen-form" style="display: none;">
+          <div class="photo-transfer-frame">
+            <img src="img/mbbank_transfer_clean.jpg" alt="MBBank Chuyển tiền tới số tài khoản" class="photo-transfer-bg-img" />
 
-          <!-- App Header Bar matching Image 2 -->
-          <div class="app-mb-transfer-header">
-            <div class="app-mb-back-btn" id="btn-form-back-home" role="button" tabindex="0" title="Quay lại">
-              <i class="fa-solid fa-chevron-left"></i>
-            </div>
-            <div class="app-mb-header-title" id="phone-app-title">Chuyển tiền tới số tài khoản</div>
-            <div style="width: 24px;"></div>
-          </div>
+            <!-- Live Status Bar Clock Overlay -->
+            <div class="photo-transfer-clock" id="phone-clock">19:27</div>
 
-          <!-- Scrollable Transfer Body -->
-          <div class="mb-transfer-scroll-content">
-            <!-- 1. Nguồn chuyển tiền -->
-            <div class="mb-section-block">
-              <div class="mb-section-title">Nguồn chuyển tiền</div>
-              <div class="mb-source-card">
-                <div class="mb-source-row-top">
-                  <span class="mb-source-label">TÀI KHOẢN THANH TOÁN - 0916508081</span>
-                  <span class="mb-source-chevron" id="btn-toggle-topup" role="button" tabindex="0" title="Nạp thêm tiền số dư">
-                    <i class="fa-solid fa-chevron-down"></i>
-                  </span>
+            <!-- Top Left Back Arrow Hotspot -->
+            <div class="photo-transfer-back-btn" id="btn-form-back-home" role="button" tabindex="0" title="Quay lại"></div>
+
+            <!-- Live Source Balance Overlay (TÀI KHOẢN THANH TOÁN) -->
+            <div class="photo-transfer-balance" id="phone-user-balance">5,301,454 VND</div>
+
+            <!-- Source Chevron Hotspot (Mở panel nạp tiền nhanh) -->
+            <div class="photo-transfer-topup-toggle" id="btn-toggle-topup" role="button" tabindex="0" title="Nạp thêm tiền số dư"></div>
+
+            <!-- Collapsible Top-Up Drawer -->
+            <div class="topup-panel-box photo-topup-drawer" id="phone-topup-panel">
+              <div style="font-size: 10.5px; color: #0284c7; font-weight: 700;">NẠP TIỀN NHANH VÀO SỐ DƯ:</div>
+              <div class="topup-chips-grid">
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="500000">+500k</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="1000000">+1M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="2000000">+2M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="5000000">+5M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="10000000">+10M</div>
+                <div class="topup-chip-btn" role="button" tabindex="0" data-topup="50000000">+50M</div>
+                <div class="topup-chip-btn topup-chip-custom" id="btn-custom-topup" role="button" tabindex="0">
+                  <i class="fa-solid fa-pen-to-square"></i> Nhập số dư tùy chỉnh...
                 </div>
-                <div class="mb-source-balance-row">
-                  <span class="mb-source-balance" id="phone-user-balance">5,301,454 VND</span>
-                </div>
-
-                <!-- Collapsible Top-Up Drawer -->
-                <div class="topup-panel-box" id="phone-topup-panel">
-                  <div style="font-size: 10.5px; color: #0284c7; font-weight: 700;">NẠP TIỀN NHANH VÀO SỐ DƯ:</div>
-                  <div class="topup-chips-grid">
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="500000">+500k</div>
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="1000000">+1M</div>
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="2000000">+2M</div>
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="5000000">+5M</div>
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="10000000">+10M</div>
-                    <div class="topup-chip-btn" role="button" tabindex="0" data-topup="50000000">+50M</div>
-                    <div class="topup-chip-btn topup-chip-custom" id="btn-custom-topup" role="button" tabindex="0">
-                      <i class="fa-solid fa-pen-to-square"></i> Nhập số dư tùy chỉnh...
-                    </div>
-                    <div class="topup-chip-btn topup-chip-reset" role="button" tabindex="0" data-topup="reset">
-                      <i class="fa-solid fa-arrows-rotate"></i> Khôi phục số dư 10,000,000đ
-                    </div>
-                  </div>
+                <div class="topup-chip-btn topup-chip-reset" role="button" tabindex="0" data-topup="reset">
+                  <i class="fa-solid fa-arrows-rotate"></i> Khôi phục số dư 10,000,000đ
                 </div>
               </div>
             </div>
 
-            <!-- 2. Chuyển đến -->
-            <div class="mb-section-block">
-              <div class="mb-section-title">Chuyển đến</div>
-              <div class="mb-recipient-card">
-                <!-- Row 1: Ngân hàng -->
-                <div class="mb-rec-row mb-rec-bank-row">
-                  <div class="mb-bank-logo-circle">
-                    <img src="img/banks/mb.png" alt="MB" id="phone-bank-icon-img" />
-                  </div>
-                  <div class="mb-rec-info-col">
-                    <span class="mb-rec-sub">Ngân hàng</span>
-                    <strong class="mb-rec-val" id="phone-bank-name-label">Quân đội (MB)</strong>
-                  </div>
-                </div>
+            <!-- Dynamic Recipient Info Overlays -->
+            <div class="photo-transfer-rec-bank" id="phone-bank-name-label">Quân đội (MB)</div>
+            <div class="photo-transfer-rec-stk" id="phone-recipient-stk">0962714685</div>
+            <div class="photo-transfer-rec-owner" id="phone-recipient-name">NGUYEN QUANG ANH</div>
+            <div class="photo-transfer-chat-save" id="btn-chat-save" role="button" tabindex="0" title="Lưu thông tin thụ hưởng"></div>
 
-                <div class="mb-dotted-divider"></div>
-
-                <!-- Row 2: Số tài khoản -->
-                <div class="mb-rec-row">
-                  <div class="mb-rec-info-col">
-                    <span class="mb-rec-sub">Số tài khoản</span>
-                    <strong class="mb-rec-val-large" id="phone-recipient-stk">0962714685</strong>
-                  </div>
-                </div>
-
-                <!-- Row 3: Money Chat / Chủ tài khoản -->
-                <div class="mb-rec-row mb-rec-owner-row">
-                  <div class="mb-rec-info-col">
-                    <span class="mb-rec-sub">Money Chat</span>
-                    <strong class="mb-rec-val-owner" id="phone-recipient-name">NGUYEN QUANG ANH</strong>
-                  </div>
-                  <div class="mb-btn-save-pill" id="btn-chat-save" role="button" tabindex="0" title="Lưu thông tin thụ hưởng">
-                    <i class="fa-regular fa-bookmark"></i> Lưu
-                  </div>
-                </div>
-              </div>
+            <!-- Amount Card: Display & Editable Hotspot -->
+            <div class="photo-transfer-amount-box" id="phone-amount-box">
+              <span class="photo-transfer-amount-val" id="phone-amount-display-num" contenteditable="true" spellcheck="false" title="Nhấp để sửa số tiền">50,000</span>
+              <span class="photo-transfer-amount-curr">VND</span>
             </div>
 
-            <!-- 3. Tinted Bottom Container (Số tiền & Nội dung) -->
-            <div class="mb-tinted-container">
-              <!-- Card: Số tiền chuyển -->
-              <div class="mb-amount-card">
-                <div class="mb-amount-center-display">
-                  <span class="mb-amount-num" id="phone-amount-display-num">50,000</span>
-                  <span class="mb-amount-vnd">VND</span>
-                  <span class="mb-amount-info-icon" title="Hạn mức MB"><i class="fa-solid fa-circle-info"></i></span>
-                </div>
-                <!-- Quick Amount Chips -->
-                <div class="fake-amount-chips">
-                  <div class="fake-chip-btn" role="button" tabindex="0" data-amount="20000">20,000đ</div>
-                  <div class="fake-chip-btn active" role="button" tabindex="0" data-amount="50000">50,000đ</div>
-                  <div class="fake-chip-btn" role="button" tabindex="0" data-amount="100000">100,000đ</div>
-                  <div class="fake-chip-btn" role="button" tabindex="0" data-amount="200000">200,000đ</div>
-                  <div class="fake-chip-btn" role="button" tabindex="0" data-amount="500000">500,000đ</div>
-                  <div class="fake-chip-btn" role="button" tabindex="0" data-amount="1000000">1,000,000đ</div>
-                </div>
-              </div>
-
-              <!-- Card: Nội dung chuyển tiền -->
-              <div class="mb-memo-card">
-                <div class="mb-memo-sub">Nội dung chuyển tiền</div>
-                <div class="mb-memo-row">
-                  <div class="mb-memo-text" id="phone-memo-display">NGUYEN XUAN DUC LUONG chuyen tien</div>
-                  <div class="mb-memo-clear-btn" id="btn-clear-memo" role="button" tabindex="0" title="Xóa nội dung">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                  </div>
-                </div>
-
-                <!-- Quick Game Category Filter inside Phone -->
-                <div class="phone-game-pills" id="phone-game-pills">
-                  <span class="phone-mode-pill active" data-cat="cltx2" role="button" tabindex="0">CLTX+2</span>
-                  <span class="phone-mode-pill" data-cat="cltx" role="button" tabindex="0">CLTX</span>
-                  <span class="phone-mode-pill" data-cat="tx" role="button" tabindex="0">TÀI XỈU</span>
-                  <span class="phone-mode-pill" data-cat="xien" role="button" tabindex="0">XIÊN</span>
-                  <span class="phone-mode-pill" data-cat="1p3" role="button" tabindex="0">1 PHẦN 3</span>
-                  <span class="phone-mode-pill" data-cat="doanso" role="button" tabindex="0">ĐOÁN SỐ</span>
-                  <span class="phone-mode-pill" data-cat="tong3" role="button" tabindex="0">TỔNG 3</span>
-                </div>
-                <div class="fake-memo-chips" id="phone-memo-chips">
-                  <div class="fake-memo-chip active" role="button" tabindex="0" data-memo="Dungdz TC">Chẵn: Dungdz TC (x1.95)</div>
-                  <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TL">Lẻ: Dungdz TL (x1.95)</div>
-                  <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TT">Tài: Dungdz TT (x1.95)</div>
-                  <div class="fake-memo-chip" role="button" tabindex="0" data-memo="Dungdz TX">Xỉu: Dungdz TX (x1.95)</div>
-                </div>
-              </div>
+            <!-- Quick Amount Chips directly on screen -->
+            <div class="photo-transfer-quick-amounts">
+              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="20000">20k</span>
+              <span class="fake-chip-btn active" role="button" tabindex="0" data-amount="50000">50k</span>
+              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="100000">100k</span>
+              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="200000">200k</span>
+              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="500000">500k</span>
+              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="1000000">1M</span>
             </div>
-          </div>
 
-          <!-- Bottom Action Buttons matching Image 2 -->
-          <div class="mb-bottom-action-bar">
-            <div class="btn-mb-action-back" id="btn-transfer-bottom-back" role="button" tabindex="0">
-              Quay lại
+            <!-- Memo Card: DIRECT MANUAL USER INPUT! User tự gõ tay nội dung cược -->
+            <div class="photo-transfer-memo-box">
+              <div class="photo-transfer-memo-input" id="phone-memo-input" contenteditable="true" spellcheck="false" placeholder="Nhập nội dung chuyển tiền (VD: Dungdz TC, Dungdz TL, ...)">Dungdz TC</div>
+              <div class="photo-transfer-clear-memo" id="btn-clear-memo" role="button" tabindex="0" title="Xóa nội dung"></div>
             </div>
-            <div class="btn-mb-action-submit" id="btn-phone-submit-transfer" role="button" tabindex="0">
-              <span id="btn-phone-transfer-text">Tiếp tục</span>
+
+            <!-- Hidden span for backwards compatibility -->
+            <span id="phone-memo-display" style="display: none;">Dungdz TC</span>
+
+            <!-- Bottom Action Hotspots (Quay lại & Tiếp tục) -->
+            <div class="photo-transfer-btn-back" id="btn-transfer-bottom-back" role="button" tabindex="0" title="Quay lại"></div>
+            <div class="photo-transfer-btn-submit" id="btn-phone-submit-transfer" role="button" tabindex="0" title="Tiếp tục">
+              <span class="photo-transfer-submit-pulse"></span>
+              <span id="btn-phone-transfer-text" style="display: none;">Tiếp tục</span>
             </div>
           </div>
         </div>

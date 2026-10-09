@@ -199,10 +199,17 @@
   function setPhoneBetChoice(syntax, catKey, label) {
     phoneState.memo = syntax;
     phoneState.gameCategory = catKey;
+    const memoInput = document.getElementById('phone-memo-input');
+    if (memoInput) {
+      memoInput.innerText = syntax;
+    }
     const memoDisp = document.getElementById('phone-memo-display');
     if (memoDisp) memoDisp.textContent = `${syntax} (${label || syntax})`;
 
     showPhoneScreen('form');
+    if (memoInput) {
+      setTimeout(() => memoInput.focus(), 150);
+    }
   }
 
   window.CLB.phone = {

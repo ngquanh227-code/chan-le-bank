@@ -29,11 +29,14 @@
     const recStkEl = document.getElementById('phone-recipient-stk');
     const recBankLabel = document.getElementById('phone-bank-name-label');
     const memoDisplay = document.getElementById('phone-memo-display');
+    const memoInput = document.getElementById('phone-memo-input');
+    const initialMemo = config.memo || 'Dungdz TC';
 
     if (recNameEl) recNameEl.textContent = config.owner || 'NGUYEN QUANG ANH';
     if (recStkEl) recStkEl.textContent = config.accountNumber || '0962714685';
     if (recBankLabel) recBankLabel.textContent = `${config.name || 'MB'} - Quân đội`;
-    if (memoDisplay) memoDisplay.textContent = `${config.memo || 'Dungdz TC'} (Quét mã VietQR)`;
+    if (memoInput) memoInput.innerText = initialMemo;
+    if (memoDisplay) memoDisplay.textContent = initialMemo;
 
     if (window.CLB.toast) {
       window.CLB.toast.showToast('Quét mã QR MB thành công! Đã nhận diện thông tin người thụ hưởng.', 'success');

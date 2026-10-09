@@ -1,7 +1,8 @@
 /**
  * Module: Phone Transfer & Betting Simulator
- * Manages MBBank transfer screen (Image 2 replica), Face ID verification,
- * dynamic transaction receipt generation, win/loss calculation, and payout notifications.
+ * Manages authentic MBBank transfer screen (Image 2 replica), manual user memo input,
+ * Face ID verification, dynamic transaction receipt generation, win/loss calculation,
+ * and realistic notification alerts.
  */
 (function() {
   'use strict';
@@ -18,103 +19,28 @@
     return `${Y}/${M}/${D} ${h}:${m}:${s}`;
   }
 
-  // Switch game category inside Phone Simulator and render betting memo chips
+  // Switch game category inside Phone Simulator and set current betting memo
   function setPhoneGameMode(modeKey, targetMemo) {
     const phoneState = (window.CLB.phone && window.CLB.phone.phoneState) ? window.CLB.phone.phoneState : {};
-    const pills = document.querySelectorAll('.phone-mode-pill');
-    pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-cat') === modeKey));
+    phoneState.gameCategory = modeKey;
 
-    const chipsContainer = document.getElementById('phone-memo-chips');
-    if (!chipsContainer) return;
-
-    let chipItems = [];
-    if (modeKey === 'cltx2') {
-      chipItems = [
-        { memo: 'Dungdz TC', label: 'Chẵn (TC) • x1.95' },
-        { memo: 'Dungdz TL', label: 'Lẻ (TL) • x1.95' },
-        { memo: 'Dungdz TT', label: 'Tài (TT) • x1.95' },
-        { memo: 'Dungdz TX', label: 'Xỉu (TX) • x1.95' }
-      ];
-    } else if (modeKey === 'cltx') {
-      chipItems = [
-        { memo: 'Dungdz C', label: 'Chẵn (C) • x2.4' },
-        { memo: 'Dungdz L', label: 'Lẻ (L) • x2.4' },
-        { memo: 'Dungdz T', label: 'Tài (T) • x2.4' },
-        { memo: 'Dungdz X', label: 'Xỉu (X) • x2.4' }
-      ];
-    } else if (modeKey === 'tx') {
-      chipItems = [
-        { memo: 'Dungdz T', label: 'Tài (T) • x2.4' },
-        { memo: 'Dungdz X', label: 'Xỉu (X) • x2.4' }
-      ];
-    } else if (modeKey === '1p3') {
-      chipItems = [
-        { memo: 'Dungdz N1', label: 'Nhóm 1 (1-5-7) • x3' },
-        { memo: 'Dungdz N2', label: 'Nhóm 2 (2-4-8) • x3' },
-        { memo: 'Dungdz N3', label: 'Nhóm 3 (3-6-9) • x3' }
-      ];
-    } else if (modeKey === 'xien') {
-      chipItems = [
-        { memo: 'Dungdz CX', label: 'Chẵn Xỉu (CX) • x3' },
-        { memo: 'Dungdz LT', label: 'Lẻ Tài (LT) • x3' },
-        { memo: 'Dungdz CT', label: 'Chẵn Tài (CT) • x3.5' },
-        { memo: 'Dungdz LX', label: 'Lẻ Xỉu (LX) • x3.5' }
-      ];
-    } else if (modeKey === 'doanso') {
-      chipItems = [
-        { memo: 'Dungdz 0', label: 'Số 0 • x7' },
-        { memo: 'Dungdz 1', label: 'Số 1 • x7' },
-        { memo: 'Dungdz 2', label: 'Số 2 • x7' },
-        { memo: 'Dungdz 3', label: 'Số 3 • x7' },
-        { memo: 'Dungdz 4', label: 'Số 4 • x7' },
-        { memo: 'Dungdz 5', label: 'Số 5 • x7' },
-        { memo: 'Dungdz 6', label: 'Số 6 • x7' },
-        { memo: 'Dungdz 7', label: 'Số 7 • x7' },
-        { memo: 'Dungdz 8', label: 'Số 8 • x7' },
-        { memo: 'Dungdz 9', label: 'Số 9 • x7' }
-      ];
-    } else if (modeKey === 'tong3') {
-      chipItems = [
-        { memo: 'Dungdz S1', label: 'Nhóm 1-9 • x3.5' },
-        { memo: 'Dungdz S2', label: 'Nhóm 10-18 • x3.5' },
-        { memo: 'Dungdz S3', label: 'Nhóm 19-27 • x3.5' },
-        { memo: 'Dungdz C3', label: 'Chẵn 3 • x2.4' },
-        { memo: 'Dungdz L3', label: 'Lẻ 3 • x2.4' },
-        { memo: 'Dungdz T3', label: 'Tài 3 • x2.4' },
-        { memo: 'Dungdz X3', label: 'Xỉu 3 • x2.4' }
-      ];
-    } else {
-      chipItems = [
-        { memo: 'Dungdz C', label: 'Chẵn (C) • x2.4' },
-        { memo: 'Dungdz L', label: 'Lẻ (L) • x2.4' },
-        { memo: 'Dungdz T', label: 'Tài (T) • x2.4' },
-        { memo: 'Dungdz X', label: 'Xỉu (X) • x2.4' }
-      ];
+    let defaultSyntax = targetMemo;
+    if (!defaultSyntax) {
+      if (modeKey === 'cltx2') defaultSyntax = 'Dungdz TC';
+      else if (modeKey === 'cltx') defaultSyntax = 'Dungdz C';
+      else if (modeKey === 'tx') defaultSyntax = 'Dungdz T';
+      else if (modeKey === '1p3') defaultSyntax = 'Dungdz N1';
+      else if (modeKey === 'xien') defaultSyntax = 'Dungdz CX';
+      else if (modeKey === 'doanso') defaultSyntax = 'Dungdz 0';
+      else if (modeKey === 'tong3') defaultSyntax = 'Dungdz S1';
+      else defaultSyntax = 'Dungdz TC';
     }
 
-    const activeIndex = targetMemo
-      ? Math.max(0, chipItems.findIndex(c => c.memo === targetMemo))
-      : 0;
-
-    chipsContainer.innerHTML = chipItems.map((c, i) => `
-      <div class="fake-memo-chip ${i === activeIndex ? 'active' : ''}" role="button" tabindex="0" data-memo="${c.memo}">${c.label}</div>
-    `).join('');
-
-    phoneState.memo = chipItems[activeIndex].memo;
+    phoneState.memo = defaultSyntax;
+    const memoInput = document.getElementById('phone-memo-input');
+    if (memoInput) memoInput.innerText = defaultSyntax;
     const disp = document.getElementById('phone-memo-display');
-    if (disp) disp.textContent = phoneState.memo;
-
-    // Attach click listeners to newly created chips
-    chipsContainer.querySelectorAll('.fake-memo-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        chipsContainer.querySelectorAll('.fake-memo-chip').forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const memo = chip.getAttribute('data-memo');
-        phoneState.memo = memo;
-        if (disp) disp.textContent = memo;
-        if (window.CLB.audio) window.CLB.audio.playTone(580, 'sine', 0.05);
-      });
-    });
+    if (disp) disp.textContent = defaultSyntax;
   }
 
   function initTransferListeners() {
@@ -175,11 +101,32 @@
       });
     }
 
+    // 1. Direct Manual Memo Typing by User
+    const memoInput = document.getElementById('phone-memo-input');
+    if (memoInput) {
+      memoInput.addEventListener('input', () => {
+        phoneState.memo = (memoInput.innerText || memoInput.textContent || '').trim();
+        const disp = document.getElementById('phone-memo-display');
+        if (disp) disp.textContent = phoneState.memo;
+      });
+      memoInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          memoInput.blur();
+        }
+      });
+    }
+
+    // 2. Clear Memo Button
     if (btnClearMemo) {
       btnClearMemo.addEventListener('click', () => {
         phoneState.memo = '';
-        const memoDisp = document.getElementById('phone-memo-display');
-        if (memoDisp) memoDisp.textContent = '(Chưa có nội dung)';
+        if (memoInput) {
+          memoInput.innerText = '';
+          memoInput.focus();
+        }
+        const disp = document.getElementById('phone-memo-display');
+        if (disp) disp.textContent = '';
         if (window.CLB.audio) window.CLB.audio.playTone(400, 'sine', 0.05);
       });
     }
@@ -191,31 +138,32 @@
       });
     }
 
-    // Quick transfer amount chips
+    // 3. Amount Display Manual Input & Quick Chips
+    const amtInput = document.getElementById('phone-amount-display-num');
+    if (amtInput) {
+      amtInput.addEventListener('input', () => {
+        const raw = amtInput.innerText.replace(/[^\d]/g, '');
+        const parsed = parseInt(raw, 10) || 0;
+        phoneState.amount = parsed;
+      });
+      amtInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          amtInput.blur();
+        }
+      });
+    }
+
     document.querySelectorAll('.fake-chip-btn').forEach(chip => {
       chip.addEventListener('click', () => {
         document.querySelectorAll('.fake-chip-btn').forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         const amt = parseInt(chip.getAttribute('data-amount'), 10);
         phoneState.amount = amt;
-        const amtDisp = document.getElementById('phone-amount-display-num');
-        if (amtDisp) amtDisp.textContent = amt.toLocaleString('vi-VN');
+        if (amtInput) amtInput.innerText = amt.toLocaleString('vi-VN');
         if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.05);
       });
     });
-
-    // Delegated Phone Game Mode Pills Selection
-    const pillsContainer = document.getElementById('phone-game-pills');
-    if (pillsContainer) {
-      pillsContainer.addEventListener('click', (e) => {
-        const pill = e.target.closest('.phone-mode-pill');
-        if (pill) {
-          const catKey = pill.getAttribute('data-cat');
-          setPhoneGameMode(catKey);
-          if (window.CLB.audio) window.CLB.audio.playTone(500, 'sine', 0.06);
-        }
-      });
-    }
 
     // Top-Up & Balance Adjustment Listeners
     if (btnToggleTopup && topupPanel) {
@@ -310,6 +258,17 @@
     const btnSubmitTransfer = document.getElementById('btn-phone-submit-transfer') || document.getElementById('btn-fake-transfer-confirm');
     if (btnSubmitTransfer) {
       btnSubmitTransfer.addEventListener('click', () => {
+        if (memoInput) {
+          const currentTyped = (memoInput.innerText || memoInput.textContent || '').trim();
+          if (currentTyped) phoneState.memo = currentTyped;
+        }
+
+        if (!phoneState.memo) {
+          if (window.CLB.toast) window.CLB.toast.showToast('Vui lòng nhập nội dung chuyển tiền (cửa cược)!', 'warning');
+          if (memoInput) memoInput.focus();
+          return;
+        }
+
         if (phoneState.balance < phoneState.amount) {
           if (topupPanel) topupPanel.classList.add('is-open');
           if (window.CLB.toast) window.CLB.toast.showToast('Số dư MB không đủ để chuyển! Vui lòng nạp thêm tiền bên dưới.', 'danger');
