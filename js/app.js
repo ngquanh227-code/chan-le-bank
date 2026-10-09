@@ -956,7 +956,7 @@ const App = (function() {
         const disp = document.getElementById('phone-amount-display');
         const btnText = document.getElementById('btn-phone-transfer-text');
         if (disp) disp.textContent = `${val.toLocaleString('vi-VN')} VND`;
-        if (btnText) btnText.textContent = `XÁC NHẬN CHUYỂN TIỀN (${(val/1000).toLocaleString('vi-VN')}k)`;
+        if (btnText) btnText.textContent = `Tiếp tục (${val.toLocaleString('vi-VN')}đ)`;
         playTone(550, 'sine', 0.05);
       });
     });
