@@ -93,7 +93,7 @@
     const btnSuperMbai = document.getElementById('btn-super-transfer-mbai');
     const btnSuperRecent = document.getElementById('btn-super-transfer-recent');
     const btnSuperWallet = document.getElementById('btn-super-transfer-wallet');
-    const btnContactLuong = document.getElementById('btn-super-contact-luong');
+    const btnContactDung = document.getElementById('btn-super-contact-dung') || document.getElementById('btn-super-contact-luong');
     const btnContactFather = document.getElementById('btn-super-contact-father');
     const btnContactHung = document.getElementById('btn-super-contact-hung');
     const btnContactLuong2 = document.getElementById('btn-super-contact-luong2');
@@ -114,7 +114,7 @@
 
     if (btnSuperStk) {
       btnSuperStk.addEventListener('click', () => {
-        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
+        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0644888866', bank: 'Quân đội (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
@@ -122,7 +122,7 @@
 
     if (btnSuperMbai) {
       btnSuperMbai.addEventListener('click', () => {
-        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
+        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0644888866', bank: 'Quân đội (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
       });
@@ -130,7 +130,7 @@
 
     if (btnSuperRecent) {
       btnSuperRecent.addEventListener('click', () => {
-        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
+        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0644888866', bank: 'Quân đội (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
       });
@@ -143,9 +143,9 @@
       });
     }
 
-    if (btnContactLuong) {
-      btnContactLuong.addEventListener('click', () => {
-        updateRecipientUI({ name: 'NGUYEN XUAN DUC LUONG', stk: '0916508081', bank: 'Quân đội (MB)' });
+    if (btnContactDung) {
+      btnContactDung.addEventListener('click', () => {
+        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0916508081', bank: 'MBBank (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
