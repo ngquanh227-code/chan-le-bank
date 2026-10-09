@@ -501,16 +501,16 @@
               rate = 3.0;
               calcExplain = `Số cuối: [${lastDigit}] khớp N3 (3, 6, 9)`;
             }
-            // 3. XIÊN SỐ (Tổng 2 số cuối: CX, LT, CT, LX)
+            // 3. XIÊN SỐ (Tổng 2 số cuối: CX, LT, CT, LX - Tỉ lệ x 3.5)
             else if (memoClean === 'CX') {
               isValidSyntax = true;
               isWin = [0, 2, 4].includes(sumLast2);
-              rate = 3.0;
+              rate = 3.5;
               calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CX (0, 2, 4)`;
             } else if (memoClean === 'LT') {
               isValidSyntax = true;
               isWin = [5, 7, 9].includes(sumLast2);
-              rate = 3.0;
+              rate = 3.5;
               calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LT (5, 7, 9)`;
             } else if (memoClean === 'CT') {
               isValidSyntax = true;
@@ -523,27 +523,27 @@
               rate = 3.5;
               calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LX (1, 3)`;
             }
-            // 4. CLTX & TÀI XỈU (Số cuối: C, L, T, X)
+            // 4. CLTX & TÀI XỈU (Số cuối: C, L, T, X - Dưới 50k ăn 2.68, Từ 50k ăn 2.48)
             else if (memoClean === 'C') {
               isValidSyntax = true;
               isWin = [2, 4, 6, 8].includes(lastDigit);
-              rate = 2.4;
-              calcExplain = `Số cuối: [${lastDigit}] [Chẵn]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Số cuối: [${lastDigit}] [Chẵn] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'L') {
               isValidSyntax = true;
               isWin = [1, 3, 5, 7].includes(lastDigit);
-              rate = 2.4;
-              calcExplain = `Số cuối: [${lastDigit}] [Lẻ]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Số cuối: [${lastDigit}] [Lẻ] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'T') {
               isValidSyntax = true;
               isWin = [5, 6, 7, 8].includes(lastDigit);
-              rate = 2.4;
-              calcExplain = `Số cuối: [${lastDigit}] [Tài]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Số cuối: [${lastDigit}] [Tài] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'X') {
               isValidSyntax = true;
               isWin = [1, 2, 3, 4].includes(lastDigit);
-              rate = 2.4;
-              calcExplain = `Số cuối: [${lastDigit}] [Xỉu]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Số cuối: [${lastDigit}] [Xỉu] (Tỉ lệ x${rate})`;
             }
             // 5. ĐOÁN SỐ (0 đến 9)
             else if (/^[0-9]$/.test(memoClean)) {
@@ -572,23 +572,23 @@
             } else if (memoClean === 'C3') {
               isValidSyntax = true;
               isWin = (sumLast3 % 2 === 0);
-              rate = 2.4;
-              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Chẵn 3]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Chẵn 3] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'L3') {
               isValidSyntax = true;
               isWin = (sumLast3 % 2 !== 0);
-              rate = 2.4;
-              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Lẻ 3]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Lẻ 3] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'T3') {
               isValidSyntax = true;
               isWin = (sumLast3 >= 14);
-              rate = 2.4;
-              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Tài 3]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Tài 3] (Tỉ lệ x${rate})`;
             } else if (memoClean === 'X3') {
               isValidSyntax = true;
               isWin = (sumLast3 < 14);
-              rate = 2.4;
-              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Xỉu 3]`;
+              rate = phoneState.amount < 50000 ? 2.68 : 2.48;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Xỉu 3] (Tỉ lệ x${rate})`;
             }
           }
 

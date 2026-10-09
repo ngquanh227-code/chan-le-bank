@@ -43,13 +43,15 @@
         colHeader: 'Số cuối',
         rulesType: 'last1',
         rows: [
-          { syntax: 'Dungdz C', name: 'Chẵn', memo: 'Dungdz C', numbers: [2, 4, 6, 8], rate: 2.4, rateLabel: 'x 2.4' },
-          { syntax: 'Dungdz L', name: 'Lẻ', memo: 'Dungdz L', numbers: [1, 3, 5, 7], rate: 2.4, rateLabel: 'x 2.4' },
-          { syntax: 'Dungdz T', name: 'Tài', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.4, rateLabel: 'x 2.4' },
-          { syntax: 'Dungdz X', name: 'Xỉu', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.4, rateLabel: 'x 2.4' }
+          { syntax: 'Dungdz C', name: 'Chẵn', memo: 'Dungdz C', numbers: [2, 4, 6, 8], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' },
+          { syntax: 'Dungdz L', name: 'Lẻ', memo: 'Dungdz L', numbers: [1, 3, 5, 7], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' },
+          { syntax: 'Dungdz T', name: 'Tài', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' },
+          { syntax: 'Dungdz X', name: 'Xỉu', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' }
         ],
         notes: [
-          'Kết quả dự theo <em>Số cuối</em> của mã ID/Trace.',
+          'Tiền cược <em>dưới 50K</em>: tỉ lệ <em>x 2.68</em>.',
+          'Tiền cược <em>từ 50K trở lên</em>: tỉ lệ <em>x 2.48</em>.',
+          'Kết quả dựa theo <em>Số cuối</em> của mã ID/Trace.',
           'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
         ]
       },
@@ -60,11 +62,13 @@
         colHeader: 'Số cuối',
         rulesType: 'last1',
         rows: [
-          { syntax: 'Dungdz T', name: 'Tài', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.4, rateLabel: 'x 2.4' },
-          { syntax: 'Dungdz X', name: 'Xỉu', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.4, rateLabel: 'x 2.4' }
+          { syntax: 'Dungdz T', name: 'Tài', memo: 'Dungdz T', numbers: [5, 6, 7, 8], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' },
+          { syntax: 'Dungdz X', name: 'Xỉu', memo: 'Dungdz X', numbers: [1, 2, 3, 4], rate: 2.68, rateLabel: '<50k: x2.68 | ≥50k: x2.48' }
         ],
         notes: [
-          'Kết quả dự theo <em>Số cuối</em> của mã ID/Trace.',
+          'Tiền cược <em>dưới 50K</em>: tỉ lệ <em>x 2.68</em>.',
+          'Tiền cược <em>từ 50K trở lên</em>: tỉ lệ <em>x 2.48</em>.',
+          'Kết quả dựa theo <em>Số cuối</em> của mã ID/Trace.',
           'Khách hàng chơi có <em>10% tỉ lệ thanh toán 2 lần!</em>'
         ]
       },
@@ -91,14 +95,15 @@
         colHeader: 'Tổng 2 số cuối',
         rulesType: 'sum2',
         rows: [
-          { syntax: 'Dungdz CX', name: 'Chẵn Xỉu', memo: 'Dungdz CX', numbers: [0, 2, 4], rate: 3.0, rateLabel: 'x 3' },
-          { syntax: 'Dungdz LT', name: 'Lẻ Tài', memo: 'Dungdz LT', numbers: [5, 7, 9], rate: 3.0, rateLabel: 'x 3' },
+          { syntax: 'Dungdz CX', name: 'Chẵn Xỉu', memo: 'Dungdz CX', numbers: [0, 2, 4], rate: 3.5, rateLabel: 'x 3.5' },
+          { syntax: 'Dungdz LT', name: 'Lẻ Tài', memo: 'Dungdz LT', numbers: [5, 7, 9], rate: 3.5, rateLabel: 'x 3.5' },
           { syntax: 'Dungdz CT', name: 'Chẵn Tài', memo: 'Dungdz CT', numbers: [6, 8], rate: 3.5, rateLabel: 'x 3.5' },
           { syntax: 'Dungdz LX', name: 'Lẻ Xỉu', memo: 'Dungdz LX', numbers: [1, 3], rate: 3.5, rateLabel: 'x 3.5' }
         ],
         notes: [
           'Chẵn Xỉu: 0, 2, 4 • Lẻ Tài: 5, 7, 9',
           'Chẵn Tài: 6, 8 • Lẻ Xỉu: 1, 3',
+          'Tỉ lệ trả thưởng: <em>x 3.5 lần</em> tiền cược cho tất cả các cửa Xiên.',
           'Kết quả dựa vào <em>Tổng 2 số cuối</em> của mã giao dịch.'
         ]
       },
