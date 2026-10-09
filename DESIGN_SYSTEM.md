@@ -22,7 +22,7 @@
   - Dòng chữ: **GIAO DỊCH THÀNH CÔNG**.
   - Số tiền trừ lớn màu đen đậm: `- 50,000 VND`.
   - Các trường thông tin rõ ràng:
-    - *Tài khoản trích nợ:* `0971266012 (NGUYEN THAO LINH)`
+    - *Tài khoản trích nợ:* `0888999888 (NGUYEN TUAN DUNG)`
     - *Tài khoản thụ hưởng:* `0644888866`
     - *Tên người thụ hưởng:* `NGUYEN VAN PHONG`
     - *Ngân hàng thụ hưởng:* `MB - NGÂN HÀNG QUÂN ĐỘI`
@@ -35,6 +35,6 @@
 
 ### 1.4 Hiệu Ứng Trả Thưởng Tự Động Trong 3.5 Giây
 - Sau 3.5 giây, thanh thông báo Dynamic Island trên đỉnh điện thoại trượt xuống kèm tiếng chuông ting ting:
-  *🔔 MBBank Biến động số dư: TK 0971266012 +120,000 VND lúc 01:09. ND: TRUM.TOP TRA THUONG GD FT26281903824*
+  *🔔 MBBank Biến động số dư: TK 08xxx888 +120,000 VND lúc 01:09. ND: NGUYEN TUAN DUNG chuyen tien tra thuong*
 - Số dư tài khoản trong điện thoại được cộng ngay lập tức.
 - Trên trang web chính, một dòng lịch sử cược mới lập tức được chèn vào đầu bảng **LỊCH SỬ CHƠI**.

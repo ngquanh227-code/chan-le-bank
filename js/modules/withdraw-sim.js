@@ -28,8 +28,8 @@
     const btnDoWithdraw = document.getElementById('btn-do-quick-withdraw');
     const modalWithdrawReceipt = document.getElementById('modal-withdraw-receipt');
 
-    const stk = inputStk ? inputStk.value.trim() : '0971266012';
-    const name = inputName ? inputName.value.trim() : 'NGUYEN THAO LINH';
+    const stk = inputStk ? inputStk.value.trim() : '0888999888';
+    const name = inputName ? inputName.value.trim() : 'NGUYEN TUAN DUNG';
     const bankCode = selectBank ? selectBank.value : 'MB';
     const bankText = selectBank && selectBank.options[selectBank.selectedIndex] 
       ? selectBank.options[selectBank.selectedIndex].text 
@@ -100,7 +100,7 @@
       // Drop notification in simulated phone
       if (window.CLB.phone) {
         const notiDate = window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
-        const maskedStk = stk.length > 5 ? `${stk.slice(0, 2)}xxx${stk.slice(-3)}` : (stk || '09xxx081');
+        const maskedStk = stk.length > 5 ? `${stk.slice(0, 2)}xxx${stk.slice(-3)}` : (stk || '08xxx888');
         window.CLB.phone.triggerPhoneNotification({
           title: 'Thông báo biến động số dư',
           time: 'Vừa xong',

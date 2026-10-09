@@ -150,7 +150,7 @@
 
     if (btnContactDung) {
       btnContactDung.addEventListener('click', () => {
-        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0916508081', bank: 'MBBank (MB)' });
+        updateRecipientUI({ name: 'NGUYEN TUAN DUNG', stk: '0888999888', bank: 'MBBank (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
@@ -158,7 +158,7 @@
 
     if (btnContactFather) {
       btnContactFather.addEventListener('click', () => {
-        updateRecipientUI({ name: 'FATHER', stk: '5130065858', bank: 'BIDV' });
+        updateRecipientUI({ name: 'FATHER', stk: '0999888777', bank: 'BIDV' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
@@ -166,7 +166,7 @@
 
     if (btnContactHung) {
       btnContactHung.addEventListener('click', () => {
-        updateRecipientUI({ name: 'DANG DUY HUNG', stk: '0399152836', bank: 'MBBank (MB)' });
+        updateRecipientUI({ name: 'DANG DUY HUNG', stk: '0977888999', bank: 'MBBank (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
@@ -174,7 +174,7 @@
 
     if (btnContactLuong2) {
       btnContactLuong2.addEventListener('click', () => {
-        updateRecipientUI({ name: 'LUONG 2', stk: '8825423642', bank: 'BIDV' });
+        updateRecipientUI({ name: 'LUONG 2', stk: '8888666888', bank: 'BIDV' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
@@ -335,7 +335,7 @@
             type: 'topup',
             title: 'Thông báo biến động số dư',
             time: 'Vừa xong',
-            body: `TK 09xxx081|GD: +10,000,000VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: MBBank khoi phuc so du goc`,
+            body: `TK 08xxx888|GD: +10,000,000VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: MBBank khoi phuc so du goc`,
             duration: 4500
           });
         } else {
@@ -347,7 +347,7 @@
               type: 'topup',
               title: 'Thông báo biến động số dư',
               time: 'Vừa xong',
-              body: `TK 09xxx081|GD: +${formatMoney(addAmount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Nguon tien MBBank nap vao`,
+              body: `TK 08xxx888|GD: +${formatMoney(addAmount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Nguon tien MBBank nap vao`,
               duration: 4500
             });
           }
@@ -380,7 +380,7 @@
               type: 'topup',
               title: 'Thông báo biến động số dư',
               time: 'Vừa xong',
-              body: `TK 09xxx081|GD: Cap nhat ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Thiet lap so du tuy chinh`,
+              body: `TK 08xxx888|GD: Cap nhat ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Thiet lap so du tuy chinh`,
               duration: 4500
             });
             if (window.CLB.audio) {
@@ -636,7 +636,7 @@
           if (receiptTxEl) receiptTxEl.textContent = fullTxCode;
           if (receiptDigitEl) receiptDigitEl.textContent = isSumGame ? sumLast2 : lastDigit;
           if (receiptTailEl) receiptTailEl.textContent = isSumGame ? `${secondLastDigit}+${lastDigit}=${sumLast2}` : lastDigit;
-          if (receiptRecipientStk) receiptRecipientStk.textContent = phoneState.recipient ? phoneState.recipient.stk : '0962714685';
+          if (receiptRecipientStk) receiptRecipientStk.textContent = phoneState.recipient ? phoneState.recipient.stk : '0644888866';
           if (receiptRecipientName) receiptRecipientName.textContent = phoneState.recipient ? phoneState.recipient.name : 'NGUYEN VAN PHONG';
 
           if (receiptMatchEl) {
@@ -663,7 +663,7 @@
             type: 'debit',
             title: 'Thông báo biến động số dư',
             time: 'Vừa xong',
-            body: `TK 09xxx081|GD: -${formatMoney(phoneState.amount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien ${phoneState.memo}`,
+            body: `TK 08xxx888|GD: -${formatMoney(phoneState.amount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien ${phoneState.memo}`,
             duration: 4500
           });
 
@@ -701,7 +701,7 @@
                 type: 'credit',
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
-                body: `TK 09xxx081|GD: +${formatMoney(payoutAmount)}VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien tra thuong ${memoClean}`,
+                body: `TK 08xxx888|GD: +${formatMoney(payoutAmount)}VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien tra thuong ${memoClean}`,
                 duration: 6000
               });
 
@@ -713,7 +713,7 @@
                 type: 'debit',
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
-                body: `TK 09xxx081|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Sai cu phap (${phoneState.memo}) khong tra thuong`,
+                body: `TK 08xxx888|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Sai cu phap (${phoneState.memo}) khong tra thuong`,
                 duration: 4500
               });
               if (window.CLB.audio) window.CLB.audio.playChime(false);
@@ -724,7 +724,7 @@
                 type: 'lose',
                 title: 'Thông báo biến động số dư',
                 time: 'Vừa xong',
-                body: `TK 09xxx081|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Khong trung thuong (${lastDigit} khac ${memoClean})`,
+                body: `TK 08xxx888|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Khong trung thuong (${lastDigit} khac ${memoClean})`,
                 duration: 4500
               });
 

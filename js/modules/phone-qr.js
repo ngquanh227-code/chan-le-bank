@@ -33,7 +33,7 @@
     const initialMemo = config.memo ? (/^dungdz\s+/i.test(config.memo) ? config.memo : `Dungdz ${config.memo}`) : 'Dungdz TC';
 
     if (recNameEl) recNameEl.textContent = config.owner || 'NGUYEN QUANG ANH';
-    if (recStkEl) recStkEl.textContent = config.accountNumber || '0962714685';
+    if (recStkEl) recStkEl.textContent = config.accountNumber || '0644888866';
     if (recBankLabel) recBankLabel.textContent = 'Quân đội (MB)';
     if (memoInput) memoInput.innerText = initialMemo;
     if (memoDisplay) memoDisplay.textContent = initialMemo;
