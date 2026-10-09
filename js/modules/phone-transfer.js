@@ -34,6 +34,8 @@
       else if (modeKey === 'doanso') defaultSyntax = 'Dungdz 0';
       else if (modeKey === 'tong3') defaultSyntax = 'Dungdz S1';
       else defaultSyntax = 'Dungdz TC';
+    } else if (!/^dungdz\s+/i.test(defaultSyntax)) {
+      defaultSyntax = `Dungdz ${defaultSyntax}`;
     }
 
     phoneState.memo = defaultSyntax;
@@ -101,14 +103,45 @@
       });
     }
 
-    // 1. Direct Manual Memo Typing by User
+    function setCursorAtEnd(el) {
+      if (!el) return;
+      try {
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } catch (e) {}
+    }
+
+    // 1. Direct Manual Memo Typing by User with persistent "Dungdz " prefix
     const memoInput = document.getElementById('phone-memo-input');
     if (memoInput) {
+      memoInput.addEventListener('focus', () => {
+        let current = (memoInput.innerText || memoInput.textContent || '').trim();
+        if (!current || !/^dungdz/i.test(current)) {
+          const suffix = current.replace(/^dungdz\s*/i, '').trim();
+          const val = suffix ? `Dungdz ${suffix}` : 'Dungdz ';
+          memoInput.innerText = val;
+          phoneState.memo = val;
+        }
+        setCursorAtEnd(memoInput);
+      });
+
       memoInput.addEventListener('input', () => {
-        phoneState.memo = (memoInput.innerText || memoInput.textContent || '').trim();
+        let current = memoInput.innerText || memoInput.textContent || '';
+        if (!current.trim() || !/^dungdz/i.test(current.trim())) {
+          const suffix = current.replace(/^dungdz\s*/i, '').trim();
+          current = suffix ? `Dungdz ${suffix}` : 'Dungdz ';
+          memoInput.innerText = current;
+          setCursorAtEnd(memoInput);
+        }
+        phoneState.memo = current.trim();
         const disp = document.getElementById('phone-memo-display');
         if (disp) disp.textContent = phoneState.memo;
       });
+
       memoInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -117,16 +150,17 @@
       });
     }
 
-    // 2. Clear Memo Button
+    // 2. Clear Memo Button: Resets to "Dungdz " ready for user to type just the door code
     if (btnClearMemo) {
       btnClearMemo.addEventListener('click', () => {
-        phoneState.memo = '';
+        phoneState.memo = 'Dungdz ';
         if (memoInput) {
-          memoInput.innerText = '';
+          memoInput.innerText = 'Dungdz ';
           memoInput.focus();
+          setCursorAtEnd(memoInput);
         }
         const disp = document.getElementById('phone-memo-display');
-        if (disp) disp.textContent = '';
+        if (disp) disp.textContent = 'Dungdz ';
         if (window.CLB.audio) window.CLB.audio.playTone(400, 'sine', 0.05);
       });
     }
@@ -263,9 +297,13 @@
           if (currentTyped) phoneState.memo = currentTyped;
         }
 
-        if (!phoneState.memo) {
-          if (window.CLB.toast) window.CLB.toast.showToast('Vui lòng nhập nội dung chuyển tiền (cửa cược)!', 'warning');
-          if (memoInput) memoInput.focus();
+        const rawMemo = (phoneState.memo || '').trim();
+        if (!rawMemo || /^dungdz\s*$/i.test(rawMemo)) {
+          if (window.CLB.toast) window.CLB.toast.showToast('Vui lòng nhập cửa cược sau Dungdz (VD: Dungdz T, Dungdz X, Dungdz TT, Dungdz TC, ...)!', 'warning');
+          if (memoInput) {
+            memoInput.focus();
+            setCursorAtEnd(memoInput);
+          }
           return;
         }
 
@@ -300,116 +338,151 @@
           const sumLast2 = (lastDigit + secondLastDigit) % 10;
           const sumLast3 = lastDigit + secondLastDigit + thirdLastDigit;
 
-          // Determine WIN / LOSE based on player's chosen memo
+          // Determine WIN / LOSE strictly requiring prefix "Dungdz" + valid door key
           let isWin = false;
           let rate = 1.95;
           let calcExplain = '';
-          const memoClean = (phoneState.memo || '').toUpperCase().replace(/^DUNGDZ\s+/, '').trim();
+          let isValidSyntax = false;
 
-          // 1. CLTX+2 (Cộng 2 số cuối: TC, TL, TT, TX)
-          if (memoClean === 'TC') {
-            isWin = [0, 2, 4, 6, 8].includes(sumLast2);
-            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Chẵn]`;
-          } else if (memoClean === 'TL') {
-            isWin = [1, 3, 5, 7, 9].includes(sumLast2);
-            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Lẻ]`;
-          } else if (memoClean === 'TT') {
-            isWin = [5, 6, 7, 8, 9].includes(sumLast2);
-            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Tài]`;
-          } else if (memoClean === 'TX') {
-            isWin = [0, 1, 2, 3, 4].includes(sumLast2);
-            rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Xỉu]`;
+          const hasDungdzPrefix = /^dungdz\s+/i.test(rawMemo);
+          const memoClean = hasDungdzPrefix ? rawMemo.replace(/^dungdz\s+/i, '').trim().toUpperCase() : '';
+
+          if (hasDungdzPrefix && memoClean) {
+            // 1. CLTX+2 (Cộng 2 số cuối: TC, TL, TT, TX)
+            if (memoClean === 'TC') {
+              isValidSyntax = true;
+              isWin = [0, 2, 4, 6, 8].includes(sumLast2);
+              rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Chẵn]`;
+            } else if (memoClean === 'TL') {
+              isValidSyntax = true;
+              isWin = [1, 3, 5, 7, 9].includes(sumLast2);
+              rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Lẻ]`;
+            } else if (memoClean === 'TT') {
+              isValidSyntax = true;
+              isWin = [5, 6, 7, 8, 9].includes(sumLast2);
+              rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Tài]`;
+            } else if (memoClean === 'TX') {
+              isValidSyntax = true;
+              isWin = [0, 1, 2, 3, 4].includes(sumLast2);
+              rate = phoneState.amount >= 1000000 ? 1.85 : (phoneState.amount >= 50000 ? 1.90 : 1.95);
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) [Xỉu]`;
+            }
+            // 2. 1 PHẦN 3 (N1, N2, N3)
+            else if (memoClean === 'N1') {
+              isValidSyntax = true;
+              isWin = [1, 5, 7].includes(lastDigit);
+              rate = 3.0;
+              calcExplain = `Số cuối: [${lastDigit}] khớp N1 (1, 5, 7)`;
+            } else if (memoClean === 'N2') {
+              isValidSyntax = true;
+              isWin = [2, 4, 8].includes(lastDigit);
+              rate = 3.0;
+              calcExplain = `Số cuối: [${lastDigit}] khớp N2 (2, 4, 8)`;
+            } else if (memoClean === 'N3') {
+              isValidSyntax = true;
+              isWin = [3, 6, 9].includes(lastDigit);
+              rate = 3.0;
+              calcExplain = `Số cuối: [${lastDigit}] khớp N3 (3, 6, 9)`;
+            }
+            // 3. XIÊN SỐ (Tổng 2 số cuối: CX, LT, CT, LX)
+            else if (memoClean === 'CX') {
+              isValidSyntax = true;
+              isWin = [0, 2, 4].includes(sumLast2);
+              rate = 3.0;
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CX (0, 2, 4)`;
+            } else if (memoClean === 'LT') {
+              isValidSyntax = true;
+              isWin = [5, 7, 9].includes(sumLast2);
+              rate = 3.0;
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LT (5, 7, 9)`;
+            } else if (memoClean === 'CT') {
+              isValidSyntax = true;
+              isWin = [6, 8].includes(sumLast2);
+              rate = 3.5;
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CT (6, 8)`;
+            } else if (memoClean === 'LX') {
+              isValidSyntax = true;
+              isWin = [1, 3].includes(sumLast2);
+              rate = 3.5;
+              calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LX (1, 3)`;
+            }
+            // 4. CLTX & TÀI XỈU (Số cuối: C, L, T, X)
+            else if (memoClean === 'C') {
+              isValidSyntax = true;
+              isWin = [2, 4, 6, 8].includes(lastDigit);
+              rate = 2.4;
+              calcExplain = `Số cuối: [${lastDigit}] [Chẵn]`;
+            } else if (memoClean === 'L') {
+              isValidSyntax = true;
+              isWin = [1, 3, 5, 7].includes(lastDigit);
+              rate = 2.4;
+              calcExplain = `Số cuối: [${lastDigit}] [Lẻ]`;
+            } else if (memoClean === 'T') {
+              isValidSyntax = true;
+              isWin = [5, 6, 7, 8].includes(lastDigit);
+              rate = 2.4;
+              calcExplain = `Số cuối: [${lastDigit}] [Tài]`;
+            } else if (memoClean === 'X') {
+              isValidSyntax = true;
+              isWin = [1, 2, 3, 4].includes(lastDigit);
+              rate = 2.4;
+              calcExplain = `Số cuối: [${lastDigit}] [Xỉu]`;
+            }
+            // 5. ĐOÁN SỐ (0 đến 9)
+            else if (/^[0-9]$/.test(memoClean)) {
+              isValidSyntax = true;
+              const betDigit = parseInt(memoClean, 10);
+              isWin = (lastDigit === betDigit);
+              rate = 7.0;
+              calcExplain = `Số cuối: [${lastDigit}] ${isWin ? 'trùng số đoán' : 'không khớp số đoán'} [${betDigit}]`;
+            }
+            // 6. TỔNG 3 SỐ CUỐI (S1, S2, S3, C3, L3, T3, X3)
+            else if (memoClean === 'S1') {
+              isValidSyntax = true;
+              isWin = (sumLast3 >= 1 && sumLast3 <= 9);
+              rate = 3.5;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S1: 1-9)`;
+            } else if (memoClean === 'S2') {
+              isValidSyntax = true;
+              isWin = (sumLast3 >= 10 && sumLast3 <= 18);
+              rate = 3.5;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S2: 10-18)`;
+            } else if (memoClean === 'S3') {
+              isValidSyntax = true;
+              isWin = (sumLast3 >= 19 && sumLast3 <= 27);
+              rate = 3.5;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S3: 19-27)`;
+            } else if (memoClean === 'C3') {
+              isValidSyntax = true;
+              isWin = (sumLast3 % 2 === 0);
+              rate = 2.4;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Chẵn 3]`;
+            } else if (memoClean === 'L3') {
+              isValidSyntax = true;
+              isWin = (sumLast3 % 2 !== 0);
+              rate = 2.4;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Lẻ 3]`;
+            } else if (memoClean === 'T3') {
+              isValidSyntax = true;
+              isWin = (sumLast3 >= 14);
+              rate = 2.4;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Tài 3]`;
+            } else if (memoClean === 'X3') {
+              isValidSyntax = true;
+              isWin = (sumLast3 < 14);
+              rate = 2.4;
+              calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Xỉu 3]`;
+            }
           }
-          // 2. 1 PHẦN 3 (N1, N2, N3)
-          else if (memoClean === 'N1') {
-            isWin = [1, 5, 7].includes(lastDigit);
-            rate = 3.0;
-            calcExplain = `Số cuối: [${lastDigit}] khớp N1 (1, 5, 7)`;
-          } else if (memoClean === 'N2') {
-            isWin = [2, 4, 8].includes(lastDigit);
-            rate = 3.0;
-            calcExplain = `Số cuối: [${lastDigit}] khớp N2 (2, 4, 8)`;
-          } else if (memoClean === 'N3') {
-            isWin = [3, 6, 9].includes(lastDigit);
-            rate = 3.0;
-            calcExplain = `Số cuối: [${lastDigit}] khớp N3 (3, 6, 9)`;
-          }
-          // 3. XIÊN SỐ (Tổng 2 số cuối: CX, LT, CT, LX)
-          else if (memoClean === 'CX') {
-            isWin = [0, 2, 4].includes(sumLast2);
-            rate = 3.0;
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CX (0, 2, 4)`;
-          } else if (memoClean === 'LT') {
-            isWin = [5, 7, 9].includes(sumLast2);
-            rate = 3.0;
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LT (5, 7, 9)`;
-          } else if (memoClean === 'CT') {
-            isWin = [6, 8].includes(sumLast2);
-            rate = 3.5;
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp CT (6, 8)`;
-          } else if (memoClean === 'LX') {
-            isWin = [1, 3].includes(sumLast2);
-            rate = 3.5;
-            calcExplain = `Tổng 2 số cuối: ${secondLastDigit}+${lastDigit}=${secondLastDigit + lastDigit} (Đuôi: ${sumLast2}) khớp LX (1, 3)`;
-          }
-          // 4. CLTX & TÀI XỈU (Số cuối: C, L, T, X)
-          else if (memoClean === 'C') {
-            isWin = [2, 4, 6, 8].includes(lastDigit);
-            rate = 2.4;
-            calcExplain = `Số cuối: [${lastDigit}] [Chẵn]`;
-          } else if (memoClean === 'L') {
-            isWin = [1, 3, 5, 7].includes(lastDigit);
-            rate = 2.4;
-            calcExplain = `Số cuối: [${lastDigit}] [Lẻ]`;
-          } else if (memoClean === 'T') {
-            isWin = [5, 6, 7, 8].includes(lastDigit);
-            rate = 2.4;
-            calcExplain = `Số cuối: [${lastDigit}] [Tài]`;
-          } else if (memoClean === 'X') {
-            isWin = [1, 2, 3, 4].includes(lastDigit);
-            rate = 2.4;
-            calcExplain = `Số cuối: [${lastDigit}] [Xỉu]`;
-          }
-          // 5. ĐOÁN SỐ (0 đến 9)
-          else if (/^[0-9]$/.test(memoClean)) {
-            const betDigit = parseInt(memoClean, 10);
-            isWin = (lastDigit === betDigit);
-            rate = 7.0;
-            calcExplain = `Số cuối: [${lastDigit}] ${isWin ? 'trùng số đoán' : 'không khớp số đoán'} [${betDigit}]`;
-          }
-          // 6. TỔNG 3 SỐ CUỐI (S1, S2, S3, C3, L3, T3, X3)
-          else if (memoClean === 'S1') {
-            isWin = (sumLast3 >= 1 && sumLast3 <= 9);
-            rate = 3.5;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S1: 1-9)`;
-          } else if (memoClean === 'S2') {
-            isWin = (sumLast3 >= 10 && sumLast3 <= 18);
-            rate = 3.5;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S2: 10-18)`;
-          } else if (memoClean === 'S3') {
-            isWin = (sumLast3 >= 19 && sumLast3 <= 27);
-            rate = 3.5;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} (Nhóm S3: 19-27)`;
-          } else if (memoClean === 'C3') {
-            isWin = (sumLast3 % 2 === 0);
-            rate = 2.4;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Chẵn 3]`;
-          } else if (memoClean === 'L3') {
-            isWin = (sumLast3 % 2 !== 0);
-            rate = 2.4;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Lẻ 3]`;
-          } else if (memoClean === 'T3') {
-            isWin = (sumLast3 >= 14);
-            rate = 2.4;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Tài 3]`;
-          } else if (memoClean === 'X3') {
-            isWin = (sumLast3 < 14);
-            rate = 2.4;
-            calcExplain = `Tổng 3 số cuối: ${thirdLastDigit}+${secondLastDigit}+${lastDigit}=${sumLast3} [Xỉu 3]`;
+
+          if (!isValidSyntax) {
+            isWin = false;
+            calcExplain = hasDungdzPrefix
+              ? `Cửa cược '${memoClean || 'trống'}' không có trong quy định`
+              : `Thiếu tiền tố 'Dungdz' (VD: Dungdz T, Dungdz X, Dungdz TT, ...)`;
           }
 
           // 10% Chance of Double Payment (Thanh toán 2 lần!)
@@ -451,7 +524,10 @@
           if (receiptRecipientName) receiptRecipientName.textContent = phoneState.recipient ? phoneState.recipient.name : 'NGUYEN VAN PHONG';
 
           if (receiptMatchEl) {
-            if (isWin) {
+            if (!isValidSyntax) {
+              receiptMatchEl.style.color = '#dc2626';
+              receiptMatchEl.textContent = `SAI CÚ PHÁP: ${calcExplain} ➔ KHÔNG TRẢ THƯỞNG`;
+            } else if (isWin) {
               receiptMatchEl.style.color = '#15803d';
               receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2!]' : ''}`;
             } else {
@@ -465,12 +541,12 @@
 
           if (window.CLB.audio) window.CLB.audio.playTone(400, 'sine', 0.1);
 
-          // Trigger Immediate Debit Notification
+          // Trigger Immediate Debit Notification (Compact iOS Style)
           triggerPhoneNotification({
             type: 'debit',
-            iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #dc2626;"></i>',
-            title: `<span style="color: #dc2626; font-weight: 800;">MBBank Biến động số dư (-${phoneState.amount.toLocaleString('vi-VN')} VND)</span>`,
-            body: `TK 0971266012 | GD: -${phoneState.amount.toLocaleString('vi-VN')} VND lúc ${timeShortTx} | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: ${phoneState.memo} GD ${fullTxCode}`,
+            iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #ffffff;"></i>',
+            title: `<span style="color: #dc2626; font-weight: 700;">MBBank: -${phoneState.amount.toLocaleString('vi-VN')} VND</span>`,
+            body: `TK 0971266012 | ND: ${phoneState.memo} | Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`,
             duration: 3200
           });
 
@@ -481,13 +557,13 @@
             newRow.style.backgroundColor = isWin ? 'rgba(40, 167, 69, 0.25)' : 'rgba(220, 53, 69, 0.15)';
             newRow.style.transition = 'background-color 1.5s ease';
 
-            const gameTag = ['C', 'L', 'C2', 'L2'].includes(phoneState.memo) ? 'CL' : 'TX';
+            const gameTag = ['C', 'L', 'C2', 'L2'].includes(memoClean) ? 'CL' : 'TX';
             newRow.innerHTML = `
               <td><span class="badge-game-mode">${gameTag}</span></td>
               <td><span class="badge-bet-choice">${phoneState.memo}</span></td>
               <td>${phoneState.amount.toLocaleString('vi-VN')}</td>
               <td><strong style="color: ${isWin ? '#4ade80' : '#888'};">${isWin ? payoutAmount.toLocaleString('vi-VN') : '0'}</strong></td>
-              <td><span class="${isWin ? 'badge-result-win' : 'badge-result-lose'}">${isWin ? 'WIN' : 'LOSE'}</span></td>
+              <td><span class="${isWin ? 'badge-result-win' : (isValidSyntax ? 'badge-result-lose' : 'badge-result-lose')}">${isWin ? 'WIN' : (isValidSyntax ? 'LOSE' : 'SAI ND')}</span></td>
               <td><code>***${fullTxCode.slice(-4)}</code></td>
               <td><span class="badge-tail-digit">${lastDigit}</span></td>
               <td>${formatTimeNow()}</td>
@@ -502,33 +578,40 @@
               phoneState.balance += payoutAmount;
               syncBalanceUI();
 
-              const nowWin = new Date();
-              const timeShortWin = `${String(nowWin.getHours()).padStart(2, '0')}:${String(nowWin.getMinutes()).padStart(2, '0')}`;
-
+              // Compact iOS Credit Notification
               triggerPhoneNotification({
                 type: 'credit',
-                iconHtml: '<i class="fa-solid fa-circle-check" style="color: #16a34a;"></i>',
-                title: `<span style="color: #15803d; font-weight: 800;">MBBank Biến động số dư (+${payoutAmount.toLocaleString('vi-VN')} VND)</span>`,
-                body: `TK 0971266012 | GD: +${payoutAmount.toLocaleString('vi-VN')} VND lúc ${timeShortWin} | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: TRUM.TOP TRA THUONG GD ${fullTxCode}`,
+                iconHtml: '<i class="fa-solid fa-check" style="color: #ffffff;"></i>',
+                title: `<span style="color: #15803d; font-weight: 700;">MBBank: +${payoutAmount.toLocaleString('vi-VN')} VND</span>`,
+                body: `TK 0971266012 | Trả thưởng 5s | Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`,
                 duration: 5000
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(true);
-              if (window.CLB.toast) window.CLB.toast.showToast(`🎉 Trúng thưởng +${payoutAmount.toLocaleString('vi-VN')}đ đã thanh toán 5s! Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`, 'success');
+              if (window.CLB.toast) window.CLB.toast.showToast(`🎉 Trúng thưởng +${payoutAmount.toLocaleString('vi-VN')}đ đã thanh toán 5s!`, 'success');
+            } else if (!isValidSyntax) {
+              // Notification when syntax is wrong
+              triggerPhoneNotification({
+                type: 'debit',
+                iconHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>',
+                title: `<span style="color: #d97706; font-weight: 700;">Cảnh báo: Sai cú pháp</span>`,
+                body: `ND "${phoneState.memo}" sai cú pháp (Cần: Dungdz + T, X, TT, ...). Không trả thưởng.`,
+                duration: 4500
+              });
+              if (window.CLB.audio) window.CLB.audio.playChime(false);
+              if (window.CLB.toast) window.CLB.toast.showToast(`Nội dung "${phoneState.memo}" sai cú pháp! Hệ thống không chuyển tiền lại.`, 'warning');
             } else {
-              const nowLose = new Date();
-              const timeShortLose = `${String(nowLose.getHours()).padStart(2, '0')}:${String(nowLose.getMinutes()).padStart(2, '0')}`;
-
+              // Normal lose
               triggerPhoneNotification({
                 type: 'lose',
-                iconHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #dc2626;"></i>',
-                title: `<span style="color: #dc2626; font-weight: 800;">TRUM.TOP Kết quả cược (Thua cược)</span>`,
-                body: `GD ${fullTxCode} số đuôi [${lastDigit}] không khớp cửa [${phoneState.memo}]. Mất: -${phoneState.amount.toLocaleString('vi-VN')} VND | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong>`,
-                duration: 5000
+                iconHtml: '<i class="fa-solid fa-xmark" style="color: #ffffff;"></i>',
+                title: `<span style="color: #dc2626; font-weight: 700;">TRUM.TOP: Không trúng thưởng</span>`,
+                body: `Số cuối ${lastDigit} không khớp ${memoClean} | Mất -${phoneState.amount.toLocaleString('vi-VN')}đ`,
+                duration: 4500
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(false);
-              if (window.CLB.toast) window.CLB.toast.showToast(`❌ Thua cược! Số cuối ${lastDigit} không khớp ${phoneState.memo} (-${phoneState.amount.toLocaleString('vi-VN')}đ) | Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`, 'danger');
+              if (window.CLB.toast) window.CLB.toast.showToast(`❌ Thua cược! Số cuối ${lastDigit} không khớp ${phoneState.memo} (-${phoneState.amount.toLocaleString('vi-VN')}đ)`, 'danger');
             }
           }, 3500);
 

@@ -335,14 +335,15 @@ a,
   .phone-payout-toast {
     left: 8px;
     right: 8px;
-    top: 36px;
-    padding: 8px 10px;
+    top: 12px;
+    padding: 6px 8px;
     font-size: 11px;
-    transform: translateY(-80px) scale(0.96);
+    max-height: 48px;
+    transform: translateY(-60px) scale(0.96);
   }
 
   .phone-payout-toast.show {
-    top: 36px;
+    top: 12px;
     transform: translateY(0) scale(1);
   }
 

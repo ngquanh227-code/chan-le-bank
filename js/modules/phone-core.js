@@ -197,18 +197,29 @@
   }
 
   function setPhoneBetChoice(syntax, catKey, label) {
-    phoneState.memo = syntax;
+    const fullMemo = /^dungdz\s+/i.test(syntax) ? syntax : `Dungdz ${syntax}`;
+    phoneState.memo = fullMemo;
     phoneState.gameCategory = catKey;
     const memoInput = document.getElementById('phone-memo-input');
     if (memoInput) {
-      memoInput.innerText = syntax;
+      memoInput.innerText = fullMemo;
     }
     const memoDisp = document.getElementById('phone-memo-display');
-    if (memoDisp) memoDisp.textContent = `${syntax} (${label || syntax})`;
+    if (memoDisp) memoDisp.textContent = `${fullMemo} (${label || syntax})`;
 
     showPhoneScreen('form');
     if (memoInput) {
-      setTimeout(() => memoInput.focus(), 150);
+      setTimeout(() => {
+        memoInput.focus();
+        try {
+          const range = document.createRange();
+          const sel = window.getSelection();
+          range.selectNodeContents(memoInput);
+          range.collapse(false);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        } catch(e) {}
+      }, 150);
     }
   }
 

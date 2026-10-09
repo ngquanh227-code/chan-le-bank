@@ -30,7 +30,7 @@
     const recBankLabel = document.getElementById('phone-bank-name-label');
     const memoDisplay = document.getElementById('phone-memo-display');
     const memoInput = document.getElementById('phone-memo-input');
-    const initialMemo = config.memo || 'Dungdz TC';
+    const initialMemo = config.memo ? (/^dungdz\s+/i.test(config.memo) ? config.memo : `Dungdz ${config.memo}`) : 'Dungdz TC';
 
     if (recNameEl) recNameEl.textContent = config.owner || 'NGUYEN QUANG ANH';
     if (recStkEl) recStkEl.textContent = config.accountNumber || '0962714685';
