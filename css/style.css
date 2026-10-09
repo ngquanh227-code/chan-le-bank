@@ -7,6 +7,7 @@
   /* Typography Tokens */
   --font-family-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-family-ios: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Be Vietnam Pro', -apple-system-subheadline, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-size-base: 15px;
   --font-weight-base: 400;
   --font-line-height-base: 22px;
@@ -1283,17 +1284,17 @@ a:hover {
 
 /* Realistic Smartphone Frame (iPhone 16 Pro Style Titanium Finish) */
 .phone-chassis {
-  width: 360px;
+  height: min(840px, 92vh);
+  aspect-ratio: 473 / 1024;
+  width: auto;
   max-width: 95vw;
-  height: 720px;
-  max-height: 94vh;
-  background-color: #080d16;
-  border-radius: 46px;
-  border: 8px solid #334155;
+  background-color: #000000;
+  border-radius: 44px;
+  border: 7px solid #1e293b;
   box-shadow: 
     0 25px 70px rgba(0, 0, 0, 0.98),
     0 0 0 1px rgba(255, 255, 255, 0.25),
-    0 0 30px rgba(0, 102, 255, 0.25),
+    0 0 35px rgba(0, 102, 255, 0.25),
     inset 0 0 8px rgba(0, 0, 0, 0.95);
   display: flex;
   flex-direction: column;
@@ -1314,6 +1315,33 @@ a:hover {
   pointer-events: none;
   z-index: 95;
   border-radius: 38px 38px 0 0;
+}
+
+/* Phone Floating Close Button */
+.phone-floating-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.5px;
+  cursor: pointer;
+  z-index: 120;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.phone-floating-close:hover {
+  background: rgba(220, 38, 38, 0.9);
+  color: #ffffff;
+  transform: scale(1.08);
 }
 
 /* Dynamic Island */
@@ -1355,6 +1383,7 @@ a:hover {
   font-size: 11.5px;
   font-weight: 700;
   color: #ffffff;
+  font-family: var(--font-family-ios);
   z-index: 90;
 }
 
@@ -1371,8 +1400,191 @@ a:hover {
   flex-direction: column;
   background-color: #091322;
   color: #ffffff;
-  overflow-y: auto;
   position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Screen 1: MBBank Photographic Home / Balance Screen */
+.photo-home-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  display: none;
+  z-index: 10;
+  background: #081121;
+}
+
+.photo-home-screen.is-active {
+  display: block;
+}
+
+.photo-home-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-home-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.photo-home-clock {
+  position: absolute;
+  top: 2.2%;
+  left: 8.8%;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000000;
+  font-family: var(--font-family-ios);
+  letter-spacing: -0.3px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.photo-home-balance {
+  position: absolute;
+  top: 22.8%;
+  left: 39.5%;
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-ios);
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+  z-index: 15;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  user-select: none;
+}
+
+.photo-home-vnd {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.photo-home-eye-btn {
+  position: absolute;
+  top: 16.6%;
+  left: 81%;
+  width: 10.5%;
+  height: 3.6%;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 25;
+}
+
+.photo-home-eye-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.photo-home-topup-btn {
+  position: absolute;
+  top: 27.2%;
+  left: 39.5%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  padding: 2px 9px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-ios);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.photo-home-topup-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.04);
+}
+
+.photo-home-transfer-btn {
+  position: absolute;
+  top: 31%;
+  left: 7.5%;
+  width: 19%;
+  height: 9.5%;
+  border-radius: 18px;
+  cursor: pointer;
+  z-index: 25;
+  transition: transform 0.18s ease;
+}
+
+.photo-home-transfer-btn:hover {
+  transform: scale(1.05);
+}
+
+.photo-home-transfer-btn:active {
+  transform: scale(0.96);
+}
+
+.photo-home-transfer-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 2px solid rgba(56, 189, 248, 0.6);
+  animation: home-btn-pulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes home-btn-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Screen 2: Transfer / Betting Form Screen */
+.phone-form-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px 14px;
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #091322;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.app-bank-back {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #38bdf8;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.app-bank-back:hover {
+  background: rgba(56, 189, 248, 0.15);
 }
 
 /* App Header */
@@ -1698,15 +1910,17 @@ a:hover {
 
 /* Receipt Screen: Authentic Real MBBank Photo Overlay */
 .photo-receipt-screen {
-  display: none;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   padding: 0;
+  margin: 0;
   overflow-y: auto;
   overflow-x: hidden;
   background: #f1f5f9;
-  border-radius: 0 0 36px 36px;
-  flex: 1;
+  display: none;
+  z-index: 10;
 }
 
 .photo-receipt-screen.is-active {
@@ -1716,12 +1930,14 @@ a:hover {
 .photo-receipt-frame {
   position: relative;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 
 .photo-receipt-bg-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: fill;
   display: block;
   user-select: none;
   pointer-events: none;
@@ -1734,7 +1950,7 @@ a:hover {
   font-size: 13px;
   font-weight: 700;
   color: #000000;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-family-ios);
   letter-spacing: -0.2px;
 }
 
@@ -1759,7 +1975,7 @@ a:hover {
   font-size: 23px;
   font-weight: 800;
   color: #001f5c;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-family-ios);
   letter-spacing: -0.5px;
   background: #f5f9ff;
   padding: 2px 0;
@@ -1775,7 +1991,7 @@ a:hover {
   font-size: 11.5px;
   font-weight: 600;
   color: #64748b;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-family-ios);
   background: #f0f5fc;
   padding: 1px 0;
 }
@@ -1803,6 +2019,7 @@ a:hover {
   color: #1e293b;
   text-transform: uppercase;
   letter-spacing: 0.2px;
+  font-family: var(--font-family-ios);
 }
 
 .photo-ov-card-bank {
@@ -1812,6 +2029,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 4px;
+  font-family: var(--font-family-ios);
 }
 
 .mbbank-star {
@@ -1824,12 +2042,14 @@ a:hover {
   font-weight: 700;
   color: #334155;
   letter-spacing: 0.5px;
+  font-family: var(--font-family-ios);
 }
 
 .photo-ov-card-memo {
   font-size: 12px;
   font-weight: 600;
   color: #0f172a;
+  font-family: var(--font-family-ios);
 }
 
 .photo-ov-card-memo strong {
@@ -1860,6 +2080,7 @@ a:hover {
   gap: 4px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   z-index: 5;
+  font-family: var(--font-family-ios);
 }
 
 .photo-ov-ft-line {
@@ -1914,6 +2135,7 @@ a:hover {
   cursor: pointer;
   transition: all 0.15s ease;
   z-index: 10;
+  font-family: var(--font-family-ios);
 }
 
 .photo-ov-btn-again:hover {
@@ -2227,13 +2449,15 @@ a,
   }
 
   .phone-chassis {
-    width: 100vw;
     height: 100vh;
-    max-width: 100vw;
     max-height: 100vh;
+    aspect-ratio: 473 / 1024;
+    width: auto;
+    max-width: 100vw;
     border-radius: 0;
     border: none;
     box-shadow: none;
+    margin: auto;
   }
 
   .phone-chassis::before {

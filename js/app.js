@@ -673,14 +673,57 @@ const App = (function() {
     // =========================================================================
     // PHONE FAKE BANKING SIMULATOR LOGIC
     // =========================================================================
+    // PHONE FAKE BANKING SIMULATOR LOGIC
+    // =========================================================================
     const modalPhone = document.getElementById('modal-phone-sim');
     const btnOpenPhone = document.getElementById('btn-open-phone-sim');
     const btnClosePhone = document.getElementById('btn-close-phone');
+    const screenHome = document.getElementById('phone-screen-home');
     const screenForm = document.getElementById('phone-screen-form');
     const screenReceipt = document.getElementById('phone-screen-receipt');
     const faceidOverlay = document.getElementById('phone-faceid-overlay');
     const payoutAlert = document.getElementById('phone-payout-alert');
     const payoutToastBody = document.getElementById('phone-payout-toast-body');
+
+    const btnHomeOpenTransfer = document.getElementById('btn-home-open-transfer');
+    const btnToggleEye = document.getElementById('btn-toggle-eye-balance');
+    const btnHomeQuickTopup = document.getElementById('btn-home-quick-topup');
+    const btnFormBackHome = document.getElementById('btn-form-back-home');
+
+    let isBalanceVisible = true;
+
+    // Synchronize balance numbers across all screens
+    const syncBalanceUI = () => {
+      const balFormEl = document.getElementById('phone-user-balance');
+      const balHomeValEl = document.getElementById('home-bal-val');
+
+      if (balFormEl) {
+        balFormEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+      }
+      if (balHomeValEl) {
+        if (isBalanceVisible) {
+          balHomeValEl.textContent = phoneState.balance.toLocaleString('vi-VN');
+        } else {
+          balHomeValEl.textContent = '••••••••';
+        }
+      }
+    };
+
+    // Switch between Screen 1 (Home), Screen 2 (Form), Screen 3 (Receipt)
+    const showPhoneScreen = (screenName) => {
+      if (screenHome) {
+        screenHome.classList.toggle('is-active', screenName === 'home');
+        screenHome.style.display = screenName === 'home' ? 'block' : 'none';
+      }
+      if (screenForm) {
+        screenForm.style.display = screenName === 'form' ? 'flex' : 'none';
+      }
+      if (screenReceipt) {
+        screenReceipt.classList.toggle('is-active', screenName === 'receipt');
+        screenReceipt.style.display = screenName === 'receipt' ? 'block' : 'none';
+      }
+      syncBalanceUI();
+    };
 
     // Helper to trigger realistic Phone Banking Notification Dropdown
     let phoneToastTimer = null;
@@ -708,27 +751,68 @@ const App = (function() {
       }, duration);
     };
 
-    // Open/Close Phone Modal
+    // Open/Close Phone Modal (Defaults to Home / Balance Screen per user request)
     const togglePhone = (open) => {
       if (modalPhone) {
         modalPhone.classList.toggle('is-open', open);
-        if (open) playTone(480, 'sine', 0.08);
+        if (open) {
+          showPhoneScreen('home');
+          playTone(480, 'sine', 0.08);
+        }
       }
     };
 
     if (btnOpenPhone) btnOpenPhone.addEventListener('click', () => togglePhone(true));
     if (btnClosePhone) btnClosePhone.addEventListener('click', () => togglePhone(false));
 
-    // Update Phone Clock to local live time
+    // Home Screen Navigation Listeners
+    if (btnHomeOpenTransfer) {
+      btnHomeOpenTransfer.addEventListener('click', () => {
+        showPhoneScreen('form');
+        playTone(520, 'sine', 0.06);
+      });
+    }
+
+    if (btnFormBackHome) {
+      btnFormBackHome.addEventListener('click', () => {
+        showPhoneScreen('home');
+        playTone(450, 'sine', 0.05);
+      });
+    }
+
+    if (btnToggleEye) {
+      btnToggleEye.addEventListener('click', () => {
+        isBalanceVisible = !isBalanceVisible;
+        syncBalanceUI();
+        playTone(isBalanceVisible ? 620 : 440, 'sine', 0.05);
+      });
+    }
+
+    if (btnHomeQuickTopup) {
+      btnHomeQuickTopup.addEventListener('click', () => {
+        showPhoneScreen('form');
+        const topupPanel = document.getElementById('phone-topup-panel');
+        if (topupPanel) topupPanel.classList.add('is-open');
+        playTone(550, 'sine', 0.06);
+      });
+    }
+
+    // Update Phone Clock across all screens to local live time
     const updatePhoneClock = () => {
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
       const m = String(now.getMinutes()).padStart(2, '0');
-      const clockEl = document.getElementById('phone-clock');
-      if (clockEl) clockEl.textContent = `${h}:${m}`;
+      const timeStr = `${h}:${m}`;
+      const clockForm = document.getElementById('phone-clock');
+      const clockHome = document.getElementById('phone-home-clock');
+      const clockReceipt = document.getElementById('photo-receipt-clock');
+      if (clockForm) clockForm.textContent = timeStr;
+      if (clockHome) clockHome.textContent = timeStr;
+      if (clockReceipt) clockReceipt.textContent = timeStr;
     };
     updatePhoneClock();
     setInterval(updatePhoneClock, 30000);
+    syncBalanceUI();
 
     // Amount Chips Selection
     document.querySelectorAll('.fake-chip-btn').forEach(chip => {
@@ -818,8 +902,7 @@ const App = (function() {
           }
         }
 
-        const balEl = document.getElementById('phone-user-balance');
-        if (balEl) balEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+        syncBalanceUI();
 
         // Melodic deposit sound
         playTone(523, 'triangle', 0.08, 0.03);
@@ -838,8 +921,7 @@ const App = (function() {
           const num = parseInt(res.replace(/\D/g, ''), 10);
           if (!isNaN(num) && num > 0) {
             phoneState.balance = num;
-            const balEl = document.getElementById('phone-user-balance');
-            if (balEl) balEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+            syncBalanceUI();
             showToast(`Đã thiết lập số dư MB thành công: ${phoneState.balance.toLocaleString('vi-VN')}đ`, 'success');
             triggerPhoneNotification({
               type: 'topup',
@@ -861,8 +943,7 @@ const App = (function() {
     const btnReceiptTopup = document.getElementById('btn-receipt-quick-topup');
     if (btnReceiptTopup) {
       btnReceiptTopup.addEventListener('click', () => {
-        if (screenReceipt) screenReceipt.classList.remove('is-active');
-        if (screenForm) screenForm.style.display = 'flex';
+        showPhoneScreen('form');
         if (topupPanel) topupPanel.classList.add('is-open');
         playTone(520, 'sine', 0.08);
       });
@@ -881,8 +962,7 @@ const App = (function() {
 
         // Deduct balance
         phoneState.balance -= phoneState.amount;
-        const balEl = document.getElementById('phone-user-balance');
-        if (balEl) balEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+        syncBalanceUI();
 
         // Sound: Transfer initiate
         playTone(350, 'triangle', 0.12, 0.06);
@@ -1065,8 +1145,7 @@ const App = (function() {
           }
 
           // Show Receipt Screen
-          if (screenForm) screenForm.style.display = 'none';
-          if (screenReceipt) screenReceipt.classList.add('is-active');
+          showPhoneScreen('receipt');
 
           playTone(400, 'sine', 0.1);
 
@@ -1105,7 +1184,7 @@ const App = (function() {
           setTimeout(() => {
             if (isWin) {
               phoneState.balance += payoutAmount;
-              if (balEl) balEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+              syncBalanceUI();
 
               const nowWin = new Date();
               const timeShortWin = `${String(nowWin.getHours()).padStart(2, '0')}:${String(nowWin.getMinutes()).padStart(2, '0')}`;
@@ -1142,23 +1221,21 @@ const App = (function() {
       });
     }
 
-    // Button "Chơi tiếp"
+    // Button "Thực hiện giao dịch khác" -> quay lại màn hình chọn cược
     const btnNewTransfer = document.getElementById('btn-phone-new-transfer');
     if (btnNewTransfer) {
       btnNewTransfer.addEventListener('click', () => {
-        if (screenReceipt) screenReceipt.classList.remove('is-active');
-        if (screenForm) screenForm.style.display = 'flex';
+        showPhoneScreen('form');
         playTone(500, 'sine', 0.08);
       });
     }
 
-    // Button "Hoàn tất"
+    // Button "Hoàn tất" (Icon Home góc trên phải) -> quay về màn hình xem số dư chính
     const btnCloseReceipt = document.getElementById('btn-phone-close-receipt');
     if (btnCloseReceipt) {
       btnCloseReceipt.addEventListener('click', () => {
-        if (screenReceipt) screenReceipt.classList.remove('is-active');
-        if (screenForm) screenForm.style.display = 'flex';
-        togglePhone(false);
+        showPhoneScreen('home');
+        playTone(480, 'sine', 0.06);
       });
     }
 

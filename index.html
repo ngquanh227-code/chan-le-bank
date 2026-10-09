@@ -6,10 +6,10 @@
   <title>TRUM.TOP - CHẴN LẺ BANK TỰ ĐỘNG 24/7</title>
   <meta name="description" content="Trùm Chẵn Lẻ Bank - Hệ thống chẵn lẻ ngân hàng tự động số 1 Việt Nam, thanh toán tự động 5s qua MBBank, Vietcombank. Tỷ lệ thưởng cao, minh bạch 100%.">
 
-  <!-- Open Sans Font from Google Fonts -->
+  <!-- Google Fonts: Be Vietnam Pro (iOS System replica), Open Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -1090,34 +1090,66 @@
         </div>
       </div>
 
-      <!-- Phone Status Bar -->
-      <div class="phone-status-bar">
-        <span id="phone-clock">00:59</span>
-        <div class="status-bar-icons">
-          <i class="fa-solid fa-signal"></i>
-          <span>5G</span>
-          <i class="fa-solid fa-wifi"></i>
-          <i class="fa-solid fa-battery-full" style="color: #4ade80;"></i>
-        </div>
+      <!-- Phone Floating Close Button -->
+      <div class="phone-floating-close" id="btn-close-phone" role="button" tabindex="0" title="Đóng giả lập">
+        <i class="fa-solid fa-xmark"></i>
       </div>
 
       <!-- Banking App Viewport -->
       <div class="phone-app-viewport">
-        <!-- App Header Bar -->
-        <div class="app-bank-header">
-          <div class="app-bank-brand">
-            <i class="fa-solid fa-star"></i>
-            <span id="phone-app-title">MBBank • Chuyển tiền 247</span>
-          </div>
-          <div style="display: flex; gap: 8px; align-items: center;">
-            <span id="btn-close-phone" role="button" tabindex="0" style="cursor: pointer; font-size: 15px; padding: 2px 6px; color: #cbd5e1;" title="Đóng giả lập">
-              <i class="fa-solid fa-xmark"></i>
-            </span>
+        <!-- SCREEN 1: MBBANK REAL HOME & BALANCE SCREEN (User's real screenshot) -->
+        <div class="app-screen-body photo-home-screen is-active" id="phone-screen-home">
+          <div class="photo-home-frame">
+            <img src="img/mbbank_home_clean.jpg" alt="MBBank Trang chủ & Xem số dư" class="photo-home-bg-img" />
+
+            <!-- Live Status Bar Clock Overlay -->
+            <div class="photo-home-clock" id="phone-home-clock">00:59</div>
+
+            <!-- Live Balance Overlay with Authentic iOS Font -->
+            <div class="photo-home-balance" id="home-balance-display">
+              <span id="home-bal-val">10,000,000</span>
+              <span class="photo-home-vnd">VND</span>
+            </div>
+
+            <!-- Eye Icon Hotspot (Toggle Hide / Show Balance) -->
+            <div class="photo-home-eye-btn" id="btn-toggle-eye-balance" role="button" tabindex="0" title="Ẩn/Hiện số dư"></div>
+
+            <!-- Quick Top-up Hotspot / Button on Home Card -->
+            <div class="photo-home-topup-btn" id="btn-home-quick-topup" role="button" tabindex="0" title="Nạp thêm tiền số dư">
+              <i class="fa-solid fa-circle-plus"></i> Nạp số dư
+            </div>
+
+            <!-- "Chuyển tiền" Hotspot (Opens Transfer / Betting Sheet) -->
+            <div class="photo-home-transfer-btn" id="btn-home-open-transfer" role="button" tabindex="0" title="Bấm để Chuyển tiền (Đặt cược)">
+              <span class="photo-home-transfer-pulse"></span>
+            </div>
           </div>
         </div>
 
-        <!-- SCREEN 1: TRANSFER FORM -->
-        <div class="app-screen-body" id="phone-screen-form">
+        <!-- SCREEN 2: TRANSFER & BETTING FORM -->
+        <div class="app-screen-body phone-form-screen" id="phone-screen-form" style="display: none;">
+          <!-- Phone Status Bar for Form Screen -->
+          <div class="phone-status-bar">
+            <span id="phone-clock">00:59</span>
+            <div class="status-bar-icons">
+              <i class="fa-solid fa-signal"></i>
+              <span>5G</span>
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-battery-full" style="color: #4ade80;"></i>
+            </div>
+          </div>
+
+          <!-- App Header Bar with Back Button to Home -->
+          <div class="app-bank-header">
+            <div class="app-bank-back" id="btn-form-back-home" role="button" tabindex="0" title="Quay lại Xem số dư">
+              <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="app-bank-brand">
+              <i class="fa-solid fa-star"></i>
+              <span id="phone-app-title">MBBank • Chuyển tiền 247</span>
+            </div>
+            <div style="width: 28px;"></div>
+          </div>
           <!-- Sender Account Card -->
           <div class="fake-bank-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
