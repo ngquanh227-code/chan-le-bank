@@ -50,9 +50,59 @@
     }
   }
 
+  let mbNotificationAudio = null;
+  let lastAudioPlayTime = 0;
+
+  function initMbBankAudio() {
+    if (!mbNotificationAudio) {
+      try {
+        mbNotificationAudio = new Audio('audio/mbbank_notification.mp3');
+        mbNotificationAudio.preload = 'auto';
+      } catch (e) {
+        console.warn('Cannot init MBBank audio', e);
+      }
+    }
+  }
+
+  function playMbBankAudio() {
+    if (window.CLB.config && window.CLB.config.soundEnabled === false) return;
+    const now = Date.now();
+    if (now - lastAudioPlayTime < 350) return; // Prevent double-trigger overlap
+    lastAudioPlayTime = now;
+
+    try {
+      initAudio();
+      initMbBankAudio();
+      if (!mbNotificationAudio) return;
+      mbNotificationAudio.currentTime = 0;
+      const playPromise = mbNotificationAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          // Autoplay policy prevented playback until user interaction
+          console.debug('MBBank notification audio play deferred:', err);
+        });
+      }
+    } catch (e) {
+      // Audio error catch
+    }
+  }
+
+  // Pre-unlock audio on first user gesture anywhere
+  const unlockAudio = () => {
+    initAudio();
+    initMbBankAudio();
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('keydown', unlockAudio);
+  };
+  document.addEventListener('click', unlockAudio, { passive: true });
+  document.addEventListener('touchstart', unlockAudio, { passive: true });
+  document.addEventListener('keydown', unlockAudio, { passive: true });
+
   window.CLB.audio = {
     initAudio,
     playTone,
-    playChime
+    playChime,
+    playMbBankAudio
   };
 })();

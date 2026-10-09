@@ -49,6 +49,11 @@
     if (!payoutAlert) return;
     if (phoneToastTimer) clearTimeout(phoneToastTimer);
 
+    // Play MBBank Notification MP3 audio
+    if (window.CLB.audio && window.CLB.audio.playMbBankAudio) {
+      window.CLB.audio.playMbBankAudio();
+    }
+
     payoutAlert.classList.remove('show', 'is-debit', 'is-credit', 'is-lose', 'is-topup');
 
     const iconEl = document.getElementById('phone-payout-toast-icon');

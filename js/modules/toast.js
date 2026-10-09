@@ -10,6 +10,10 @@
     const container = document.getElementById('toast-container');
     if (!container) return;
 
+    if (!message.startsWith('Đã sao chép') && window.CLB.audio && window.CLB.audio.playMbBankAudio) {
+      window.CLB.audio.playMbBankAudio();
+    }
+
     const toast = document.createElement('div');
     toast.className = `toast-item toast-${type}`;
     toast.setAttribute('role', 'alert');
