@@ -679,6 +679,7 @@ const App = (function() {
     const btnOpenPhone = document.getElementById('btn-open-phone-sim');
     const btnClosePhone = document.getElementById('btn-close-phone');
     const screenHome = document.getElementById('phone-screen-home');
+    const screenQr = document.getElementById('phone-screen-qr');
     const screenForm = document.getElementById('phone-screen-form');
     const screenReceipt = document.getElementById('phone-screen-receipt');
     const faceidOverlay = document.getElementById('phone-faceid-overlay');
@@ -686,11 +687,19 @@ const App = (function() {
     const payoutToastBody = document.getElementById('phone-payout-toast-body');
 
     const btnHomeOpenTransfer = document.getElementById('btn-home-open-transfer');
+    const btnHomeOpenQr = document.getElementById('btn-home-open-qr');
     const btnToggleEye = document.getElementById('btn-toggle-eye-balance');
     const btnHomeQuickTopup = document.getElementById('btn-home-quick-topup');
     const btnFormBackHome = document.getElementById('btn-form-back-home');
+    const btnQrBack = document.getElementById('btn-qr-back');
+    const btnQrFlash = document.getElementById('btn-qr-flash');
+    const btnQrModalScanPhone = document.getElementById('btn-qr-modal-scan-phone');
+    const btnTransferBottomBack = document.getElementById('btn-transfer-bottom-back');
+    const btnClearMemo = document.getElementById('btn-clear-memo');
+    const btnChatSave = document.getElementById('btn-chat-save');
 
     let isBalanceVisible = true;
+    let qrScanTimer = null;
 
     // Synchronize balance numbers across all screens
     const syncBalanceUI = () => {
@@ -698,7 +707,7 @@ const App = (function() {
       const balHomeValEl = document.getElementById('home-bal-val');
 
       if (balFormEl) {
-        balFormEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')}đ`;
+        balFormEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')} VND`;
       }
       if (balHomeValEl) {
         if (isBalanceVisible) {
@@ -709,11 +718,42 @@ const App = (function() {
       }
     };
 
-    // Switch between Screen 1 (Home), Screen 2 (Form), Screen 3 (Receipt)
+    // Complete QR scanning simulation with realistic beep and auto-transition to transfer form
+    const completeQrScan = () => {
+      if (qrScanTimer) {
+        clearTimeout(qrScanTimer);
+        qrScanTimer = null;
+      }
+      playTone(1800, 'sine', 0.12);
+      setTimeout(() => playTone(2400, 'sine', 0.08), 70);
+
+      // Populate recipient info on Screen 2 (Image 2)
+      const recNameEl = document.getElementById('phone-recipient-name');
+      const recStkEl = document.getElementById('phone-recipient-stk');
+      const recBankLabel = document.getElementById('phone-bank-name-label');
+      const memoDisplay = document.getElementById('phone-memo-display');
+
+      if (recNameEl) recNameEl.textContent = state.activeBank.owner || 'NGUYEN QUANG ANH';
+      if (recStkEl) recStkEl.textContent = state.activeBank.accountNumber || '0962714685';
+      if (recBankLabel) recBankLabel.textContent = `${state.activeBank.name || 'Quân đội (MB)'}`;
+      if (memoDisplay) memoDisplay.textContent = `${state.activeBank.memo || 'Dungdz TC'}`;
+
+      showToast('Quét mã QR MB thành công! Đã nhận diện thông tin người thụ hưởng.', 'success');
+      showPhoneScreen('form');
+    };
+
+    // Switch between Screen 1 (Home), Screen 1.5 (QR Scanner), Screen 2 (Form), Screen 3 (Receipt)
     const showPhoneScreen = (screenName) => {
+      if (qrScanTimer) {
+        clearTimeout(qrScanTimer);
+        qrScanTimer = null;
+      }
       if (screenHome) {
         screenHome.classList.toggle('is-active', screenName === 'home');
         screenHome.style.display = screenName === 'home' ? 'block' : 'none';
+      }
+      if (screenQr) {
+        screenQr.style.display = screenName === 'qr' ? 'flex' : 'none';
       }
       if (screenForm) {
         screenForm.style.display = screenName === 'form' ? 'flex' : 'none';
@@ -723,6 +763,14 @@ const App = (function() {
         screenReceipt.style.display = screenName === 'receipt' ? 'block' : 'none';
       }
       syncBalanceUI();
+
+      // If user opened QR screen, simulate automatic camera recognition after 1.3s
+      if (screenName === 'qr') {
+        playTone(550, 'sine', 0.08);
+        qrScanTimer = setTimeout(() => {
+          completeQrScan();
+        }, 1300);
+      }
     };
 
     // Helper to trigger realistic Phone Banking Notification Dropdown
@@ -901,6 +949,75 @@ const App = (function() {
       btnHomeOpenTransfer.addEventListener('click', () => {
         showPhoneScreen('form');
         playTone(520, 'sine', 0.06);
+      });
+    }
+
+    if (btnHomeOpenQr) {
+      btnHomeOpenQr.addEventListener('click', () => {
+        showPhoneScreen('qr');
+      });
+    }
+
+    if (btnQrBack) {
+      btnQrBack.addEventListener('click', () => {
+        showPhoneScreen('home');
+        playTone(450, 'sine', 0.05);
+      });
+    }
+
+    if (btnTransferBottomBack) {
+      btnTransferBottomBack.addEventListener('click', () => {
+        showPhoneScreen('home');
+        playTone(450, 'sine', 0.05);
+      });
+    }
+
+    if (btnQrFlash) {
+      btnQrFlash.addEventListener('click', () => {
+        const frame = document.getElementById('qr-camera-viewport');
+        if (frame) {
+          const isLit = frame.getAttribute('data-flash') === '1';
+          frame.setAttribute('data-flash', isLit ? '0' : '1');
+          frame.style.filter = isLit ? '' : 'brightness(1.4)';
+          btnQrFlash.style.background = isLit ? '#ffffff' : '#facc15';
+          playTone(isLit ? 400 : 700, 'sine', 0.05);
+        }
+      });
+    }
+
+    // Tapping camera frame or any QR code logo simulates instant scan
+    const qrCameraTarget = document.getElementById('qr-camera-viewport');
+    if (qrCameraTarget) {
+      qrCameraTarget.addEventListener('click', () => completeQrScan());
+    }
+    ['qr-brand-napas', 'qr-brand-mb', 'qr-brand-vietqr', 'qr-brand-vietqr2', 'btn-qr-photo-transfer', 'btn-qr-upload'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', () => completeQrScan());
+    });
+
+    if (btnQrModalScanPhone) {
+      btnQrModalScanPhone.addEventListener('click', () => {
+        closeQrModal();
+        togglePhone(true);
+        showPhoneScreen('qr');
+      });
+    }
+
+    if (btnClearMemo) {
+      btnClearMemo.addEventListener('click', () => {
+        const memoEl = document.getElementById('phone-memo-display');
+        if (memoEl) {
+          memoEl.textContent = '';
+          showToast('Đã xóa nội dung chuyển tiền', 'info');
+          playTone(400, 'sine', 0.05);
+        }
+      });
+    }
+
+    if (btnChatSave) {
+      btnChatSave.addEventListener('click', () => {
+        showToast('Đã lưu thông tin Money Chat vào danh bạ MB!', 'success');
+        playTone(600, 'sine', 0.08);
       });
     }
 
@@ -1124,9 +1241,11 @@ const App = (function() {
         phoneState.amount = val;
 
         const disp = document.getElementById('phone-amount-display');
+        const dispNum = document.getElementById('phone-amount-display-num');
         const btnText = document.getElementById('btn-phone-transfer-text');
         if (disp) disp.textContent = `${val.toLocaleString('vi-VN')} VND`;
-        if (btnText) btnText.textContent = `Tiếp tục (${val.toLocaleString('vi-VN')}đ)`;
+        if (dispNum) dispNum.textContent = val.toLocaleString('vi-VN');
+        if (btnText) btnText.textContent = `Tiếp tục`;
         playTone(550, 'sine', 0.05);
       });
     });

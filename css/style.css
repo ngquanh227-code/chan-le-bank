@@ -2059,6 +2059,32 @@ a:hover {
   transform: scale(1.04);
 }
 
+.photo-home-qr-btn {
+  position: absolute;
+  top: 24.8%;
+  left: 15.5%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-family-mb) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.photo-home-qr-btn:hover {
+  background: rgba(255, 255, 255, 0.38);
+  transform: scale(1.04);
+}
+
 .photo-home-transfer-btn {
   position: absolute;
   top: 31%;
@@ -2094,206 +2120,582 @@ a:hover {
   100% { transform: scale(1); opacity: 0.8; }
 }
 
-/* Screen 2: Authentic MBBank Transfer Form Screen */
+/* ==========================================================================
+   SCREEN 1.5: AUTHENTIC MBBANK QR CODE SCANNER (Image 1 replica)
+   ========================================================================== */
+.phone-qr-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #090e18;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  font-family: var(--font-family-mb) !important;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.qr-status-bar {
+  background: transparent;
+  color: #ffffff;
+}
+
+.qr-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px 10px;
+}
+
+.qr-back-btn {
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.qr-header-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+}
+
+.qr-flash-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qr-camera-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 22px;
+  cursor: pointer;
+}
+
+.qr-camera-frame {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 280px;
+  border-radius: 18px;
+  border: 2px solid rgba(56, 189, 248, 0.75);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #1e293b 0%, #090e18 100%);
+}
+
+.qr-scan-laser {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, transparent 0%, #38bdf8 30%, #818cf8 50%, #38bdf8 70%, transparent 100%);
+  box-shadow: 0 0 12px #38bdf8, 0 0 4px #818cf8;
+  animation: qrLaserScan 2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes qrLaserScan {
+  0% { top: 8%; opacity: 0.85; }
+  100% { top: 92%; opacity: 0.85; }
+}
+
+.qr-instruction-pill {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  pointer-events: none;
+}
+
+.qr-accepted-section {
+  padding: 10px 18px 6px;
+}
+
+.qr-accepted-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.qr-logos-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.qr-logo-item {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+  height: 52px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease;
+}
+
+.qr-logo-item:hover {
+  transform: scale(1.05);
+}
+
+.qr-mock-code {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-mock-blue {
+  border: 3px solid #0054a6;
+  background-image: repeating-linear-gradient(45deg, #0054a6 0, #0054a6 2px, transparent 0, transparent 4px);
+}
+
+.qr-mock-mb {
+  border: 3px solid #002b80;
+  background-color: #ffffff;
+}
+
+.qr-center-star {
+  width: 14px;
+  height: auto;
+}
+
+.qr-mock-red {
+  border: 3px solid #e11d48;
+  background-image: repeating-linear-gradient(45deg, #e11d48 0, #e11d48 2px, transparent 0, transparent 4px);
+}
+
+.qr-mock-red2 {
+  border: 3px solid #dc2626;
+  background-image: repeating-linear-gradient(-45deg, #dc2626 0, #dc2626 2px, transparent 0, transparent 4px);
+}
+
+.qr-brand-text {
+  font-size: 9px;
+  font-weight: 800;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.qr-text-napas { color: #0054a6; }
+.qr-text-vietqr { color: #e11d48; }
+
+.qr-bottom-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 14px 10px 18px;
+  margin-top: auto;
+}
+
+.qr-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+.qr-action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.qr-action-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   SCREEN 2: AUTHENTIC MBBANK TRANSFER FORM SCREEN (Image 2 replica)
+   ========================================================================== */
 .phone-form-screen {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 0 10px 22px;
-  margin: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
   background: #f4f6fa;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   z-index: 10;
   font-family: var(--font-family-mb) !important;
+  color: #1e293b;
+  overflow: hidden;
 }
 
-.phone-form-screen .phone-status-bar {
+.light-status-bar {
   background: #ffffff;
   color: #0f172a;
-  margin: 0 -10px;
 }
 
-.app-bank-header {
+.app-mb-transfer-header {
   background: #ffffff;
-  padding: 8px 14px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #002b80;
+  padding: 6px 14px 10px;
   border-bottom: 1px solid #edf2f7;
-  margin: 0 -10px;
 }
 
-.app-bank-back {
-  width: 32px;
-  height: 32px;
+.app-mb-back-btn {
+  font-size: 18px;
+  color: #1e293b;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.app-mb-header-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: 0.1px;
+  font-family: var(--font-family-mb);
+}
+
+.mb-transfer-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px 12px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mb-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mb-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.mb-source-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.mb-source-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mb-source-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: 0.2px;
+}
+
+.mb-source-chevron {
+  color: #64748b;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.mb-source-balance-row {
+  margin-top: 3px;
+}
+
+.mb-source-balance {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: var(--font-family-mb);
+}
+
+.mb-recipient-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.mb-rec-row {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+}
+
+.mb-rec-bank-row {
+  gap: 12px;
+}
+
+.mb-bank-logo-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  color: #002b80;
-  border-radius: 50%;
-  transition: background 0.15s ease;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-.app-bank-back:hover {
-  background: #f1f5f9;
+.mb-bank-logo-circle img {
+  height: 18px;
+  width: auto;
 }
 
-.app-bank-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.1px;
-  color: #002b80;
-  font-family: var(--font-family-mb);
-}
-
-.app-bank-brand img {
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-}
-
-/* Cards inside Transfer Screen */
-.phone-form-screen .fake-bank-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e9f2;
-  border-radius: 16px;
-  padding: 12px 14px;
+.mb-rec-info-col {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  box-shadow: 0 3px 12px rgba(0, 35, 102, 0.04);
+  gap: 1.5px;
 }
 
-.phone-form-screen .fake-card-label {
+.mb-rec-sub {
   font-size: 10.5px;
   color: #64748b;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.4px;
 }
 
-.phone-form-screen .fake-account-val {
+.mb-rec-val {
   font-size: 13.5px;
-  font-weight: 700;
+  font-weight: 800;
   color: #0f172a;
-  display: flex;
+}
+
+.mb-dotted-divider {
+  border-top: 1px dashed #cbd5e1;
+  margin: 0 14px;
+}
+
+.mb-rec-val-large {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: var(--font-family-mb);
+}
+
+.mb-rec-owner-row {
   justify-content: space-between;
-  align-items: center;
-  font-family: var(--font-family-mb);
 }
 
-.phone-form-screen .fake-balance-badge {
+.mb-rec-val-owner {
   font-size: 13px;
-  color: #002b80;
-  font-weight: 700;
-  background: #eef4ff;
-  padding: 2.5px 8px;
-  border-radius: 6px;
-  border: 1px solid #dbeafe;
-  font-family: var(--font-family-mb);
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
 }
 
-.phone-form-screen .btn-topup-badge {
-  background: linear-gradient(135deg, #0e8449 0%, #16a34a 100%);
-  color: #ffffff;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 10.5px;
+.mb-btn-save-pill {
+  border: 1.5px solid #4f46e5;
+  color: #4f46e5;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.3);
   transition: all 0.15s ease;
   user-select: none;
 }
 
-.phone-form-screen .topup-panel-box {
-  background: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  border-radius: 10px;
-  padding: 8px;
-  margin-top: 4px;
+.mb-btn-save-pill:hover {
+  background: #eef2ff;
 }
 
-.phone-form-screen .topup-chips-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  margin-top: 5px;
-}
-
-.phone-form-screen .topup-chip-btn {
-  background: #ffffff;
-  color: #059669;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 5px 2px;
-  font-size: 11px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.phone-form-screen .topup-chip-btn:hover {
-  background: #ecfdf5;
-  border-color: #059669;
-}
-
-.phone-form-screen .topup-chip-custom {
-  grid-column: span 3;
-  background: #ecfdf5;
-  border: 1px dashed #059669;
-  color: #047857;
-  padding: 6px 8px;
-  font-size: 11px;
-  font-weight: 800;
+.mb-tinted-container {
+  background: #eef3fc;
+  border-radius: 14px;
+  padding: 10px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mb-amount-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.mb-amount-center-display {
+  display: flex;
+  align-items: baseline;
   justify-content: center;
   gap: 6px;
+  position: relative;
+  padding: 4px 0 8px;
+}
+
+.mb-amount-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #5c68f8;
+  font-family: var(--font-family-mb);
+  letter-spacing: -0.5px;
+}
+
+.mb-amount-vnd {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.mb-amount-info-icon {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0284c7;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 6px;
+}
+
+.mb-memo-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mb-memo-sub {
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+.mb-memo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2px;
+}
+
+.mb-memo-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: var(--font-family-mb);
+}
+
+.mb-memo-clear-btn {
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.mb-bottom-action-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px 14px 14px;
+  background: #f4f6fa;
+  border-top: 1px solid #eef2f6;
+}
+
+.btn-mb-action-back {
+  border: 1.5px solid #5c68f8;
+  background: #ffffff;
+  color: #5c68f8;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-weight: 800;
+  font-size: 13.5px;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
   transition: all 0.15s ease;
 }
 
-.phone-form-screen .topup-chip-reset {
-  grid-column: span 3;
-  background: linear-gradient(135deg, #002b80 0%, #0047cc 100%);
-  color: #ffffff;
-  border: none;
-  padding: 6px 4px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
+.btn-mb-action-back:hover {
+  background: #eef2ff;
 }
 
-.phone-form-screen .fake-amount-chips {
+.btn-mb-action-submit {
+  flex: 1;
+  background: linear-gradient(135deg, #5c68f8 0%, #4f46e5 100%);
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: all 0.15s ease;
+}
+
+.btn-mb-action-submit:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  transform: translateY(-1px);
+}
+
+/* Common Chips & Pills inside Phone */
+.fake-amount-chips {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
   margin-top: 4px;
 }
 
-.phone-form-screen .fake-chip-btn {
+.fake-chip-btn {
   background-color: #f8fafc;
   color: #1e293b;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 7px 4px;
+  padding: 6px 4px;
   font-size: 11.5px;
   font-weight: 700;
   text-align: center;
@@ -2302,19 +2704,19 @@ a:hover {
   font-family: var(--font-family-mb);
 }
 
-.phone-form-screen .fake-chip-btn:hover {
+.fake-chip-btn:hover {
   background-color: #eef2f6;
   border-color: #cbd5e1;
 }
 
-.phone-form-screen .fake-chip-btn.active {
-  background: #002b80;
-  border-color: #002b80;
+.fake-chip-btn.active {
+  background: #5c68f8;
+  border-color: #5c68f8;
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 43, 128, 0.25);
+  box-shadow: 0 2px 8px rgba(92, 104, 248, 0.35);
 }
 
-.phone-form-screen .phone-game-pills {
+.phone-game-pills {
   display: flex;
   overflow-x: auto;
   gap: 5px;
@@ -2323,7 +2725,7 @@ a:hover {
   scrollbar-width: none;
 }
 
-.phone-form-screen .phone-mode-pill {
+.phone-mode-pill {
   background: #f1f5f9;
   color: #475569;
   border-radius: 6px;
@@ -2337,30 +2739,30 @@ a:hover {
   border: 1px solid #e2e8f0;
 }
 
-.phone-form-screen .phone-mode-pill:hover {
+.phone-mode-pill:hover {
   background: #e2e8f0;
 }
 
-.phone-form-screen .phone-mode-pill.active {
+.phone-mode-pill.active {
   background: #002b80;
   color: #ffffff;
   border-color: #002b80;
 }
 
-.phone-form-screen .fake-memo-chips {
+.fake-memo-chips {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
   margin-top: 4px;
 }
 
-.phone-form-screen .fake-memo-chip {
+.fake-memo-chip {
   background-color: #ffffff;
   color: #0f172a;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  padding: 8px 6px;
-  font-size: 11.5px;
+  padding: 7px 6px;
+  font-size: 11px;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
@@ -2368,46 +2770,16 @@ a:hover {
   font-family: var(--font-family-mb);
 }
 
-.phone-form-screen .fake-memo-chip:hover {
+.fake-memo-chip:hover {
   background-color: #f8fafc;
   border-color: #94a3b8;
 }
 
-.phone-form-screen .fake-memo-chip.active {
+.fake-memo-chip.active {
   background-color: #002b80;
   border-color: #002b80;
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 43, 128, 0.25);
-}
-
-.phone-form-screen .btn-fake-transfer-confirm {
-  width: 100%;
-  background: linear-gradient(135deg, #002b80 0%, #0047cc 100%);
-  color: #ffffff;
-  border: none;
-  border-radius: 26px;
-  height: 48px;
-  font-size: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 16px rgba(0, 43, 128, 0.35);
-  transition: all 0.15s ease;
-  margin-top: 4px;
-  font-family: var(--font-family-mb);
-}
-
-.phone-form-screen .btn-fake-transfer-confirm:hover {
-  background: linear-gradient(135deg, #001f5c 0%, #003fa3 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 43, 128, 0.45);
-}
-
-.phone-form-screen .btn-fake-transfer-confirm:active {
-  transform: translateY(1px);
 }
 
 /* FaceID Scanning Overlay */
