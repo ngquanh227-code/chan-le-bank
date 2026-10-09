@@ -1267,10 +1267,10 @@ const App = (function() {
 
           if (receiptMatchEl) {
             if (isWin) {
-              receiptMatchEl.style.color = '#4ade80';
+              receiptMatchEl.style.color = '#15803d';
               receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2!]' : ''}`;
             } else {
-              receiptMatchEl.style.color = '#f87171';
+              receiptMatchEl.style.color = '#dc2626';
               receiptMatchEl.textContent = `${calcExplain} ➔ THUA (-${phoneState.amount.toLocaleString('vi-VN')}đ)`;
             }
           }
@@ -1283,9 +1283,9 @@ const App = (function() {
           // Trigger Immediate Debit Notification (Biến động số dư trừ tiền cược & hiện số dư còn lại)
           triggerPhoneNotification({
             type: 'debit',
-            iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #f87171;"></i>',
-            title: `<span style="color: #f87171; font-weight: 800;">MBBank Biến động số dư (-${phoneState.amount.toLocaleString('vi-VN')} VND)</span>`,
-            body: `TK 0971266012 | GD: -${phoneState.amount.toLocaleString('vi-VN')} VND lúc ${timeShortTx} | <strong>Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: ${phoneState.memo} GD ${fullTxCode}`,
+            iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #dc2626;"></i>',
+            title: `<span style="color: #dc2626; font-weight: 800;">MBBank Biến động số dư (-${phoneState.amount.toLocaleString('vi-VN')} VND)</span>`,
+            body: `TK 0971266012 | GD: -${phoneState.amount.toLocaleString('vi-VN')} VND lúc ${timeShortTx} | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: ${phoneState.memo} GD ${fullTxCode}`,
             duration: 3200
           });
 
@@ -1322,9 +1322,9 @@ const App = (function() {
 
               triggerPhoneNotification({
                 type: 'credit',
-                iconHtml: '<i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>',
-                title: `<span style="color: #4ade80; font-weight: 800;">MBBank Biến động số dư (+${payoutAmount.toLocaleString('vi-VN')} VND)</span>`,
-                body: `TK 0971266012 | GD: +${payoutAmount.toLocaleString('vi-VN')} VND lúc ${timeShortWin} | <strong>Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: TRUM.TOP TRA THUONG GD ${fullTxCode}`,
+                iconHtml: '<i class="fa-solid fa-circle-check" style="color: #16a34a;"></i>',
+                title: `<span style="color: #15803d; font-weight: 800;">MBBank Biến động số dư (+${payoutAmount.toLocaleString('vi-VN')} VND)</span>`,
+                body: `TK 0971266012 | GD: +${payoutAmount.toLocaleString('vi-VN')} VND lúc ${timeShortWin} | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong> | ND: TRUM.TOP TRA THUONG GD ${fullTxCode}`,
                 duration: 5000
               });
 
@@ -1337,9 +1337,9 @@ const App = (function() {
 
               triggerPhoneNotification({
                 type: 'lose',
-                iconHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #ef4444;"></i>',
-                title: `<span style="color: #ef4444; font-weight: 800;">TRUM.TOP Kết quả cược (Thua cược)</span>`,
-                body: `GD ${fullTxCode} số đuôi [${lastDigit}] không khớp cửa [${phoneState.memo}]. Mất: -${phoneState.amount.toLocaleString('vi-VN')} VND | <strong>Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong>`,
+                iconHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #dc2626;"></i>',
+                title: `<span style="color: #dc2626; font-weight: 800;">TRUM.TOP Kết quả cược (Thua cược)</span>`,
+                body: `GD ${fullTxCode} số đuôi [${lastDigit}] không khớp cửa [${phoneState.memo}]. Mất: -${phoneState.amount.toLocaleString('vi-VN')} VND | <strong style="color: #0f172a;">Số dư: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong>`,
                 duration: 5000
               });
 
