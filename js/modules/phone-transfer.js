@@ -63,14 +63,115 @@
     const btnToggleTopup = document.getElementById('btn-toggle-topup');
     const faceidOverlay = document.getElementById('phone-faceid-overlay');
 
+    function updateRecipientUI(rec) {
+      if (!rec) return;
+      phoneState.recipient = { ...rec };
+      const bankEl = document.getElementById('phone-bank-name-label');
+      const stkEl = document.getElementById('phone-recipient-stk');
+      const nameEl = document.getElementById('phone-recipient-name');
+      if (bankEl) bankEl.textContent = rec.bank || 'Quân đội (MB)';
+      if (stkEl) stkEl.textContent = rec.stk || '';
+      if (nameEl) nameEl.textContent = rec.name || '';
+    }
+
     if (btnToggleEye && window.CLB.phone) {
       btnToggleEye.addEventListener('click', () => window.CLB.phone.toggleEyeBalance());
     }
 
+    // 1. Home -> "Chuyển tiền" opens Super Transfer screen (Image 1 replica)
     if (btnHomeOpenTransfer) {
       btnHomeOpenTransfer.addEventListener('click', () => {
+        showPhoneScreen('super-transfer');
+        if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
+      });
+    }
+
+    // 2. Super Transfer Screen Navigation & Actions
+    const btnSuperBack = document.getElementById('btn-super-transfer-back');
+    const btnSuperHome = document.getElementById('btn-super-transfer-home');
+    const btnSuperStk = document.getElementById('btn-super-transfer-stk');
+    const btnSuperMbai = document.getElementById('btn-super-transfer-mbai');
+    const btnSuperRecent = document.getElementById('btn-super-transfer-recent');
+    const btnSuperWallet = document.getElementById('btn-super-transfer-wallet');
+    const btnContactLuong = document.getElementById('btn-super-contact-luong');
+    const btnContactFather = document.getElementById('btn-super-contact-father');
+    const btnContactHung = document.getElementById('btn-super-contact-hung');
+    const btnContactLuong2 = document.getElementById('btn-super-contact-luong2');
+
+    if (btnSuperBack) {
+      btnSuperBack.addEventListener('click', () => {
+        showPhoneScreen('home');
+        if (window.CLB.audio) window.CLB.audio.playTone(480, 'sine', 0.06);
+      });
+    }
+
+    if (btnSuperHome) {
+      btnSuperHome.addEventListener('click', () => {
+        showPhoneScreen('home');
+        if (window.CLB.audio) window.CLB.audio.playTone(480, 'sine', 0.06);
+      });
+    }
+
+    if (btnSuperStk) {
+      btnSuperStk.addEventListener('click', () => {
+        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
+      });
+    }
+
+    if (btnSuperMbai) {
+      btnSuperMbai.addEventListener('click', () => {
+        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
         showPhoneScreen('form');
         if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
+      });
+    }
+
+    if (btnSuperRecent) {
+      btnSuperRecent.addEventListener('click', () => {
+        updateRecipientUI({ name: 'NGUYEN VAN PHONG', stk: '0644888866', bank: 'Quân đội (MB)' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
+      });
+    }
+
+    if (btnSuperWallet) {
+      btnSuperWallet.addEventListener('click', () => {
+        if (window.CLB.toast) window.CLB.toast.showToast('Ví điện tử liên kết MBBank', 'info');
+        if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.06);
+      });
+    }
+
+    if (btnContactLuong) {
+      btnContactLuong.addEventListener('click', () => {
+        updateRecipientUI({ name: 'NGUYEN XUAN DUC LUONG', stk: '0916508081', bank: 'Quân đội (MB)' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
+      });
+    }
+
+    if (btnContactFather) {
+      btnContactFather.addEventListener('click', () => {
+        updateRecipientUI({ name: 'FATHER', stk: '5130065858', bank: 'BIDV' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
+      });
+    }
+
+    if (btnContactHung) {
+      btnContactHung.addEventListener('click', () => {
+        updateRecipientUI({ name: 'DANG DUY HUNG', stk: '0399152836', bank: 'MBBank (MB)' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
+      });
+    }
+
+    if (btnContactLuong2) {
+      btnContactLuong2.addEventListener('click', () => {
+        updateRecipientUI({ name: 'LUONG 2', stk: '8825423642', bank: 'BIDV' });
+        showPhoneScreen('form');
+        if (window.CLB.audio) window.CLB.audio.playTone(540, 'sine', 0.06);
       });
     }
 
@@ -89,16 +190,17 @@
       });
     }
 
+    // 3. Form -> Back goes to Super Transfer
     if (btnFormBackHome) {
       btnFormBackHome.addEventListener('click', () => {
-        showPhoneScreen('home');
+        showPhoneScreen('super-transfer');
         if (window.CLB.audio) window.CLB.audio.playTone(480, 'sine', 0.06);
       });
     }
 
     if (btnTransferBottomBack) {
       btnTransferBottomBack.addEventListener('click', () => {
-        showPhoneScreen('home');
+        showPhoneScreen('super-transfer');
         if (window.CLB.audio) window.CLB.audio.playTone(480, 'sine', 0.06);
       });
     }

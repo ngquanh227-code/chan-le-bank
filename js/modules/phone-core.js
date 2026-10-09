@@ -65,6 +65,7 @@
 
   function showPhoneScreen(screenName) {
     const screenHome = document.getElementById('phone-screen-home');
+    const screenSuperTransfer = document.getElementById('phone-screen-super-transfer');
     const screenQr = document.getElementById('phone-screen-qr');
     const screenForm = document.getElementById('phone-screen-form');
     const screenReceipt = document.getElementById('phone-screen-receipt');
@@ -76,6 +77,10 @@
     if (screenHome) {
       screenHome.classList.toggle('is-active', screenName === 'home');
       screenHome.style.display = screenName === 'home' ? 'block' : 'none';
+    }
+    if (screenSuperTransfer) {
+      screenSuperTransfer.classList.toggle('is-active', screenName === 'super-transfer');
+      screenSuperTransfer.style.display = screenName === 'super-transfer' ? 'block' : 'none';
     }
     if (screenQr) {
       screenQr.style.display = screenName === 'qr' ? 'flex' : 'none';

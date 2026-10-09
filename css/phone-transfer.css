@@ -1,4 +1,212 @@
 /* ==========================================================================
+   SCREEN 1.2: AUTHENTIC MBBANK SUPER TRANSFER SCREEN (Image 1 replica)
+   ========================================================================== */
+.photo-super-transfer-screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  overflow: hidden;
+  font-family: var(--font-family-mb) !important;
+}
+
+.photo-super-transfer-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.photo-super-transfer-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+  display: block;
+}
+
+/* Top Left Back Hotspot */
+.super-transfer-back-btn {
+  position: absolute;
+  left: 4.2%;
+  top: 6.6%;
+  width: 10.6%;
+  height: 4.6%;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease;
+}
+
+.super-transfer-back-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Top Right Home Hotspot */
+.super-transfer-home-btn {
+  position: absolute;
+  left: 85.6%;
+  top: 6.6%;
+  width: 10.6%;
+  height: 4.6%;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease;
+}
+
+.super-transfer-home-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Quick Action: "Số tài khoản" Hotspot */
+.super-transfer-stk-btn {
+  position: absolute;
+  left: 5.9%;
+  top: 20.0%;
+  width: 16.9%;
+  height: 11.2%;
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 30;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.super-transfer-stk-btn:hover {
+  background: rgba(79, 70, 229, 0.08);
+  transform: translateY(-2px);
+}
+
+.super-transfer-stk-btn:active {
+  transform: scale(0.96);
+}
+
+/* Quick Action: "Số điện thoại" */
+.super-transfer-phone-btn {
+  position: absolute;
+  left: 27.9%;
+  top: 20.0%;
+  width: 16.9%;
+  height: 11.2%;
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.super-transfer-phone-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Quick Action: "Số thẻ" */
+.super-transfer-card-btn {
+  position: absolute;
+  left: 49.9%;
+  top: 20.0%;
+  width: 16.9%;
+  height: 11.2%;
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.super-transfer-card-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* MBAI Search & Paste Box Hotspot */
+.super-transfer-mbai-box {
+  position: absolute;
+  left: 5.3%;
+  top: 33.2%;
+  width: 89.4%;
+  height: 12.5%;
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease;
+}
+
+.super-transfer-mbai-box:hover {
+  background: rgba(0, 168, 107, 0.05);
+}
+
+/* "Gần đây" Section Hotspot */
+.super-transfer-recent-box {
+  position: absolute;
+  left: 5.5%;
+  top: 46.7%;
+  width: 32.6%;
+  height: 8.5%;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease;
+}
+
+.super-transfer-recent-box:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* "Ví điện tử & đối tác" Hotspot */
+.super-transfer-wallet-box {
+  position: absolute;
+  left: 40.6%;
+  top: 46.7%;
+  width: 54.1%;
+  height: 8.5%;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease;
+}
+
+.super-transfer-wallet-box:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Money Chat Contact Items */
+.super-transfer-contact-item {
+  position: absolute;
+  left: 5.3%;
+  width: 89.9%;
+  height: 7.8%;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 30;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.super-transfer-contact-item:hover {
+  background: rgba(79, 70, 229, 0.06);
+}
+
+.super-transfer-contact-item:active {
+  transform: scale(0.98);
+}
+
+.super-transfer-contact-item.item-1 {
+  top: 64.9%;
+}
+
+.super-transfer-contact-item.item-2 {
+  top: 73.7%;
+}
+
+.super-transfer-contact-item.item-3 {
+  top: 82.5%;
+}
+
+.super-transfer-contact-item.item-4 {
+  top: 91.3%;
+}
+
+/* ==========================================================================
    SCREEN 2: AUTHENTIC PHOTOGRAPHIC MBBANK TRANSFER SCREEN (Image 2 replica)
    ========================================================================== */
 .photo-transfer-screen {
@@ -48,10 +256,10 @@
 /* Top Back Arrow Hotspot */
 .photo-transfer-back-btn {
   position: absolute;
-  top: 6.8%;
-  left: 5%;
-  width: 44px;
-  height: 44px;
+  top: 6.6%;
+  left: 5.3%;
+  width: 9.5%;
+  height: 4.4%;
   border-radius: 50%;
   cursor: pointer;
   z-index: 25;
@@ -64,10 +272,10 @@
 /* Live Source Account Balance */
 .photo-transfer-balance {
   position: absolute;
-  top: 24.8%;
-  left: 9.5%;
+  top: 24.0%;
+  left: 8.5%;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: #1e293b;
   letter-spacing: -0.2px;
   font-family: var(--font-family-mb) !important;
@@ -77,10 +285,10 @@
 /* Chevron Hotspot for Top-up Drawer */
 .photo-transfer-topup-toggle {
   position: absolute;
-  top: 22.5%;
-  right: 7.5%;
-  width: 44px;
-  height: 40px;
+  top: 23.4%;
+  right: 8.5%;
+  width: 9.5%;
+  height: 4.4%;
   border-radius: 8px;
   cursor: pointer;
   z-index: 25;
@@ -112,9 +320,9 @@
 /* Recipient Info Overlays */
 .photo-transfer-rec-bank {
   position: absolute;
-  top: 39.8%;
-  left: 22.4%;
-  font-size: 14.5px;
+  top: 38.0%;
+  left: 21.1%;
+  font-size: 15px;
   font-weight: 600;
   color: #1e293b;
   font-family: var(--font-family-mb) !important;
@@ -125,9 +333,9 @@
 
 .photo-transfer-rec-stk {
   position: absolute;
-  top: 47.6%;
-  left: 9.3%;
-  font-size: 17px;
+  top: 45.4%;
+  left: 8.5%;
+  font-size: 16px;
   font-weight: 600;
   color: #0f172a;
   letter-spacing: 0.3px;
@@ -138,12 +346,12 @@
 
 .photo-transfer-rec-owner {
   position: absolute;
-  top: 55.0%;
-  left: 9.3%;
-  max-width: 58%;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0f172a;
+  top: 48.8%;
+  left: 8.5%;
+  max-width: 75%;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #2563eb;
   letter-spacing: 0.2px;
   white-space: nowrap;
   overflow: hidden;
@@ -155,11 +363,11 @@
 
 .photo-transfer-chat-save {
   position: absolute;
-  top: 52.8%;
-  right: 8.8%;
-  width: 96px;
-  height: 38px;
-  border-radius: 18px;
+  top: 45.0%;
+  right: 8.5%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 25;
 }
@@ -171,20 +379,21 @@
 /* Amount Box Display & Input */
 .photo-transfer-amount-box {
   position: absolute;
-  top: 63.8%;
-  left: 6.2%;
-  width: 87.6%;
-  height: 6.0%;
+  top: 55.7%;
+  left: 5.9%;
+  width: 88.2%;
+  height: 7.0%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-right: 12px;
   gap: 6px;
   z-index: 25;
 }
 
 .photo-transfer-amount-val {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: 700;
   color: #4f46e5;
   font-family: var(--font-family-mb) !important;
   letter-spacing: -0.3px;
@@ -204,22 +413,35 @@
 
 .photo-transfer-amount-curr {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: #475569;
   font-family: var(--font-family-mb) !important;
   line-height: 1;
 }
 
-/* Memo Input: DIRECT MANUAL USER INPUT! */
+/* Memo Card: DIRECT MANUAL USER INPUT! */
+.photo-transfer-memo-label {
+  position: absolute;
+  top: 66.2%;
+  left: 8.5%;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #3b82f6;
+  font-family: var(--font-family-mb) !important;
+  pointer-events: none;
+  z-index: 25;
+  letter-spacing: -0.1px;
+}
+
 .photo-transfer-memo-input {
   position: absolute;
-  top: 75.5%;
-  left: 9.3%;
-  width: 72%;
-  min-height: 44px;
-  max-height: 60px;
-  font-size: 14.5px;
-  font-weight: 500;
+  top: 69.4%;
+  left: 8.5%;
+  width: 71.9%;
+  min-height: 38px;
+  max-height: 54px;
+  font-size: 15.5px;
+  font-weight: 600;
   color: #1e293b;
   line-height: 1.35;
   font-family: var(--font-family-mb) !important;
@@ -249,10 +471,10 @@
 
 .photo-transfer-clear-memo {
   position: absolute;
-  top: 75.0%;
-  right: 9.3%;
-  width: 38px;
-  height: 38px;
+  top: 69.5%;
+  right: 8.0%;
+  width: 8.5%;
+  height: 4.2%;
   border-radius: 50%;
   cursor: pointer;
   z-index: 30;
@@ -265,10 +487,10 @@
 /* Bottom Action Hotspots */
 .photo-transfer-btn-back {
   position: absolute;
-  bottom: 4.8%;
-  left: 6%;
-  width: 30%;
-  height: 52px;
+  top: 87.9%;
+  left: 5.9%;
+  width: 27.9%;
+  height: 5.7%;
   border-radius: 26px;
   cursor: pointer;
   z-index: 25;
@@ -280,10 +502,10 @@
 
 .photo-transfer-btn-submit {
   position: absolute;
-  bottom: 4.8%;
-  right: 6%;
-  width: 54%;
-  height: 52px;
+  top: 87.9%;
+  left: 38.1%;
+  width: 56.0%;
+  height: 5.7%;
   border-radius: 26px;
   cursor: pointer;
   z-index: 25;
