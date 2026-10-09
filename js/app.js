@@ -765,6 +765,137 @@ const App = (function() {
     if (btnOpenPhone) btnOpenPhone.addEventListener('click', () => togglePhone(true));
     if (btnClosePhone) btnClosePhone.addEventListener('click', () => togglePhone(false));
 
+    // =========================================================================
+    // DRAGGABLE PHONE SIMULATOR & PIN TO DESKTOP LOGIC
+    // =========================================================================
+    const dragHandle = document.getElementById('phone-drag-handle');
+    const btnPinPhone = document.getElementById('btn-pin-phone');
+    const chassis = document.querySelector('.phone-chassis');
+
+    // Pin / Non-blocking Mode Toggle
+    if (btnPinPhone) {
+      btnPinPhone.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isPinned = modalPhone.classList.toggle('is-pinned');
+        btnPinPhone.classList.toggle('active', isPinned);
+        if (isPinned) {
+          showToast('Đã ghim nổi điện thoại! Bạn có thể thao tác website và chơi cùng lúc.', 'success');
+          playTone(660, 'sine', 0.08);
+        } else {
+          showToast('Đã tắt chế độ ghim nổi.', 'info');
+          playTone(440, 'sine', 0.08);
+        }
+      });
+    }
+
+    // Draggable Phone Simulator Mechanics
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0;
+    let initialLeft = 0, initialTop = 0;
+
+    const startDrag = (e) => {
+      // Don't drag if clicking buttons, inputs, chips or interactive controls
+      if (e.target.closest('button, a, input, select, textarea, [role="button"], .fake-chip-btn, .fake-memo-chip, .photo-home-eye-btn, .photo-home-transfer-btn, .photo-home-topup-btn, .phone-floating-close, .phone-floating-pin, .btn-fake-transfer-confirm, .photo-ov-btn-again, .photo-ov-home-btn')) {
+        return;
+      }
+      if (e.button !== undefined && e.button !== 0) return; // Only left click
+
+      isDragging = true;
+      if (chassis) chassis.classList.add('is-dragging');
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      dragStartX = clientX;
+      dragStartY = clientY;
+
+      const rect = chassis.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+
+      chassis.style.position = 'fixed';
+      chassis.style.left = `${initialLeft}px`;
+      chassis.style.top = `${initialTop}px`;
+      chassis.style.margin = '0';
+      chassis.style.transform = 'none';
+
+      window.addEventListener('mousemove', onDragMove, { passive: false });
+      window.addEventListener('mouseup', onDragEnd);
+      window.addEventListener('touchmove', onDragMove, { passive: false });
+      window.addEventListener('touchend', onDragEnd);
+
+      if (e.cancelable) e.preventDefault();
+    };
+
+    const onDragMove = (e) => {
+      if (!isDragging || !chassis) return;
+
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      const dx = clientX - dragStartX;
+      const dy = clientY - dragStartY;
+
+      let newLeft = initialLeft + dx;
+      let newTop = initialTop + dy;
+
+      const rect = chassis.getBoundingClientRect();
+      const maxLeft = Math.max(10, window.innerWidth - rect.width - 10);
+      const maxTop = Math.max(10, window.innerHeight - 80);
+
+      newLeft = Math.max(5, Math.min(newLeft, maxLeft));
+      newTop = Math.max(5, Math.min(newTop, maxTop));
+
+      chassis.style.left = `${newLeft}px`;
+      chassis.style.top = `${newTop}px`;
+
+      if (e.cancelable) e.preventDefault();
+    };
+
+    const onDragEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (chassis) chassis.classList.remove('is-dragging');
+
+      window.removeEventListener('mousemove', onDragMove);
+      window.removeEventListener('mouseup', onDragEnd);
+      window.removeEventListener('touchmove', onDragMove);
+      window.removeEventListener('touchend', onDragEnd);
+    };
+
+    if (dragHandle) {
+      dragHandle.addEventListener('mousedown', startDrag);
+      dragHandle.addEventListener('touchstart', startDrag, { passive: false });
+
+      // Double-click drag handle to re-center
+      dragHandle.addEventListener('dblclick', () => {
+        if (chassis) {
+          chassis.style.left = '';
+          chassis.style.top = '';
+          chassis.style.position = '';
+          chassis.style.margin = '';
+          chassis.style.transform = '';
+          showToast('Đã đặt lại vị trí điện thoại vào giữa màn hình!', 'info');
+        }
+      });
+    }
+
+    const dynamicIsland = document.getElementById('phone-dynamic-island');
+    if (dynamicIsland) {
+      dynamicIsland.addEventListener('mousedown', startDrag);
+      dynamicIsland.addEventListener('touchstart', startDrag, { passive: false });
+    }
+
+    // Clicking outside chassis in backdrop closes modal (only when not pinned)
+    if (modalPhone) {
+      modalPhone.addEventListener('click', (e) => {
+        if (modalPhone.classList.contains('is-pinned')) return;
+        if (e.target === modalPhone) {
+          togglePhone(false);
+        }
+      });
+    }
+
     // Home Screen Navigation Listeners
     if (btnHomeOpenTransfer) {
       btnHomeOpenTransfer.addEventListener('click', () => {

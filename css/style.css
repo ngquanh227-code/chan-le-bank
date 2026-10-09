@@ -1317,6 +1317,92 @@ a:hover {
   border-radius: 38px 38px 0 0;
 }
 
+/* Phone Drag Bar Handle */
+.phone-drag-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 130;
+  cursor: grab;
+  user-select: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 100%);
+  transition: background 0.2s ease;
+}
+
+.phone-drag-bar:hover {
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.2) 0%, transparent 100%);
+}
+
+.phone-drag-bar:active,
+.phone-chassis.is-dragging .phone-drag-bar {
+  cursor: grabbing;
+}
+
+.drag-handle-pill {
+  width: 44px;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.phone-drag-bar:hover .drag-handle-pill {
+  background: #38bdf8;
+  width: 54px;
+}
+
+.phone-chassis.is-dragging {
+  cursor: grabbing !important;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.99), 0 0 0 2px #38bdf8, 0 0 45px rgba(56, 189, 248, 0.45) !important;
+  transition: box-shadow 0.15s ease;
+}
+
+/* Phone Floating Pin (PiP / Non-blocking Mode) Button */
+.phone-floating-pin {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 125;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.phone-floating-pin:hover,
+.phone-floating-pin.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+  transform: scale(1.08);
+}
+
+/* Pinned State: Allows full interaction with website while phone is open */
+.phone-modal-backdrop.is-pinned {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  pointer-events: none !important;
+}
+
+.phone-modal-backdrop.is-pinned .phone-chassis {
+  pointer-events: auto !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(255, 255, 255, 0.25), 0 0 30px rgba(0, 102, 255, 0.3) !important;
+}
+
 /* Phone Floating Close Button */
 .phone-floating-close {
   position: absolute;
@@ -1333,7 +1419,7 @@ a:hover {
   justify-content: center;
   font-size: 13.5px;
   cursor: pointer;
-  z-index: 120;
+  z-index: 125;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.2s ease;
 }
