@@ -1294,11 +1294,11 @@
           <div class="photo-transfer-frame">
             <img src="img/mbbank_transfer_clean.jpg" alt="MBBank Chuyển tiền tới số tài khoản" class="photo-transfer-bg-img" />
 
-            <!-- Live Status Bar Clock Overlay -->
-            <div class="photo-transfer-clock" id="phone-clock">19:27</div>
-
             <!-- Top Left Back Arrow Hotspot -->
             <div class="photo-transfer-back-btn" id="btn-form-back-home" role="button" tabindex="0" title="Quay lại"></div>
+
+            <!-- Hidden clock element for timers -->
+            <span id="phone-clock" style="display: none;">19:27</span>
 
             <!-- Live Source Balance Overlay (TÀI KHOẢN THANH TOÁN) -->
             <div class="photo-transfer-balance" id="phone-user-balance">5,301,454 VND</div>
@@ -1331,27 +1331,15 @@
             <div class="photo-transfer-rec-owner" id="phone-recipient-name">NGUYEN QUANG ANH</div>
             <div class="photo-transfer-chat-save" id="btn-chat-save" role="button" tabindex="0" title="Lưu thông tin thụ hưởng"></div>
 
-            <!-- Amount Card: Display & Editable Hotspot -->
+            <!-- Amount Card: Display & Editable Hotspot (Clean, authentic layout) -->
             <div class="photo-transfer-amount-box" id="phone-amount-box">
               <span class="photo-transfer-amount-val" id="phone-amount-display-num" contenteditable="true" spellcheck="false" title="Nhấp để sửa số tiền">50,000</span>
               <span class="photo-transfer-amount-curr">VND</span>
             </div>
 
-            <!-- Quick Amount Chips directly on screen -->
-            <div class="photo-transfer-quick-amounts">
-              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="20000">20k</span>
-              <span class="fake-chip-btn active" role="button" tabindex="0" data-amount="50000">50k</span>
-              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="100000">100k</span>
-              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="200000">200k</span>
-              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="500000">500k</span>
-              <span class="fake-chip-btn" role="button" tabindex="0" data-amount="1000000">1M</span>
-            </div>
-
             <!-- Memo Card: DIRECT MANUAL USER INPUT! User tự gõ tay nội dung cược -->
-            <div class="photo-transfer-memo-box">
-              <div class="photo-transfer-memo-input" id="phone-memo-input" contenteditable="true" spellcheck="false" placeholder="Nhập nội dung chuyển tiền (VD: Dungdz TC, Dungdz TL, ...)">Dungdz TC</div>
-              <div class="photo-transfer-clear-memo" id="btn-clear-memo" role="button" tabindex="0" title="Xóa nội dung"></div>
-            </div>
+            <div class="photo-transfer-memo-input" id="phone-memo-input" contenteditable="true" spellcheck="false" placeholder="Nhập nội dung cược (VD: Dungdz TC, Dungdz TL, ...)">Dungdz TC</div>
+            <div class="photo-transfer-clear-memo" id="btn-clear-memo" role="button" tabindex="0" title="Xóa nội dung"></div>
 
             <!-- Hidden span for backwards compatibility -->
             <span id="phone-memo-display" style="display: none;">Dungdz TC</span>
