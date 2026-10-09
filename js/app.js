@@ -928,6 +928,176 @@ const App = (function() {
       });
     }
 
+    // =========================================================================
+    // FAKE WITHDRAWAL SIMULATION ENGINE (GIẢ LẬP RÚT TIỀN VỀ TK)
+    // =========================================================================
+    const btnDoWithdraw = document.getElementById('btn-do-quick-withdraw');
+    const withdrawCustomInput = document.getElementById('withdraw-custom-amount');
+    const withdrawValDisplay = document.getElementById('withdraw-val-display');
+    const btnWithdrawAll = document.getElementById('btn-withdraw-all');
+    const withdrawChips = document.querySelectorAll('.withdraw-chip');
+    const btnHomeQuickWithdraw = document.getElementById('btn-home-quick-withdraw');
+
+    let currentWithdrawAmount = 100000;
+
+    const setWithdrawAmount = (amt) => {
+      currentWithdrawAmount = Math.max(10000, amt);
+      if (withdrawValDisplay) {
+        withdrawValDisplay.textContent = `${currentWithdrawAmount.toLocaleString('vi-VN')} VND`;
+      }
+      if (withdrawCustomInput) {
+        withdrawCustomInput.textContent = currentWithdrawAmount.toLocaleString('vi-VN');
+      }
+    };
+
+    // Preset chip clicks
+    withdrawChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        withdrawChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const amt = parseInt(chip.getAttribute('data-amount'), 10);
+        setWithdrawAmount(amt);
+        playTone(520, 'sine', 0.05);
+      });
+    });
+
+    // Custom amount live typing
+    if (withdrawCustomInput) {
+      withdrawCustomInput.addEventListener('input', () => {
+        const raw = withdrawCustomInput.textContent.replace(/[^\d]/g, '');
+        const parsed = parseInt(raw, 10) || 0;
+        currentWithdrawAmount = parsed;
+        if (withdrawValDisplay) {
+          withdrawValDisplay.textContent = `${parsed.toLocaleString('vi-VN')} VND`;
+        }
+        withdrawChips.forEach(c => c.classList.remove('active'));
+      });
+    }
+
+    // "Tất cả" (Rút toàn bộ số dư)
+    if (btnWithdrawAll) {
+      btnWithdrawAll.addEventListener('click', () => {
+        withdrawChips.forEach(c => c.classList.remove('active'));
+        const allBal = phoneState.balance || 10000000;
+        setWithdrawAmount(allBal);
+        playTone(600, 'sine', 0.06);
+        showToast(`Đã chọn toàn bộ số dư: ${allBal.toLocaleString('vi-VN')}đ`, 'info');
+      });
+    }
+
+    // Modal elements
+    const modalWithdrawReceipt = document.getElementById('modal-withdraw-receipt');
+    const btnCloseWithdrawModal = document.getElementById('btn-close-withdraw-modal');
+    const btnOpenPhoneFromReceipt = document.getElementById('btn-open-phone-from-receipt');
+    const withdrawBackdrop = document.getElementById('withdraw-receipt-backdrop');
+
+    const closeWithdrawModal = () => {
+      if (modalWithdrawReceipt) modalWithdrawReceipt.style.display = 'none';
+    };
+
+    if (btnCloseWithdrawModal) btnCloseWithdrawModal.addEventListener('click', closeWithdrawModal);
+    if (withdrawBackdrop) withdrawBackdrop.addEventListener('click', closeWithdrawModal);
+    if (btnOpenPhoneFromReceipt) {
+      btnOpenPhoneFromReceipt.addEventListener('click', () => {
+        closeWithdrawModal();
+        togglePhone(true);
+      });
+    }
+
+    // Core execution handler for fake withdrawal
+    const executeFakeWithdrawal = (amtOverride) => {
+      const selectBank = document.getElementById('select-payout-bank');
+      const inputStk = document.getElementById('input-stk-reward');
+      const inputName = document.getElementById('input-name-reward');
+
+      const stk = inputStk ? inputStk.value.trim() : '0971266012';
+      const name = inputName ? inputName.value.trim() : 'NGUYEN THAO LINH';
+      const bankCode = selectBank ? selectBank.value : 'MB';
+      const bankText = selectBank && selectBank.options[selectBank.selectedIndex] 
+        ? selectBank.options[selectBank.selectedIndex].text 
+        : 'MB - Ngân hàng Quân Đội';
+
+      const amount = amtOverride || currentWithdrawAmount || 100000;
+
+      if (!stk) {
+        showToast('Vui lòng nhập số tài khoản nhận tiền!', 'warning');
+        if (inputStk) inputStk.focus();
+        return;
+      }
+
+      if (amount < 10000) {
+        showToast('Số tiền rút tối thiểu là 10,000đ!', 'warning');
+        return;
+      }
+
+      // Loading state on button
+      if (btnDoWithdraw) {
+        btnDoWithdraw.classList.add('is-loading');
+        btnDoWithdraw.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>ĐANG KẾT NỐI NAPAS 24/7...</span>';
+      }
+
+      playTone(480, 'triangle', 0.1);
+
+      // Simulate instantaneous NAPAS 24/7 payout (1.2 seconds)
+      setTimeout(() => {
+        if (btnDoWithdraw) {
+          btnDoWithdraw.classList.remove('is-loading');
+          btnDoWithdraw.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span id="btn-withdraw-text">RÚT TIỀN VỀ NGÂN HÀNG (GIẢ LẬP)</span>';
+        }
+
+        const txCode = `NPS${Math.floor(100000000 + Math.random() * 900000000)}`;
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+
+        // Pleasant success audio chime
+        playTone(523.25, 'sine', 0.12);
+        setTimeout(() => playTone(659.25, 'sine', 0.15), 100);
+        setTimeout(() => playTone(783.99, 'sine', 0.25), 220);
+
+        // Success Toast Notification
+        showToast(`Rút tiền thành công! Đã giải ngân ${amount.toLocaleString('vi-VN')}đ về STK ${stk} (${bankCode})`, 'success');
+
+        // Populate and open success receipt dialog
+        const rcAmount = document.getElementById('receipt-modal-amount');
+        const rcBank = document.getElementById('receipt-modal-bank');
+        const rcStk = document.getElementById('receipt-modal-stk');
+        const rcName = document.getElementById('receipt-modal-name');
+        const rcFt = document.getElementById('receipt-modal-ft');
+        const rcTime = document.getElementById('receipt-modal-time');
+
+        if (rcAmount) rcAmount.textContent = amount.toLocaleString('vi-VN');
+        if (rcBank) rcBank.textContent = bankText;
+        if (rcStk) rcStk.textContent = stk;
+        if (rcName) rcName.textContent = name;
+        if (rcFt) rcFt.textContent = txCode;
+        if (rcTime) rcTime.textContent = timeStr;
+
+        if (modalWithdrawReceipt) {
+          modalWithdrawReceipt.style.display = 'flex';
+        }
+
+        // Trigger realistic phone notification dropdown in virtual phone
+        triggerPhoneNotification({
+          title: `${bankCode === 'MB' ? 'MBBank' : bankCode} Biến động số dư`,
+          body: `TK ${stk} +${amount.toLocaleString('vi-VN')}đ lúc ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}. GD: Rút tiền TRUM.TOP - ${txCode}`,
+          iconHtml: '<i class="fa-solid fa-arrow-down-left" style="color: #16a34a;"></i>',
+          type: 'credit',
+          duration: 5000
+        });
+
+      }, 1200);
+    };
+
+    if (btnDoWithdraw) {
+      btnDoWithdraw.addEventListener('click', () => executeFakeWithdrawal());
+    }
+
+    if (btnHomeQuickWithdraw) {
+      btnHomeQuickWithdraw.addEventListener('click', () => {
+        executeFakeWithdrawal(500000);
+      });
+    }
+
     // Update Phone Clock across all screens to local live time
     const updatePhoneClock = () => {
       const now = new Date();

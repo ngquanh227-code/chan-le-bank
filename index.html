@@ -166,10 +166,16 @@
             <!-- Bank Selection Dropdown -->
             <div>
               <select class="form-select-bank" id="select-payout-bank" aria-label="Ngân hàng nhận thưởng">
-                <option value="MB" selected>MB-Ngân hàng Quân Đội</option>
-                <option value="VCB">VCB-Ngân hàng Ngoại Thương</option>
-                <option value="TCB">TCB-Ngân hàng Kỹ Thương</option>
-                <option value="ACB">ACB-Ngân hàng Á Châu</option>
+                <option value="MB" selected>MB - Ngân hàng Quân Đội</option>
+                <option value="VCB">VCB - Vietcombank</option>
+                <option value="TCB">TCB - Techcombank</option>
+                <option value="ACB">ACB - Ngân hàng Á Châu</option>
+                <option value="VPB">VPB - VPBank</option>
+                <option value="TPB">TPB - TPBank</option>
+                <option value="BIDV">BIDV - Ngân hàng Đầu tư &amp; Phát triển</option>
+                <option value="CTG">CTG - VietinBank</option>
+                <option value="AGR">AGR - Agribank</option>
+                <option value="MOMO">MOMO - Ví điện tử MoMo</option>
               </select>
             </div>
 
@@ -185,6 +191,47 @@
               <button type="button" class="btn btn-secondary" id="btn-save-account" title="Lưu thông tin tài khoản">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
+            </div>
+
+            <!-- FAKE WITHDRAWAL SIMULATION SECTION (Ô GIẢ LẬP RÚT TIỀN VỀ TK) -->
+            <div class="fake-withdraw-box" id="fake-withdraw-box">
+              <div class="fake-withdraw-header">
+                <div class="fake-withdraw-title">
+                  <i class="fa-solid fa-money-bill-transfer" style="color: #38bdf8;"></i>
+                  <span>GIẢ LẬP RÚT TIỀN VỀ TK</span>
+                </div>
+                <span class="fake-withdraw-badge"><i class="fa-solid fa-bolt"></i> NAPAS 24/7</span>
+              </div>
+              
+              <div class="withdraw-amount-picker">
+                <div class="withdraw-picker-label">
+                  <span>Số tiền rút mô phỏng:</span>
+                  <span class="withdraw-val-text" id="withdraw-val-display">100,000 VND</span>
+                </div>
+                <div class="withdraw-custom-wrap">
+                  <span class="withdraw-currency-prefix">VND</span>
+                  <div class="withdraw-custom-input" contenteditable="true" role="textbox" id="withdraw-custom-amount" aria-label="Nhập số tiền rút tùy ý">100,000</div>
+                  <div class="withdraw-all-btn" id="btn-withdraw-all" role="button" tabindex="0" title="Rút toàn bộ số dư">Tất cả</div>
+                </div>
+                <div class="withdraw-chips-grid">
+                  <div class="withdraw-chip" role="button" tabindex="0" data-amount="50000">50k</div>
+                  <div class="withdraw-chip active" role="button" tabindex="0" data-amount="100000">100k</div>
+                  <div class="withdraw-chip" role="button" tabindex="0" data-amount="200000">200k</div>
+                  <div class="withdraw-chip" role="button" tabindex="0" data-amount="500000">500k</div>
+                  <div class="withdraw-chip" role="button" tabindex="0" data-amount="1000000">1M</div>
+                  <div class="withdraw-chip" role="button" tabindex="0" data-amount="5000000">5M</div>
+                </div>
+              </div>
+
+              <!-- Fake Withdraw Action Trigger -->
+              <div class="btn-fake-withdraw-action" id="btn-do-quick-withdraw" role="button" tabindex="0">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span id="btn-withdraw-text">RÚT TIỀN VỀ NGÂN HÀNG (GIẢ LẬP)</span>
+              </div>
+
+              <div class="fake-withdraw-subnote">
+                <i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> Giải ngân tự động trong 2s • Không mất phí
+              </div>
             </div>
 
             <!-- Button 6: Lịch sử chơi -->
@@ -1129,6 +1176,11 @@
               <i class="fa-solid fa-circle-plus"></i> Nạp số dư
             </div>
 
+            <!-- Quick Withdraw Hotspot / Button on Home Card -->
+            <div class="photo-home-withdraw-btn" id="btn-home-quick-withdraw" role="button" tabindex="0" title="Giả lập rút tiền về tài khoản">
+              <i class="fa-solid fa-money-bill-transfer"></i> Rút về TK
+            </div>
+
             <!-- "Chuyển tiền" Hotspot (Opens Transfer / Betting Sheet) -->
             <div class="photo-home-transfer-btn" id="btn-home-open-transfer" role="button" tabindex="0" title="Bấm để Chuyển tiền (Đặt cược)">
               <span class="photo-home-transfer-pulse"></span>
@@ -1301,6 +1353,64 @@
             <div class="photo-ov-btn-again" id="btn-phone-new-transfer" role="button" tabindex="0" title="Thực hiện giao dịch khác">
               <span>Thực hiện giao dịch khác</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Fake Withdrawal Success Receipt (NAPAS 24/7) -->
+  <div class="withdraw-receipt-modal" id="modal-withdraw-receipt" style="display: none;">
+    <div class="withdraw-receipt-backdrop" id="withdraw-receipt-backdrop"></div>
+    <div class="withdraw-receipt-dialog">
+      <div class="withdraw-receipt-card">
+        <div class="withdraw-receipt-badge-top">
+          <div class="receipt-check-circle">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <div class="receipt-success-heading">RÚT TIỀN THÀNH CÔNG</div>
+          <div class="receipt-sub-heading">Xử lý qua cổng NAPAS 24/7 siêu tốc</div>
+        </div>
+
+        <div class="receipt-amount-row">
+          <span class="receipt-amount-sign">+</span>
+          <span class="receipt-amount-val" id="receipt-modal-amount">100,000</span>
+          <span class="receipt-amount-curr">VND</span>
+        </div>
+
+        <div class="receipt-detail-grid">
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Ngân hàng nhận:</span>
+            <strong class="receipt-val" id="receipt-modal-bank">MBBank (MB)</strong>
+          </div>
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Số tài khoản:</span>
+            <strong class="receipt-val" id="receipt-modal-stk">0971266012</strong>
+          </div>
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Người thụ hưởng:</span>
+            <strong class="receipt-val" id="receipt-modal-name">NGUYEN THAO LINH</strong>
+          </div>
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Mã giao dịch:</span>
+            <strong class="receipt-val text-gold" id="receipt-modal-ft">NPS268914824</strong>
+          </div>
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Thời gian:</span>
+            <span class="receipt-val" id="receipt-modal-time">19:35:12 09/10/2026</span>
+          </div>
+          <div class="receipt-detail-item">
+            <span class="receipt-lbl">Trạng thái:</span>
+            <span class="receipt-val text-green"><i class="fa-solid fa-circle-check"></i> Đã giải ngân (0.8s)</span>
+          </div>
+        </div>
+
+        <div class="withdraw-receipt-actions">
+          <div class="btn-receipt-finish" id="btn-close-withdraw-modal" role="button" tabindex="0">
+            <i class="fa-solid fa-check"></i> Hoàn tất
+          </div>
+          <div class="btn-receipt-phone" id="btn-open-phone-from-receipt" role="button" tabindex="0">
+            <i class="fa-solid fa-mobile-screen"></i> Xem trên điện thoại ảo
           </div>
         </div>
       </div>
