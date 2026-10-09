@@ -21,15 +21,20 @@
   let isBalanceVisible = true;
   let phoneToastTimer = null;
 
+  function formatMoney(amount) {
+    if (amount === undefined || amount === null || isNaN(amount)) return '0';
+    return Number(amount).toLocaleString('en-US');
+  }
+
   function syncBalanceUI() {
     const balFormEl = document.getElementById('phone-user-balance');
     const balHomeValEl = document.getElementById('home-bal-val');
 
     if (balFormEl) {
-      balFormEl.textContent = `${phoneState.balance.toLocaleString('vi-VN')} VND`;
+      balFormEl.textContent = `${formatMoney(phoneState.balance)} VND`;
     }
     if (balHomeValEl) {
-      balHomeValEl.textContent = isBalanceVisible ? phoneState.balance.toLocaleString('vi-VN') : '••••••••';
+      balHomeValEl.textContent = isBalanceVisible ? formatMoney(phoneState.balance) : '••••••••';
     }
   }
 
@@ -230,6 +235,7 @@
 
   window.CLB.phone = {
     phoneState,
+    formatMoney,
     syncBalanceUI,
     toggleEyeBalance,
     triggerPhoneNotification,

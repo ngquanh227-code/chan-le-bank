@@ -14,10 +14,10 @@
     const withdrawCustomInput = document.getElementById('withdraw-custom-amount');
 
     if (withdrawValDisplay) {
-      withdrawValDisplay.textContent = `${currentWithdrawAmount.toLocaleString('vi-VN')} VND`;
+      withdrawValDisplay.textContent = `${currentWithdrawAmount.toLocaleString("en-US")} VND`;
     }
     if (withdrawCustomInput) {
-      withdrawCustomInput.textContent = currentWithdrawAmount.toLocaleString('vi-VN');
+      withdrawCustomInput.textContent = currentWithdrawAmount.toLocaleString("en-US");
     }
   }
 
@@ -75,7 +75,7 @@
       }
 
       if (window.CLB.toast) {
-        window.CLB.toast.showToast(`Rút tiền thành công! Đã giải ngân ${amount.toLocaleString('vi-VN')}đ về STK ${stk} (${bankCode})`, 'success');
+        window.CLB.toast.showToast(`Rút tiền thành công! Đã giải ngân ${amount.toLocaleString("en-US")}đ về STK ${stk} (${bankCode})`, 'success');
       }
 
       // Populate success receipt dialog
@@ -86,7 +86,7 @@
       const rcFt = document.getElementById('receipt-modal-ft');
       const rcTime = document.getElementById('receipt-modal-time');
 
-      if (rcAmount) rcAmount.textContent = amount.toLocaleString('vi-VN');
+      if (rcAmount) rcAmount.textContent = amount.toLocaleString("en-US");
       if (rcBank) rcBank.textContent = bankText;
       if (rcStk) rcStk.textContent = stk;
       if (rcName) rcName.textContent = name;
@@ -101,7 +101,7 @@
       if (window.CLB.phone) {
         window.CLB.phone.triggerPhoneNotification({
           title: `${bankCode === 'MB' ? 'MBBank' : bankCode} Biến động số dư`,
-          body: `TK ${stk} +${amount.toLocaleString('vi-VN')}đ lúc ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}. GD: Rút tiền TRUM.TOP - ${txCode}`,
+          body: `TK ${stk} +${amount.toLocaleString("en-US")}đ lúc ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}. GD: Rút tiền TRUM.TOP - ${txCode}`,
           iconHtml: '<i class="fa-solid fa-arrow-down-left" style="color: #16a34a;"></i>',
           type: 'credit',
           duration: 5000
@@ -140,7 +140,7 @@
         const parsed = parseInt(raw, 10) || 0;
         currentWithdrawAmount = parsed;
         if (withdrawValDisplay) {
-          withdrawValDisplay.textContent = `${parsed.toLocaleString('vi-VN')} VND`;
+          withdrawValDisplay.textContent = `${parsed.toLocaleString("en-US")} VND`;
         }
         withdrawChips.forEach(c => c.classList.remove('active'));
       });
@@ -153,7 +153,7 @@
         const allBal = (window.CLB.phone && window.CLB.phone.phoneState) ? window.CLB.phone.phoneState.balance : 10000000;
         setWithdrawAmount(allBal);
         if (window.CLB.audio) window.CLB.audio.playTone(600, 'sine', 0.06);
-        if (window.CLB.toast) window.CLB.toast.showToast(`Đã chọn toàn bộ số dư: ${allBal.toLocaleString('vi-VN')}đ`, 'info');
+        if (window.CLB.toast) window.CLB.toast.showToast(`Đã chọn toàn bộ số dư: ${allBal.toLocaleString("en-US")}đ`, 'info');
       });
     }
 

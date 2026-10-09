@@ -134,7 +134,7 @@
     tr.style.animation = 'rowHighlight 1.5s ease-out';
     tr.innerHTML = `
       <td style="color: #60a5fa; font-weight: 700;">${randomName}</td>
-      <td style="color: #fbbf24; font-weight: 700;">+${randomAmount.toLocaleString('vi-VN')}đ</td>
+      <td style="color: #fbbf24; font-weight: 700;">+${randomAmount.toLocaleString("en-US")}đ</td>
       <td><span class="game-badge-tag">${randomGame}</span></td>
       <td style="color: #9ca3af;">${timeStr}</td>
     `;

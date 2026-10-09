@@ -8,6 +8,11 @@
   'use strict';
   window.CLB = window.CLB || {};
 
+  function formatMoney(amount) {
+    if (amount === undefined || amount === null || isNaN(amount)) return "0";
+    return Number(amount).toLocaleString("en-US");
+  }
+
   function formatTimeNow() {
     const now = new Date();
     const Y = now.getFullYear();
@@ -282,6 +287,13 @@
         const parsed = parseInt(raw, 10) || 0;
         phoneState.amount = parsed;
       });
+      amtInput.addEventListener('blur', () => {
+        if (phoneState.amount > 0) {
+          amtInput.innerText = formatMoney(phoneState.amount);
+        } else {
+          amtInput.innerText = '0';
+        }
+      });
       amtInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -296,7 +308,7 @@
         chip.classList.add('active');
         const amt = parseInt(chip.getAttribute('data-amount'), 10);
         phoneState.amount = amt;
-        if (amtInput) amtInput.innerText = amt.toLocaleString('vi-VN');
+        if (amtInput) amtInput.innerText = formatMoney(amt);
         if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.05);
       });
     });
@@ -329,12 +341,12 @@
           const addAmount = parseInt(topupVal, 10);
           if (!isNaN(addAmount)) {
             phoneState.balance += addAmount;
-            if (window.CLB.toast) window.CLB.toast.showToast(`Đã nạp +${addAmount.toLocaleString('vi-VN')}đ vào tài khoản nguồn MBBank!`, 'success');
+            if (window.CLB.toast) window.CLB.toast.showToast(`Đã nạp +${formatMoney(addAmount)}đ vào tài khoản nguồn MBBank!`, 'success');
             triggerPhoneNotification({
               type: 'topup',
               iconHtml: '<i class="fa-solid fa-wallet" style="color: #4ade80;"></i>',
               title: `<span style="color: #4ade80; font-weight: 800;">MBBank Nạp tiền nguồn (+${(addAmount >= 1000000 ? (addAmount/1000000)+'M' : (addAmount/1000)+'k')})</span>`,
-              body: `TK 0971266012 | Nạp: +${addAmount.toLocaleString('vi-VN')} VND | <strong>Số dư khả dụng: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong>`,
+              body: `TK 0971266012 | Nạp: +${formatMoney(addAmount)} VND | <strong>Số dư khả dụng: ${formatMoney(phoneState.balance)} VND</strong>`,
               duration: 3500
             });
           }
@@ -361,12 +373,12 @@
           if (!isNaN(num) && num > 0) {
             phoneState.balance = num;
             syncBalanceUI();
-            if (window.CLB.toast) window.CLB.toast.showToast(`Đã thiết lập số dư MB thành công: ${phoneState.balance.toLocaleString('vi-VN')}đ`, 'success');
+            if (window.CLB.toast) window.CLB.toast.showToast(`Đã thiết lập số dư MB thành công: ${formatMoney(phoneState.balance)}đ`, 'success');
             triggerPhoneNotification({
               type: 'topup',
               iconHtml: '<i class="fa-solid fa-pen-to-square" style="color: #38bdf8;"></i>',
               title: '<span style="color: #38bdf8; font-weight: 800;">MBBank Cập nhật số dư tùy chỉnh</span>',
-              body: `TK 0971266012 | <strong>Số dư khả dụng mới: ${phoneState.balance.toLocaleString('vi-VN')} VND</strong>`,
+              body: `TK 0971266012 | <strong>Số dư khả dụng mới: ${formatMoney(phoneState.balance)} VND</strong>`,
               duration: 3500
             });
             if (window.CLB.audio) {
@@ -613,7 +625,7 @@
           const timeShortTx = `${String(nowTx.getHours()).padStart(2, '0')}:${String(nowTx.getMinutes()).padStart(2, '0')}`;
           const dateFormatted = `${String(nowTx.getDate()).padStart(2, '0')}/${String(nowTx.getMonth() + 1).padStart(2, '0')}/${nowTx.getFullYear()}`;
 
-          if (receiptAmountEl) receiptAmountEl.textContent = `${phoneState.amount.toLocaleString('vi-VN')} VND`;
+          if (receiptAmountEl) receiptAmountEl.textContent = `${formatMoney(phoneState.amount)} VND`;
           if (receiptTimeEl) receiptTimeEl.textContent = `${timeShortTx} - ${dateFormatted}`;
           const photoClock = document.getElementById('photo-receipt-clock');
           if (photoClock) photoClock.textContent = timeShortTx;
@@ -631,10 +643,10 @@
               receiptMatchEl.textContent = `SAI CÚ PHÁP: ${calcExplain} ➔ KHÔNG TRẢ THƯỞNG`;
             } else if (isWin) {
               receiptMatchEl.style.color = '#15803d';
-              receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${payoutAmount.toLocaleString('vi-VN')}đ)${isDoublePayout ? ' [NỔ HŨ X2!]' : ''}`;
+              receiptMatchEl.textContent = `KHỚP CỬA ${memoClean} ➔ THẮNG (+${formatMoney(payoutAmount)}đ)${isDoublePayout ? ' [NỔ HŨ X2!]' : ''}`;
             } else {
               receiptMatchEl.style.color = '#dc2626';
-              receiptMatchEl.textContent = `${calcExplain} ➔ THUA (-${phoneState.amount.toLocaleString('vi-VN')}đ)`;
+              receiptMatchEl.textContent = `${calcExplain} ➔ THUA (-${formatMoney(phoneState.amount)}đ)`;
             }
           }
 
@@ -647,8 +659,8 @@
           triggerPhoneNotification({
             type: 'debit',
             iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #ffffff;"></i>',
-            title: `<span style="color: #dc2626; font-weight: 700;">MBBank: -${phoneState.amount.toLocaleString('vi-VN')} VND</span>`,
-            body: `TK 0971266012 | ND: ${phoneState.memo} | Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`,
+            title: `<span style="color: #dc2626; font-weight: 700;">MBBank: -${formatMoney(phoneState.amount)} VND</span>`,
+            body: `TK 0971266012 | ND: ${phoneState.memo} | Số dư: ${formatMoney(phoneState.balance)}đ`,
             duration: 3200
           });
 
@@ -663,8 +675,8 @@
             newRow.innerHTML = `
               <td><span class="badge-game-mode">${gameTag}</span></td>
               <td><span class="badge-bet-choice">${phoneState.memo}</span></td>
-              <td>${phoneState.amount.toLocaleString('vi-VN')}</td>
-              <td><strong style="color: ${isWin ? '#4ade80' : '#888'};">${isWin ? payoutAmount.toLocaleString('vi-VN') : '0'}</strong></td>
+              <td>${formatMoney(phoneState.amount)}</td>
+              <td><strong style="color: ${isWin ? '#4ade80' : '#888'};">${isWin ? formatMoney(payoutAmount) : '0'}</strong></td>
               <td><span class="${isWin ? 'badge-result-win' : (isValidSyntax ? 'badge-result-lose' : 'badge-result-lose')}">${isWin ? 'WIN' : (isValidSyntax ? 'LOSE' : 'SAI ND')}</span></td>
               <td><code>***${fullTxCode.slice(-4)}</code></td>
               <td><span class="badge-tail-digit">${lastDigit}</span></td>
@@ -684,13 +696,13 @@
               triggerPhoneNotification({
                 type: 'credit',
                 iconHtml: '<i class="fa-solid fa-check" style="color: #ffffff;"></i>',
-                title: `<span style="color: #15803d; font-weight: 700;">MBBank: +${payoutAmount.toLocaleString('vi-VN')} VND</span>`,
-                body: `TK 0971266012 | Trả thưởng 5s | Số dư: ${phoneState.balance.toLocaleString('vi-VN')}đ`,
+                title: `<span style="color: #15803d; font-weight: 700;">MBBank: +${formatMoney(payoutAmount)} VND</span>`,
+                body: `TK 0971266012 | Trả thưởng 5s | Số dư: ${formatMoney(phoneState.balance)}đ`,
                 duration: 5000
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(true);
-              if (window.CLB.toast) window.CLB.toast.showToast(`🎉 Trúng thưởng +${payoutAmount.toLocaleString('vi-VN')}đ đã thanh toán 5s!`, 'success');
+              if (window.CLB.toast) window.CLB.toast.showToast(`🎉 Trúng thưởng +${formatMoney(payoutAmount)}đ đã thanh toán 5s!`, 'success');
             } else if (!isValidSyntax) {
               // Notification when syntax is wrong
               triggerPhoneNotification({
@@ -708,12 +720,12 @@
                 type: 'lose',
                 iconHtml: '<i class="fa-solid fa-xmark" style="color: #ffffff;"></i>',
                 title: `<span style="color: #dc2626; font-weight: 700;">TRUM.TOP: Không trúng thưởng</span>`,
-                body: `Số cuối ${lastDigit} không khớp ${memoClean} | Mất -${phoneState.amount.toLocaleString('vi-VN')}đ`,
+                body: `Số cuối ${lastDigit} không khớp ${memoClean} | Mất -${formatMoney(phoneState.amount)}đ`,
                 duration: 4500
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(false);
-              if (window.CLB.toast) window.CLB.toast.showToast(`❌ Thua cược! Số cuối ${lastDigit} không khớp ${phoneState.memo} (-${phoneState.amount.toLocaleString('vi-VN')}đ)`, 'danger');
+              if (window.CLB.toast) window.CLB.toast.showToast(`❌ Thua cược! Số cuối ${lastDigit} không khớp ${phoneState.memo} (-${formatMoney(phoneState.amount)}đ)`, 'danger');
             }
           }, 3500);
 
