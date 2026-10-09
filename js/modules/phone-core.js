@@ -44,7 +44,17 @@
     if (window.CLB.audio) window.CLB.audio.playTone(isBalanceVisible ? 620 : 440, 'sine', 0.05);
   }
 
-  function triggerPhoneNotification({ title, body, iconHtml, type, duration = 4200 }) {
+  function formatMbNotiDate(d = new Date()) {
+    const pad = n => n.toString().padStart(2, '0');
+    const day = pad(d.getDate());
+    const month = pad(d.getMonth() + 1);
+    const year = d.getFullYear().toString().slice(-2);
+    const hours = pad(d.getHours());
+    const minutes = pad(d.getMinutes());
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }
+
+  function triggerPhoneNotification({ title, body, iconHtml, type, duration = 4800, time = 'Vừa xong' }) {
     const payoutAlert = document.getElementById('phone-payout-alert');
     if (!payoutAlert) return;
     if (phoneToastTimer) clearTimeout(phoneToastTimer);
@@ -58,11 +68,21 @@
 
     const iconEl = document.getElementById('phone-payout-toast-icon');
     const titleEl = document.getElementById('phone-payout-toast-title');
+    const timeEl = document.getElementById('phone-payout-toast-time');
     const bodyEl = document.getElementById('phone-payout-toast-body');
 
     if (type) payoutAlert.classList.add(`is-${type}`);
-    if (iconEl && iconHtml) iconEl.innerHTML = iconHtml;
-    if (titleEl && title) titleEl.innerHTML = title;
+
+    if (iconEl) {
+      if (iconHtml) {
+        iconEl.innerHTML = iconHtml;
+      } else if (!iconEl.querySelector('img')) {
+        iconEl.innerHTML = '<img src="img/mbbank_noti_icon.png" alt="MBBank" class="phone-payout-mb-logo">';
+      }
+    }
+
+    if (titleEl) titleEl.textContent = title || 'Thông báo biến động số dư';
+    if (timeEl) timeEl.textContent = time || 'Vừa xong';
     if (bodyEl && body) bodyEl.innerHTML = body;
 
     void payoutAlert.offsetWidth;
@@ -241,6 +261,7 @@
   window.CLB.phone = {
     phoneState,
     formatMoney,
+    formatMbNotiDate,
     syncBalanceUI,
     toggleEyeBalance,
     triggerPhoneNotification,

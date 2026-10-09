@@ -847,32 +847,31 @@
   display: none;
 }
 
-/* Payout & Banking Dropdown Notification (Compact Native iOS Banner) */
+/* Payout & Banking Dropdown Notification (Authentic iOS MBBank Banner) */
 .phone-payout-toast {
   position: absolute;
-  top: 14px;
-  left: 12px;
-  right: 12px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color: #0f172a;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 14px;
-  padding: 6px 10px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  top: 12px;
+  left: 10px;
+  right: 10px;
+  background: rgba(18, 24, 34, 0.92);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 9px 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 2px 6px rgba(0, 0, 0, 0.3);
   display: flex;
-  gap: 8px;
-  align-items: center;
+  gap: 10px;
+  align-items: flex-start;
   z-index: 300;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  max-height: 52px;
-  overflow: hidden;
-  transform: translateY(-60px) scale(0.96);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
-  font-family: var(--font-family-mb) !important;
+  box-sizing: border-box;
+  transform: translateY(-80px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 }
 
 .phone-payout-toast.show {
@@ -882,27 +881,82 @@
   transform: translateY(0) scale(1);
 }
 
+.phone-payout-toast-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #002b80;
+}
+
+.phone-payout-toast-icon-wrap img,
+.phone-payout-mb-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.phone-payout-toast-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phone-payout-toast-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.phone-payout-toast-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phone-payout-toast-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.phone-payout-toast-body {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+  word-break: break-word;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+}
+
 .phone-payout-toast.is-debit {
-  border-color: rgba(248, 113, 113, 0.5);
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.14);
+  border-color: rgba(248, 113, 113, 0.4);
 }
 
 .phone-payout-toast.is-credit {
-  border-color: rgba(74, 222, 128, 0.5);
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.14);
+  border-color: rgba(74, 222, 128, 0.4);
 }
 
 .phone-payout-toast.is-lose {
-  border-color: rgba(248, 113, 113, 0.5);
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.14);
+  border-color: rgba(248, 113, 113, 0.35);
 }
 
 .phone-payout-toast.is-topup {
-  border-color: rgba(56, 189, 248, 0.5);
-  background-color: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.14);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 

@@ -99,12 +99,14 @@
 
       // Drop notification in simulated phone
       if (window.CLB.phone) {
+        const notiDate = window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
+        const maskedStk = stk.length > 5 ? `${stk.slice(0, 2)}xxx${stk.slice(-3)}` : (stk || '09xxx081');
         window.CLB.phone.triggerPhoneNotification({
-          title: `${bankCode === 'MB' ? 'MBBank' : bankCode} Biến động số dư`,
-          body: `TK ${stk} +${amount.toLocaleString("en-US")}đ lúc ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}. GD: Rút tiền TRUM.TOP - ${txCode}`,
-          iconHtml: '<i class="fa-solid fa-arrow-down-left" style="color: #16a34a;"></i>',
+          title: 'Thông báo biến động số dư',
+          time: 'Vừa xong',
+          body: `TK ${maskedStk}|GD: +${amount.toLocaleString("en-US")}VND ${notiDate} |SD: +${amount.toLocaleString("en-US")}VND|ND: NGUYEN TUAN DUNG rut tien TRUM.TOP`,
           type: 'credit',
-          duration: 5000
+          duration: 5500
         });
       }
     }, 1200);

@@ -327,15 +327,16 @@
         const topupVal = btn.getAttribute('data-topup');
         if (!topupVal) return;
 
+        const notiDate = window.CLB.phone && window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
         if (topupVal === 'reset') {
           phoneState.balance = 10000000;
           if (window.CLB.toast) window.CLB.toast.showToast('Đã khôi phục số dư MB về 10,000,000đ!', 'success');
           triggerPhoneNotification({
             type: 'topup',
-            iconHtml: '<i class="fa-solid fa-arrows-rotate" style="color: #38bdf8;"></i>',
-            title: '<span style="color: #38bdf8; font-weight: 800;">MBBank Khôi phục số dư gốc</span>',
-            body: `TK 0971266012 | Đặt lại số dư: 10,000,000 VND | <strong>Số dư khả dụng: 10,000,000 VND</strong>`,
-            duration: 3500
+            title: 'Thông báo biến động số dư',
+            time: 'Vừa xong',
+            body: `TK 09xxx081|GD: +10,000,000VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: MBBank khoi phuc so du goc`,
+            duration: 4500
           });
         } else {
           const addAmount = parseInt(topupVal, 10);
@@ -344,10 +345,10 @@
             if (window.CLB.toast) window.CLB.toast.showToast(`Đã nạp +${formatMoney(addAmount)}đ vào tài khoản nguồn MBBank!`, 'success');
             triggerPhoneNotification({
               type: 'topup',
-              iconHtml: '<i class="fa-solid fa-wallet" style="color: #4ade80;"></i>',
-              title: `<span style="color: #4ade80; font-weight: 800;">MBBank Nạp tiền nguồn (+${(addAmount >= 1000000 ? (addAmount/1000000)+'M' : (addAmount/1000)+'k')})</span>`,
-              body: `TK 0971266012 | Nạp: +${formatMoney(addAmount)} VND | <strong>Số dư khả dụng: ${formatMoney(phoneState.balance)} VND</strong>`,
-              duration: 3500
+              title: 'Thông báo biến động số dư',
+              time: 'Vừa xong',
+              body: `TK 09xxx081|GD: +${formatMoney(addAmount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Nguon tien MBBank nap vao`,
+              duration: 4500
             });
           }
         }
@@ -373,13 +374,14 @@
           if (!isNaN(num) && num > 0) {
             phoneState.balance = num;
             syncBalanceUI();
+            const notiDate = window.CLB.phone && window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
             if (window.CLB.toast) window.CLB.toast.showToast(`Đã thiết lập số dư MB thành công: ${formatMoney(phoneState.balance)}đ`, 'success');
             triggerPhoneNotification({
               type: 'topup',
-              iconHtml: '<i class="fa-solid fa-pen-to-square" style="color: #38bdf8;"></i>',
-              title: '<span style="color: #38bdf8; font-weight: 800;">MBBank Cập nhật số dư tùy chỉnh</span>',
-              body: `TK 0971266012 | <strong>Số dư khả dụng mới: ${formatMoney(phoneState.balance)} VND</strong>`,
-              duration: 3500
+              title: 'Thông báo biến động số dư',
+              time: 'Vừa xong',
+              body: `TK 09xxx081|GD: Cap nhat ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Thiet lap so du tuy chinh`,
+              duration: 4500
             });
             if (window.CLB.audio) {
               window.CLB.audio.playTone(587, 'sine', 0.1);
@@ -655,13 +657,14 @@
 
           if (window.CLB.audio) window.CLB.audio.playTone(400, 'sine', 0.1);
 
-          // Trigger Immediate Debit Notification (Compact iOS Style)
+          const notiDate = window.CLB.phone && window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
+          // Trigger Immediate Debit Notification (Authentic MBBank iOS Notification)
           triggerPhoneNotification({
             type: 'debit',
-            iconHtml: '<i class="fa-solid fa-arrow-up-right-from-square" style="color: #ffffff;"></i>',
-            title: `<span style="color: #dc2626; font-weight: 700;">MBBank: -${formatMoney(phoneState.amount)} VND</span>`,
-            body: `TK 0971266012 | ND: ${phoneState.memo} | Số dư: ${formatMoney(phoneState.balance)}đ`,
-            duration: 3200
+            title: 'Thông báo biến động số dư',
+            time: 'Vừa xong',
+            body: `TK 09xxx081|GD: -${formatMoney(phoneState.amount)}VND ${notiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien ${phoneState.memo}`,
+            duration: 4500
           });
 
           // Inject into Website's "LỊCH SỬ CHƠI" Table
@@ -688,17 +691,18 @@
 
           // Step 3: Trigger Real-time Payout Dropdown Notification on Phone (after 3.5s)
           setTimeout(() => {
+            const payoutNotiDate = window.CLB.phone && window.CLB.phone.formatMbNotiDate ? window.CLB.phone.formatMbNotiDate() : '09/10/26 22:04';
             if (isWin) {
               phoneState.balance += payoutAmount;
               syncBalanceUI();
 
-              // Compact iOS Credit Notification
+              // Authentic MBBank Credit Notification
               triggerPhoneNotification({
                 type: 'credit',
-                iconHtml: '<i class="fa-solid fa-check" style="color: #ffffff;"></i>',
-                title: `<span style="color: #15803d; font-weight: 700;">MBBank: +${formatMoney(payoutAmount)} VND</span>`,
-                body: `TK 0971266012 | Trả thưởng 5s | Số dư: ${formatMoney(phoneState.balance)}đ`,
-                duration: 5000
+                title: 'Thông báo biến động số dư',
+                time: 'Vừa xong',
+                body: `TK 09xxx081|GD: +${formatMoney(payoutAmount)}VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: NGUYEN TUAN DUNG chuyen tien tra thuong ${memoClean}`,
+                duration: 6000
               });
 
               if (window.CLB.audio) window.CLB.audio.playChime(true);
@@ -707,9 +711,9 @@
               // Notification when syntax is wrong
               triggerPhoneNotification({
                 type: 'debit',
-                iconHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>',
-                title: `<span style="color: #d97706; font-weight: 700;">Cảnh báo: Sai cú pháp</span>`,
-                body: `ND "${phoneState.memo}" sai cú pháp (Cần: Dungdz + T, X, TT, ...). Không trả thưởng.`,
+                title: 'Thông báo biến động số dư',
+                time: 'Vừa xong',
+                body: `TK 09xxx081|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Sai cu phap (${phoneState.memo}) khong tra thuong`,
                 duration: 4500
               });
               if (window.CLB.audio) window.CLB.audio.playChime(false);
@@ -718,9 +722,9 @@
               // Normal lose
               triggerPhoneNotification({
                 type: 'lose',
-                iconHtml: '<i class="fa-solid fa-xmark" style="color: #ffffff;"></i>',
-                title: `<span style="color: #dc2626; font-weight: 700;">TRUM.TOP: Không trúng thưởng</span>`,
-                body: `Số cuối ${lastDigit} không khớp ${memoClean} | Mất -${formatMoney(phoneState.amount)}đ`,
+                title: 'Thông báo biến động số dư',
+                time: 'Vừa xong',
+                body: `TK 09xxx081|GD: 0VND ${payoutNotiDate} |SD: ${formatMoney(phoneState.balance)}VND|ND: Khong trung thuong (${lastDigit} khac ${memoClean})`,
                 duration: 4500
               });
 
