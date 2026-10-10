@@ -603,6 +603,4 @@
     initPhoneCoreListeners,
     setPhoneBetChoice
   };
-    setPhoneBetChoice
-  };
 })();

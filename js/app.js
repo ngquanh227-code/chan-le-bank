@@ -15,6 +15,24 @@
       }
     },
 
+    openPhone: function() {
+      if (window.CLB && window.CLB.phone && window.CLB.phone.togglePhone) {
+        window.CLB.phone.togglePhone(true);
+      }
+    },
+
+    closePhone: function() {
+      if (window.CLB && window.CLB.phone && window.CLB.phone.togglePhone) {
+        window.CLB.phone.togglePhone(false);
+      }
+    },
+
+    togglePhone: function(open) {
+      if (window.CLB && window.CLB.phone && window.CLB.phone.togglePhone) {
+        window.CLB.phone.togglePhone(open);
+      }
+    },
+
     closeQrModal: function() {
       if (window.CLB && window.CLB.game) {
         window.CLB.game.closeQrModal();

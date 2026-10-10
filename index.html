@@ -984,7 +984,7 @@
   </a>
 
   <!-- FLOATING PHONE BANK SIMULATOR LAUNCHER -->
-  <div class="floating-phone-launcher" id="btn-open-phone-sim" role="button" tabindex="0" title="Mở giả lập điện thoại chuyển khoản MBBank">
+  <div class="floating-phone-launcher" id="btn-open-phone-sim" onclick="App.openPhone()" role="button" tabindex="0" title="Mở giả lập điện thoại chuyển khoản MBBank">
     <span class="phone-pulse-dot" aria-hidden="true"></span>
     <i class="fa-solid fa-mobile-screen-button"></i>
     <span>Giả Lập Chuyển Tiền MB</span>
@@ -1154,7 +1154,7 @@
       </div>
 
       <!-- Phone Floating Close Button -->
-      <div class="phone-floating-close" id="btn-close-phone" role="button" tabindex="0" title="Đóng giả lập">
+      <div class="phone-floating-close" id="btn-close-phone" onclick="App.closePhone()" role="button" tabindex="0" title="Đóng giả lập">
         <i class="fa-solid fa-xmark"></i>
       </div>
 

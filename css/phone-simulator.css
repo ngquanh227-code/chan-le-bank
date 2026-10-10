@@ -56,7 +56,7 @@
 }
 
 .phone-modal-backdrop.is-open {
-  display: flex;
+  display: flex !important;
 }
 
 /* Realistic Smartphone Frame (iPhone 16 Pro Style Titanium Finish) */
