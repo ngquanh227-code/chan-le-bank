@@ -196,11 +196,177 @@
     void payoutAlert.offsetWidth;
     payoutAlert.classList.add('show');
 
+    // Haptic feedback for notification
+    triggerHaptic(type === 'credit' ? 'payout' : (type === 'debit' ? 'success' : 'light'));
+
     // 1-2s duration: defaults to 1.8s (1800ms), maximum 2.0s (2000ms)
     const notiDuration = Math.min(Math.max(duration || 1800, 1000), 2000);
     phoneToastTimer = setTimeout(() => {
       dismissPhoneNotification();
     }, notiDuration);
+  }
+
+  /* HAPTIC VIBRATION ENGINE (iOS / Android Web Vibration API) */
+  function triggerHaptic(type = 'light') {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try {
+        if (type === 'light') navigator.vibrate(35);
+        else if (type === 'success') navigator.vibrate([40, 50, 70]);
+        else if (type === 'payout') navigator.vibrate([70, 50, 120, 60, 90]);
+        else if (type === 'error') navigator.vibrate([80, 50, 80]);
+      } catch(e) {}
+    }
+  }
+
+  /* MBBANK REAL-TIME TRANSACTION HISTORY MODEL */
+  const phoneTransactions = [
+    {
+      id: 'TX-INIT',
+      type: 'credit',
+      amount: 10000000,
+      title: 'MBBank khôi phục số dư',
+      memo: 'Nạp tiền khả dụng MBBank',
+      time: '22:04 - 09/10/2026',
+      balance: 10000000
+    }
+  ];
+
+  function addPhoneTransaction(tx) {
+    phoneTransactions.unshift({
+      id: tx.id || ('TX-' + Date.now()),
+      type: tx.type || 'credit',
+      amount: tx.amount || 0,
+      title: tx.title || (tx.type === 'credit' ? 'Nhận tiền chuyển đến' : 'Chuyển tiền đi'),
+      memo: tx.memo || '',
+      time: tx.time || formatMbNotiDate(),
+      balance: tx.balance !== undefined ? tx.balance : phoneState.balance
+    });
+    if (phoneTransactions.length > 50) phoneTransactions.pop();
+    renderPhoneHistory();
+  }
+
+  let currentHistoryFilter = 'all';
+
+  function renderPhoneHistory(filter) {
+    if (filter) currentHistoryFilter = filter;
+    const listEl = document.getElementById('phone-history-list');
+    const balEl = document.getElementById('phone-history-bal-num');
+    if (balEl) balEl.textContent = formatMoney(phoneState.balance);
+    if (!listEl) return;
+
+    const filtered = phoneTransactions.filter(item => {
+      if (currentHistoryFilter === 'credit') return item.type === 'credit';
+      if (currentHistoryFilter === 'debit') return item.type === 'debit';
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `<div class="phone-history-empty"><i class="fa-solid fa-receipt" style="font-size: 28px; margin-bottom: 8px; opacity: 0.5;"></i><br>Không có giao dịch nào</div>`;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(item => `
+      <div class="phone-history-item is-${item.type}">
+        <div class="phone-history-item-icon">
+          <i class="fa-solid fa-${item.type === 'credit' ? 'arrow-down-left' : 'arrow-up-right'}"></i>
+        </div>
+        <div class="phone-history-item-main">
+          <div class="phone-history-item-title">${item.title}</div>
+          ${item.memo ? `<div class="phone-history-item-memo">${item.memo}</div>` : ''}
+          <div class="phone-history-item-time">${item.time}</div>
+        </div>
+        <div class="phone-history-item-right">
+          <div class="phone-history-item-amount">${item.type === 'credit' ? '+' : '-'}${formatMoney(item.amount)} VND</div>
+          <div class="phone-history-item-bal">SD: ${formatMoney(item.balance)}đ</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /* DOWNLOAD AUTHENTIC PHOTOGRAPHIC RECEIPT VIA HTML5 CANVAS */
+  function downloadReceiptImage() {
+    triggerHaptic('light');
+    const canvas = document.createElement('canvas');
+    canvas.width = 473;
+    canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, 473, 1024);
+      ctx.textAlign = 'center';
+
+      // Status bar Clock
+      const clockText = document.getElementById('photo-receipt-clock')?.textContent || '22:23';
+      ctx.font = '600 13px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText(clockText, 236, 26);
+
+      // Amount
+      const amountText = document.getElementById('receipt-amount-display')?.textContent || '50,000 VND';
+      ctx.font = '800 25px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText(amountText, 236, 256);
+
+      // Time
+      const timeText = document.getElementById('receipt-time-display')?.textContent || '22:23 - 09/10/2026';
+      ctx.font = '500 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(timeText, 236, 292);
+
+      // Recipient Name
+      const nameText = document.getElementById('receipt-recipient-name')?.textContent || 'NGUYEN VAN PHONG';
+      ctx.font = '700 14px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText(nameText, 236, 388);
+
+      // Bank
+      ctx.font = '700 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#002b80';
+      ctx.fillText('MB Bank (MBB)', 236, 420);
+
+      // STK
+      const stkText = document.getElementById('receipt-recipient-stk')?.textContent || '0644888866';
+      ctx.font = '500 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#334155';
+      ctx.fillText(stkText, 236, 452);
+
+      // Memo
+      const memoText = document.getElementById('receipt-memo')?.textContent || 'Dungdz TC';
+      ctx.font = '600 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText('Nội dung: ' + memoText, 236, 484);
+
+      // FT Code
+      const txCodeText = document.getElementById('receipt-tx-code')?.textContent || 'FT268194824';
+      ctx.font = '700 12px -apple-system, BlinkMacSystemFont, sans-serif';
+      ctx.fillStyle = '#002b80';
+      ctx.fillText('Mã giao dịch: ' + txCodeText, 236, 516);
+
+      // Trigger automatic download
+      try {
+        const link = document.createElement('a');
+        link.download = `Bien_Lai_MBBank_${txCodeText}.png`;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (err) {
+        console.error('Cannot download canvas image', err);
+      }
+
+      if (window.CLB.toast) {
+        window.CLB.toast.showToast(`Đã lưu ảnh biên lai ${txCodeText} thành công!`, 'success');
+      }
+      triggerHaptic('success');
+    };
+
+    img.onerror = () => {
+      if (window.CLB.toast) window.CLB.toast.showToast('Không thể tạo ảnh biên lai lúc này', 'warning');
+    };
+
+    img.src = 'img/mbbank_receipt_clean.jpg';
   }
 
   function showPhoneScreen(screenName) {
@@ -209,6 +375,7 @@
     const screenQr = document.getElementById('phone-screen-qr');
     const screenForm = document.getElementById('phone-screen-form');
     const screenReceipt = document.getElementById('phone-screen-receipt');
+    const screenHistory = document.getElementById('phone-screen-history');
 
     if (window.CLB.qr && window.CLB.qr.clearQrTimer) {
       window.CLB.qr.clearQrTimer();
@@ -231,6 +398,11 @@
     if (screenReceipt) {
       screenReceipt.classList.toggle('is-active', screenName === 'receipt');
       screenReceipt.style.display = screenName === 'receipt' ? 'block' : 'none';
+    }
+    if (screenHistory) {
+      screenHistory.classList.toggle('is-active', screenName === 'history');
+      screenHistory.style.display = screenName === 'history' ? 'flex' : 'none';
+      if (screenName === 'history') renderPhoneHistory();
     }
     syncBalanceUI();
 
@@ -337,6 +509,49 @@
     if (btnOpenPhone) btnOpenPhone.addEventListener('click', () => togglePhone(true));
     if (btnClosePhone) btnClosePhone.addEventListener('click', () => togglePhone(false));
 
+    // History Screen Navigation
+    const btnHomeHistory = document.getElementById('btn-home-open-history');
+    const btnHomeQuickHistory = document.getElementById('btn-home-quick-history');
+    const btnHistoryBack = document.getElementById('btn-phone-history-back');
+    const btnHistoryRefresh = document.getElementById('btn-phone-history-refresh');
+
+    if (btnHomeHistory) btnHomeHistory.addEventListener('click', () => {
+      showPhoneScreen('history');
+      if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.05);
+    });
+    if (btnHomeQuickHistory) btnHomeQuickHistory.addEventListener('click', () => {
+      showPhoneScreen('history');
+      if (window.CLB.audio) window.CLB.audio.playTone(520, 'sine', 0.05);
+    });
+    if (btnHistoryBack) btnHistoryBack.addEventListener('click', () => {
+      showPhoneScreen('home');
+      if (window.CLB.audio) window.CLB.audio.playTone(460, 'sine', 0.05);
+    });
+    if (btnHistoryRefresh) btnHistoryRefresh.addEventListener('click', () => {
+      renderPhoneHistory();
+      if (window.CLB.audio) window.CLB.audio.playTone(600, 'sine', 0.05);
+      if (window.CLB.toast) window.CLB.toast.showToast('Đã làm mới biến động số dư', 'info');
+    });
+
+    // History Filter Tabs
+    document.querySelectorAll('.phone-history-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.phone-history-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const filterKey = tab.getAttribute('data-tab') || 'all';
+        renderPhoneHistory(filterKey);
+        if (window.CLB.audio) window.CLB.audio.playTone(560, 'sine', 0.04);
+      });
+    });
+
+    // Download Receipt Button
+    const btnDownloadReceipt = document.getElementById('btn-phone-download-receipt');
+    if (btnDownloadReceipt) {
+      btnDownloadReceipt.addEventListener('click', () => {
+        downloadReceiptImage();
+      });
+    }
+
     updatePhoneClock();
     setInterval(updatePhoneClock, 10000);
   }
@@ -372,6 +587,11 @@
     phoneState,
     formatMoney,
     formatMbNotiDate,
+    triggerHaptic,
+    phoneTransactions,
+    addPhoneTransaction,
+    renderPhoneHistory,
+    downloadReceiptImage,
     syncBalanceUI,
     toggleEyeBalance,
     triggerPhoneNotification,
@@ -381,6 +601,8 @@
     updatePhoneClock,
     initDragAndPin,
     initPhoneCoreListeners,
+    setPhoneBetChoice
+  };
     setPhoneBetChoice
   };
 })();

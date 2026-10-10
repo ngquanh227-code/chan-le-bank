@@ -1177,6 +1177,16 @@
             <!-- Eye Icon Hotspot (Toggle Hide / Show Balance) -->
             <div class="photo-home-eye-btn" id="btn-toggle-eye-balance" role="button" tabindex="0" title="Ẩn/Hiện số dư"></div>
 
+            <!-- Bell / History Hotspot on Home Screen Header -->
+            <div class="photo-home-bell-btn" id="btn-home-open-history" role="button" tabindex="0" title="Xem Biến động số dư MBBank">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+
+            <!-- Quick History Hotspot / Button on Home Card -->
+            <div class="photo-home-history-quick-btn" id="btn-home-quick-history" role="button" tabindex="0" title="Xem Biến động số dư">
+              <i class="fa-solid fa-clock-rotate-left"></i> Biến động
+            </div>
+
             <!-- Quick Top-up Hotspot / Button on Home Card -->
             <div class="photo-home-topup-btn" id="btn-home-quick-topup" role="button" tabindex="0" title="Nạp thêm tiền số dư">
               <i class="fa-solid fa-circle-plus"></i> Nạp số dư
@@ -1229,16 +1239,59 @@
             <div class="super-transfer-wallet-box" id="btn-super-transfer-wallet" role="button" tabindex="0" title="Chuyển tới ví điện tử"></div>
 
             <!-- Money Chat Contact Item 1: NGUYEN TUAN DUNG -->
-            <div class="super-transfer-contact-item item-1" id="btn-super-contact-dung" role="button" tabindex="0" title="Chuyển cho NGUYEN TUAN DUNG"></div>
+            <div class="super-transfer-contact-item item-1" id="btn-super-contact-dung" role="button" tabindex="0" title="Chuyển cho NGUYEN TUAN DUNG">
+              <div class="mc-avatar mc-avatar-dung">
+                <i class="fa-solid fa-user-tie"></i>
+              </div>
+              <div class="mc-info">
+                <div class="mc-name">NGUYEN TUAN DUNG</div>
+                <div class="mc-sub">0888999888 <span class="mc-sep">|</span> MBBank (MB)</div>
+              </div>
+              <div class="mc-meta"></div>
+            </div>
 
             <!-- Money Chat Contact Item 2: FATHER -->
-            <div class="super-transfer-contact-item item-2" id="btn-super-contact-father" role="button" tabindex="0" title="Chuyển cho FATHER"></div>
+            <div class="super-transfer-contact-item item-2" id="btn-super-contact-father" role="button" tabindex="0" title="Chuyển cho FATHER">
+              <div class="mc-avatar mc-avatar-bidv">
+                <i class="fa-solid fa-asterisk"></i>
+              </div>
+              <div class="mc-info">
+                <div class="mc-name">FATHER</div>
+                <div class="mc-sub">0999888777 <span class="mc-sep">|</span> BIDV</div>
+              </div>
+              <div class="mc-meta">
+                <span class="mc-date">06/10</span>
+                <span class="mc-unread-dot"></span>
+              </div>
+            </div>
 
             <!-- Money Chat Contact Item 3: DANG DUY HUNG -->
-            <div class="super-transfer-contact-item item-3" id="btn-super-contact-hung" role="button" tabindex="0" title="Chuyển cho DANG DUY HUNG"></div>
+            <div class="super-transfer-contact-item item-3" id="btn-super-contact-hung" role="button" tabindex="0" title="Chuyển cho DANG DUY HUNG">
+              <div class="mc-avatar mc-avatar-mb">
+                <img src="img/banks/mb.png" alt="MB" class="mc-mb-logo" />
+              </div>
+              <div class="mc-info">
+                <div class="mc-name">DANG DUY HUNG</div>
+                <div class="mc-sub">0977888999 <span class="mc-sep">|</span> MBBank (MB)</div>
+              </div>
+              <div class="mc-meta">
+                <span class="mc-date">03/10</span>
+              </div>
+            </div>
 
             <!-- Money Chat Contact Item 4: LUONG 2 -->
-            <div class="super-transfer-contact-item item-4" id="btn-super-contact-luong2" role="button" tabindex="0" title="Chuyển cho LUONG 2"></div>
+            <div class="super-transfer-contact-item item-4" id="btn-super-contact-luong2" role="button" tabindex="0" title="Chuyển cho LUONG 2">
+              <div class="mc-avatar mc-avatar-bidv">
+                <i class="fa-solid fa-asterisk"></i>
+              </div>
+              <div class="mc-info">
+                <div class="mc-name">LUONG 2</div>
+                <div class="mc-sub">8888666888 <span class="mc-sep">|</span> BIDV</div>
+              </div>
+              <div class="mc-meta">
+                <span class="mc-date">03/10</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -1440,10 +1493,49 @@
               </div>
             </div>
 
+            <!-- Action Hotspot: "Lưu ảnh biên lai" Button -->
+            <div class="photo-ov-btn-download" id="btn-phone-download-receipt" role="button" tabindex="0" title="Tải ảnh biên lai về máy">
+              <i class="fa-solid fa-download"></i> Lưu ảnh biên lai
+            </div>
+
             <!-- Action Hotspot: "Thực hiện giao dịch khác" Button -->
             <div class="photo-ov-btn-again" id="btn-phone-new-transfer" role="button" tabindex="0" title="Thực hiện giao dịch khác">
               <span>Thực hiện giao dịch khác</span>
             </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 4: LỊCH SỬ BIẾN ĐỘNG SỐ DƯ (MBBank Transaction History) -->
+        <div class="app-screen-body phone-history-screen" id="phone-screen-history" style="display: none;">
+          <div class="phone-history-header">
+            <div class="phone-history-back" id="btn-phone-history-back" role="button" tabindex="0" title="Quay lại">
+              <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="phone-history-title">Biến động số dư</div>
+            <div class="phone-history-filter-icon" id="btn-phone-history-refresh" role="button" tabindex="0" title="Làm mới">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+          </div>
+
+          <div class="phone-history-card">
+            <div class="phone-history-card-top">
+              <span class="phone-history-card-label">Tài khoản thanh toán</span>
+              <span class="phone-history-card-stk">0888999888</span>
+            </div>
+            <div class="phone-history-card-balance-lbl">Số dư khả dụng</div>
+            <div class="phone-history-card-balance-val">
+              <span id="phone-history-bal-num">10,000,000</span> <span style="font-size: 13px; font-weight: 600;">VND</span>
+            </div>
+          </div>
+
+          <div class="phone-history-tabs">
+            <div class="phone-history-tab is-active" data-tab="all" role="button" tabindex="0">Tất cả</div>
+            <div class="phone-history-tab" data-tab="credit" role="button" tabindex="0">Tiền vào (+)</div>
+            <div class="phone-history-tab" data-tab="debit" role="button" tabindex="0">Tiền ra (-)</div>
+          </div>
+
+          <div class="phone-history-list" id="phone-history-list">
+            <!-- Dynamic Transaction Items -->
           </div>
         </div>
       </div>
